@@ -1,0 +1,452 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fdf8f4;
+  color: #333;
+}
+
+/* Site-wide color tokens */
+:root {
+  --text-color: #fdf8f4;
+  --bg-color: #fdf8f4; /* restore light background */
+  --accent: #b8860b;
+  --brand-font: 'Cinzel', 'Georgia', serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Import a fancy serif for headings/navbar */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap');
+
+/* Use the brand font as the primary typeface */
+body, * {
+  font-family: var(--brand-font);
+}
+
+/* Apply all-caps, slightly looser letter spacing and lighter weight for branding elements */
+.logo,
+nav a,
+.hero-content h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 400; /* not so bold */
+}
+
+/* Keep buttons readable (normal case) but use the brand font */
+.btn {
+  font-family: var(--brand-font);
+  text-transform: none;
+}
+
+/* Facilities Section */
+.facilities {
+  padding: 4rem 0;
+  background-color: #fff;
+}
+
+.facilities-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.facility-card {
+
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.facility-card:hover {
+  transform: translateY(-5px);
+}
+
+.facility-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.facility-card h3 {
+  font-family: var(--brand-font);
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* 🌿 Navbar */
+#navbar {
+  position: fixed;
+  width: 100%;
+  /* reduce outer padding so navbar feels more compact */
+  padding: 20px 20px;
+  display: flex;
+  justify-content: center; /* keep inner container centered */
+  align-items: center;
+  transition: all 0.4s ease;
+  z-index: 1000;
+  background: transparent;
+}
+
+/* Make the inner container hold the logo and nav side-by-side */
+#navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* limit content width and center it on large screens */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 12px; /* small inner horizontal padding */
+}
+
+/* Ensure the nav itself lays out links horizontally and aligns to the right */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+#navbar.scrolled {
+  /* when scrolled, navbar becomes white with an outer drop shadow (per design) */
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.12);
+  backdrop-filter: none;
+  border-radius: 6px;
+  padding: 8px 20px; /* keep a bit of vertical spacing when scrolled */
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-family: var(--brand-font);
+  color: var(--text-color);
+}
+
+nav a {
+  margin-left: 25px; /* tighter spacing */
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #532200;
+}
+
+/* 🌅 Hero Section */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+#slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--text-color);
+}
+
+.hero-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: "Georgia", serif;
+  transition: opacity 1s ease;
+}
+
+.hero-content .btn {
+  display: inline-block;
+  transform: translateY(90px);
+  padding: 24px 24px;
+  background-color: #532200;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border-radius: 1px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+
+
+/* Make the hero quote wrap and appear centered with controlled width */
+.hero-content #quote {
+  max-width: 760px;
+  margin: 0 auto 8px auto;
+  text-align: center;
+  line-height: 1.18;
+  font-size: 2.6rem;
+  color: var(--text-color);
+}
+
+/* ===== Filter bar ===== */
+.filter-bar {
+  margin-top: 6vh; /* place it below hero visually */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.filter-bar .container {
+  background: #ffffff;
+  padding: 14px 18px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.06);
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.filter-item label {
+  font-size: 0.95rem;
+  color: #222;
+}
+.filter-item input,
+.filter-item select {
+  margin-left: 8px;
+  padding: 6px 8px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  background: #fff;
+  color: #222;
+}
+.check-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+
+/* ===== Rooms grid ===== */
+.rooms {
+  padding: 50px 0;
+  margin: 40px 0;
+}
+.rooms .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.section-title .subtitle {
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: #666;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+.section-title h2 {
+  font-size: 2.8rem;
+  color: #111;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.room-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+.room-card:hover {
+  transform: translateY(-4px);
+}
+.card-image {
+  position: relative;
+  width: 100%;
+  padding-top: 66.67%; /* 3:2 aspect ratio */
+  overflow: hidden;
+}
+.card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.room-badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(255,255,255,0.9);
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: flex;
+  gap: 16px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.badge-item {
+  font-size: 0.75rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.badge-item::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+}
+.card-content {
+  padding: 24px;
+  text-align: left;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card-content h3 {
+  margin-bottom: 12px;
+  color: #111;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.card-content p {
+  color: #666;
+  margin-bottom: 24px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.book-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+.book-btn:hover {
+  background: #222;
+}
+
+/* Adjust navbar text when scrolled (dark text on white background) */
+#navbar.scrolled .logo,
+#navbar.scrolled nav a {
+  color: #111;
+}
+
+/* Allow hover styling when navbar is scrolled */
+#navbar.scrolled nav a:hover {
+  color: #532200;
+}
+
+/* Responsive: stack cards on smaller screens */
+@media (max-width: 900px) {
+  .rooms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .rooms-grid { grid-template-columns: 1fr; }
+  .filter-bar .container { flex-direction: column; align-items: stretch; }
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #532200;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border-radius: 1px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #3e1a00;
+}
+
+/* Custom scrollbar: WebKit and Firefox */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 8px;
+  border: 3px solid rgba(0,0,0,0.06);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9a6b06;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(0,0,0,0.04);
+}

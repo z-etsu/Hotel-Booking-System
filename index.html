@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Booking System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- 🌿 Navbar -->
+  <header id="navbar">
+    <div class="container">
+      <h1 class="logo">Hotel Name</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Rooms</a>
+        <a href="#">Facilities</a>
+        <a href="#">About</a>
+        <a href="#">Login / Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 🌅 Hero Section -->
+  <section class="hero">
+    <div id="slideshow">
+      <img src="slide2.jpg" class="slide active" />
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="slide" />
+      <img src="slide3.jpg" class="slide" />
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h2 id="quote">Feel Relaxed & Enjoy Your Luxuriousness</h2>
+      <a href="#rooms" class="btn">See Our Rooms</a>
+    </div>
+  </section>
+
+  <!-- Filter Bar (UI only) -->
+  <section class="filter-bar">
+    <div class="container">
+      <div class="filter-item">
+        <label>Check in
+          <input type="date" name="checkin" />
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Check out
+          <input type="date" name="checkout" />
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Adults
+          <select name="adults">
+            <option>1 Adult</option>
+            <option selected>2 Adults</option>
+            <option>3 Adults</option>
+            <option>4 Adults</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Children
+          <select name="children">
+            <option>No Kid</option>
+            <option>1 Kid</option>
+            <option>2 Kids</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <button class="btn check-btn">Check Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms Section -->
+  <section id="rooms" class="rooms">
+    <div class="container">
+      <div class="section-title">
+        <p class="subtitle">Hotel &amp; Spa Adina</p>
+        <h2>Room &amp; Suites</h2>
+      </div>
+
+      <div class="rooms-grid">
+        <!-- Room Card 1 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Luxury Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 50m2</span>
+              <span class="badge-item">Max People 4</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Luxury Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $289</a>
+          </div>
+        </article>
+
+        <!-- Room Card 2 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" alt="Suite" />
+            <div class="room-badge">
+              <span class="badge-item">Size 90m2</span>
+              <span class="badge-item">Max People 5</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Luxury Suite Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $320</a>
+          </div>
+        </article>
+
+        <!-- Room Card 3 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde" alt="Deluxe" />
+            <div class="room-badge">
+              <span class="badge-item">Size 45m2</span>
+              <span class="badge-item">Max People 6</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Deluxe Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $344</a>
+          </div>
+        </article>
+        
+        <!-- Room Card 4 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="superior.png" alt="Superior" />
+            <div class="room-badge">
+              <span class="badge-item">Size 30m2</span>
+              <span class="badge-item">Max People 1</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Superior Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $115</a>
+          </div>
+        </article>
+
+        <!-- Room Card 5 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Signature" />
+            <div class="room-badge">
+              <span class="badge-item">Size 70m2</span>
+              <span class="badge-item">Max People 2</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Signature Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $220</a>
+          </div>
+        </article>
+
+        <!-- Room Card 6 -->
+        <article class="room-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2" alt="Deluxe 2" />
+            <div class="room-badge">
+              <span class="badge-item">Size 50m2</span>
+              <span class="badge-item">Max People 3</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Deluxe Room</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <a class="btn book-btn" href="#">Book Now from $265</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- More rooms button -->
+      <div style="text-align:center; margin-top:28px;">
+        <a class="btn" href="#" style="background:transparent; color:#111; border:2px solid #111; padding:10px 18px;">More rooms &gt;&gt;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Section -->
+  <section id="facilities" class="facilities">
+    <div class="container">
+      <div class="section-title">
+        <p class="subtitle">Our Services</p>
+        <h2>Hotel Facilities</h2>
+      </div>
+
+      <div class="facilities-grid">
+        <!-- Swimming Pool -->
+        <div class="facility-card">
+          <img src="https://images.unsplash.com/photo-1567197427669-a0d3603a3586" alt="Swimming Pool" />
+          <h3>Swimming Pool</h3>
+        </div>
+
+        <!-- Restaurant -->
+        <div class="facility-card">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="Restaurant" />
+          <h3>Restaurant</h3>
+        </div>
+
+        <!-- Free WiFi -->
+        <div class="facility-card">
+          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="Free WiFi" />
+          <h3>Free WiFi</h3>
+        </div>
+
+        <!-- Fitness Center -->
+        <div class="facility-card">
+          <img src="fitness center.jpg" alt="Fitness Center" />
+          <h3>Fitness Center</h3>
+        </div>
+
+        <!-- Parking -->
+        <div class="facility-card">
+          <img src="https://images.unsplash.com/photo-1609587312208-cea54be969e7" alt="Parking" />
+          <h3>Parking</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
