@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Hotel Name</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <style>
+      /* --- Custom Styles for Auth Pages --- */
+      .auth-container {
+        /* Pushes the form down below the fixed navbar */
+        padding-top: 100px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--bg-color); /* Light background */
+        padding-bottom: 4rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .auth-form {
+        background-color: #ffffff;
+        padding: 3rem; /* Increased padding */
+        border-radius: 10px; /* Slightly more rounded */
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* Stronger, professional shadow */
+        max-width: 550px; /* Slightly wider form */
+        width: 100%;
+      }
+      .auth-form h2 {
+        color: #111;
+        text-align: center;
+        margin-bottom: 2rem; /* Increased margin */
+        font-family: var(--brand-font);
+        font-weight: 500; 
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 2rem;
+      }
+      /* Inherit form group styling from contact section for consistency */
+      .auth-form .form-group {
+        margin-bottom: 1.5rem; /* Increased spacing between fields */
+      }
+      .auth-form input {
+        width: 100%;
+        padding: 1rem 1.25rem; /* Bigger padding for larger inputs */
+        border: 2px solid #e0e0e0; /* Thicker, defined border */
+        border-radius: 6px;
+        font-size: 1rem; /* Larger font size */
+        transition: border-color 0.3s, box-shadow 0.3s;
+        color: #333;
+        -webkit-appearance: none; /* Resetting default browser styles */
+        -moz-appearance: none;
+        appearance: none;
+      }
+      /* Professional input focus state */
+      .auth-form input:focus {
+        outline: none;
+        border-color: var(--accent); /* Accent color border */
+        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2); /* Soft glow */
+        background-color: #fff;
+      }
+      .auth-form input::placeholder {
+        color: #999;
+      }
+
+      .auth-form .btn {
+        width: 100%;
+        padding: 1.1rem; /* Bigger button */
+        font-size: 1.1rem;
+        background-color: var(--accent); 
+        border: none;
+        cursor: pointer;
+        font-family: var(--brand-font);
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+      .auth-form .btn:hover {
+        background-color: #9a6b06;
+      }
+      .auth-form p {
+        text-align: center; 
+        margin-top: 2rem; 
+        color: #666; 
+        font-size: 1rem;
+      }
+      .auth-form a {
+        color: var(--accent); 
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+      .auth-form a:hover {
+        color: #9a6b06;
+      }
+      
+      /* Grid for Name Fields - Stays inside the box */
+      .name-fields {
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr; /* F, MI, L */
+        gap: 1.5rem; /* Increased gap */
+        margin-bottom: 0.5rem; /* Adjusted margin since form-group has its own */
+      }
+      .name-fields .form-group {
+          margin-bottom: 0;
+      }
+      
+      .birthday-label {
+        color: #333; 
+        display: block; 
+        margin-bottom: 0.5rem; 
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      
+      @media (max-width: 600px) {
+        .auth-form {
+          padding: 2rem;
+        }
+        /* Stack name fields on mobile to ensure they stay inside the box */
+        .name-fields {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .name-fields .form-group {
+          margin-bottom: 1.5rem;
+        }
+      }
+    </style>
+</head>
+<body>
+    <header id="navbar" class="scrolled">
+      <div class="container">
+        <h1 class="logo">Hotel Name</h1>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="#rooms">Rooms</a>
+          <a href="#facilities">Facilities</a>
+          <a href="#contact">About</a>
+          <a href="login.html" style="color: var(--accent);">Login / Register</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="auth-container">
+        <form class="auth-form" id="registerForm">
+            <h2>Guest Registration</h2>
+
+            <div class="name-fields">
+                <div class="form-group">
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="middleInitial" placeholder="MI" maxlength="1">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthday" class="birthday-label">Birthday</label>
+                <input type="date" id="birthday" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password (min 8 chars)" required minlength="8">
+            </div>
+            
+            <button type="submit" class="btn">Register Account</button>
+            
+            <p>
+                Already have an account? <a href="login.html">Login here</a>.
+            </p>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-info">
+              <h1 class="footer-logo">Hotel Name</h1>
+              <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+            <div class="quick-links">
+              <h3>Quick Links</h3>
+              <ul>
+                <li><a href="index.html#rooms">Our Rooms</a></li>
+                <li><a href="index.html#facilities">Facilities</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="contact-links">
+              <h3>Contact Info</h3>
+              <ul>
+                <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
+                <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+                <li><i class="fas fa-clock"></i> 24/7 Open</li>
+              </ul>
+            </div>
+            <div class="newsletter">
+              <h3>Newsletter</h3>
+              <p>Subscribe to receive special offers and updates</p>
+              <form class="newsletter-form">
+                <div class="form-group">
+                  <input type="email" placeholder="Your Email Address" required>
+                  <button type="submit" class="btn">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>© 2025 Hotel Name. All rights reserved.</p>
+          </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> 
+    <script src="register.js"></script>
+</body>
+</html>
