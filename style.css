@@ -11,6 +11,20 @@ body {
   color: #333;
 }
 
+/* Page Transition */
+.page-transition {
+    animation: pageTransition 1.2s ease;
+}
+
+@keyframes pageTransition {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 /* Site-wide color tokens */
 :root {
   --text-color: #fdf8f4;
@@ -88,6 +102,11 @@ nav {
   padding: 8px 20px; /* keep a bit of vertical spacing when scrolled */
 }
 
+#navbar.scrolled .logo,
+#navbar.scrolled nav a {
+  color: #532200;
+}
+
 .logo {
   font-size: 1.8rem;
   font-weight: 400;
@@ -106,6 +125,18 @@ nav a {
 nav a:hover {
   color: #532200;
 }
+
+/* Adjust navbar text when scrolled (dark text on white background) */
+#navbar.scrolled .logo,
+#navbar.scrolled nav a {
+  color: #111;
+}
+
+/* Allow hover styling when navbar is scrolled */
+#navbar.scrolled nav a:hover {
+  color: #532200;
+}
+
 
 /* 🌅 Hero Section */
 .hero {
@@ -374,16 +405,6 @@ nav a:hover {
   background: #222;
 }
 
-/* Adjust navbar text when scrolled (dark text on white background) */
-#navbar.scrolled .logo,
-#navbar.scrolled nav a {
-  color: #111;
-}
-
-/* Allow hover styling when navbar is scrolled */
-#navbar.scrolled nav a:hover {
-  color: #532200;
-}
 
 /* Facilities Section */
 .facilities {
@@ -1021,4 +1042,21 @@ html {
   text-align: left;
   padding-left: 1rem;
   border-left: 4px solid #532200;
+}
+
+/* Add this to your existing CSS */
+.slide-transition {
+  animation: slideIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
