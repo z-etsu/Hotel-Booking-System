@@ -136,7 +136,7 @@
       <div class="container">
         <h1 class="logo">Hotel Name</h1>
         <nav>
-          <a href="index.html">Home</a>
+          <a href="index.php">Home</a>
           <a href="#rooms">Rooms</a>
           <a href="#facilities">Facilities</a>
           <a href="#contact">About</a>
@@ -146,32 +146,39 @@
     </header>
 
     <div class="auth-container">
-        <form class="auth-form" id="registerForm">
+        <!-- ACTION and METHOD added here -->
+        <form class="auth-form" id="registerForm" action="register.php" method="POST">
             <h2>Guest Registration</h2>
 
             <div class="name-fields">
                 <div class="form-group">
-                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <!-- NAME attribute added -->
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="middleInitial" placeholder="MI" maxlength="1">
+                    <!-- NAME attribute added -->
+                    <input type="text" id="middleInitial" name="middleInitial" placeholder="MI" maxlength="1">
                 </div>
                 <div class="form-group">
-                    <input type="text" id="lastName" placeholder="Last Name" required>
+                    <!-- NAME attribute added -->
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="birthday" class="birthday-label">Birthday</label>
-                <input type="date" id="birthday" required>
+                <!-- NAME attribute added -->
+                <input type="date" id="birthday" name="birthday" required>
             </div>
             
             <div class="form-group">
-                <input type="email" id="email" placeholder="Email Address" required>
+                <!-- NAME attribute added -->
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
             </div>
             
             <div class="form-group">
-                <input type="password" id="password" placeholder="Password (min 8 chars)" required minlength="8">
+                <!-- NAME attribute added -->
+                <input type="password" id="password" name="password" placeholder="Password (min 8 chars)" required minlength="8">
             </div>
             
             <button type="submit" class="btn">Register Account</button>
@@ -198,10 +205,10 @@
             <div class="quick-links">
               <h3>Quick Links</h3>
               <ul>
-                <li><a href="index.html#rooms">Our Rooms</a></li>
-                <li><a href="index.html#facilities">Facilities</a></li>
-                <li><a href="index.html#testimonials">Testimonials</a></li>
-                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><a href="index.php#rooms">Our Rooms</a></li>
+                <li><a href="index.php#facilities">Facilities</a></li>
+                <li><a href="index.php#testimonials">Testimonials</a></li>
+                <li><a href="index.php#contact">Contact Us</a></li>
               </ul>
             </div>
             <div class="contact-links">
@@ -230,7 +237,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script> 
-    <script src="register.js"></script>
+    <!-- Removed register.js as form submission is now handled by PHP -->
 </body>
 </html>

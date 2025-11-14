@@ -106,7 +106,7 @@
       <div class="container">
         <h1 class="logo">Hotel Name</h1>
         <nav>
-          <a href="index.html">Home</a>
+          <a href="index.php">Home</a>
           <a href="#rooms">Rooms</a>
           <a href="#facilities">Facilities</a>
           <a href="#contact">About</a>
@@ -116,15 +116,18 @@
     </header>
 
     <div class="auth-container">
-        <form class="auth-form" id="loginForm">
+        <!-- ACTION and METHOD added here -->
+        <form class="auth-form" id="loginForm" action="login.php" method="POST">
             <h2>Login to Your Account</h2>
             
             <div class="form-group">
-                <input type="email" id="email" placeholder="Email Address" required>
+                <!-- NAME attribute added -->
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
             </div>
             
             <div class="form-group">
-                <input type="password" id="password" placeholder="Password" required>
+                <!-- NAME attribute added -->
+                <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             
             <button type="submit" class="btn">Login</button>
@@ -151,10 +154,10 @@
             <div class="quick-links">
               <h3>Quick Links</h3>
               <ul>
-                <li><a href="index.html#rooms">Our Rooms</a></li>
-                <li><a href="index.html#facilities">Facilities</a></li>
-                <li><a href="index.html#testimonials">Testimonials</a></li>
-                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><a href="index.php#rooms">Our Rooms</a></li>
+                <li><a href="index.php#facilities">Facilities</a></li>
+                <li><a href="index.php#testimonials">Testimonials</a></li>
+                <li><a href="index.php#contact">Contact Us</a></li>
               </ul>
             </div>
             <div class="contact-links">
