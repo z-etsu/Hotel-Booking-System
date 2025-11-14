@@ -1,0 +1,560 @@
+<?php
+session_start(); // **START SESSION: Must be at the very top**
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Booking System</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .message-box {
+      position: fixed;
+      top: 80px; /* Below the navbar */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      border-radius: 5px;
+      z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .message-box.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .message-box.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .message-box.show {
+        opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <?php if (isset($_SESSION['message'])): ?>
+    <div id="alert-message" class="message-box <?php echo $_SESSION['message_type']; ?> show">
+        <?php echo $_SESSION['message']; ?>
+    </div>
+    <?php 
+    // Clear the session message immediately after displaying it
+    unset($_SESSION['message']);
+    unset($_SESSION['message_type']);
+    ?>
+  <?php endif; ?>
+
+  <header id="navbar">
+    <div class="container">
+      <h1 class="logo">Hotel Name</h1>
+      <nav>
+        <a href="index.php">Home</a> <a href="rooms.html">Rooms</a>
+        <a href="#">Facilities</a>
+        <a href="#">About</a>
+        
+        <?php if (isset($_SESSION['user_name'])): ?>
+          <a href="#" style="color: var(--primary-color); font-weight: bold;">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></a>
+          <a href="logout.php" style="background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 5px;">Logout</a>
+        <?php else: ?>
+          <a href="login.html">Login / Register</a>
+        <?php endif; ?>
+        </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div id="slideshow">
+      <img src="slide2.jpg" class="slide active" />
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" class="slide" />
+      <img src="slide3.jpg" class="slide" />
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h2 id="quote">Feel Relaxed & Enjoy Your Luxuriousness</h2>
+      <a href="#rooms" class="btn">See Our Rooms</a>
+    </div>
+  </section>
+
+  <section class="filter-bar">
+    <div class="container">
+      <div class="filter-item">
+        <label>Check in
+          <input type="date" name="checkin" />
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Check out
+          <input type="date" name="checkout" />
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Adults
+          <select name="adults">
+            <option>1 Adult</option>
+            <option selected>2 Adults</option>
+            <option>3 Adults</option>
+            <option>4 Adults</option>
+          </select> 
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <label>Children
+          <select name="children">
+            <option>No Kid</option>
+            <option>1 Kid</option>
+            <option>2 Kids</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-item">
+        <button class="btn check-btn">Check Now</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="rooms" class="rooms">
+    <div class="container">
+      <div class="section-title">
+        <p class="subtitle">Hotel & Spa Adina</p>
+        <h2>Room & Suites</h2>
+      </div>
+
+      <h3 class="category-title">Standard Rooms</h3>
+      <div class="rooms-grid">
+        <article class="room-card">
+          <div class="card-image">
+            <img src="single-room.jpg" alt="Single Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 25m²</span>
+              <span class="badge-item">Max People 1</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Single Room</h3>
+            <p>Cozy room perfect for solo travelers with essential amenities.</p>
+            <a class="btn book-btn" href="#">Book Now from $89</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="double-room.jpg" alt="Double Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 30m²</span>
+              <span class="badge-item">Max People 2</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Double Room</h3>
+            <p>Comfortable room with a double bed and modern amenities.</p>
+            <a class="btn book-btn" href="#">Book Now from $129</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="twin-room.jpg" alt="Twin Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 35m²</span>
+              <span class="badge-item">Max People 2</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Twin Room</h3>
+            <p>Spacious room with two single beds, perfect for sharing.</p>
+            <a class="btn book-btn" href="#">Book Now from $139</a>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="category-title">Family Rooms</h3>
+      <div class="rooms-grid">
+        <article class="room-card">
+          <div class="card-image">
+            <img src="triple-room.jpg" alt="Triple Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 40m²</span>
+              <span class="badge-item">Max People 3</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Triple Room</h3>
+            <p>Spacious room with three single beds or one double and one single bed.</p>
+            <a class="btn book-btn" href="#">Book Now from $189</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="family-room.jpg" alt="Family Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 45m²</span>
+              <span class="badge-item">Max People 4</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Family Room</h3>
+            <p>Perfect for families with two double beds and extra living space.</p>
+            <a class="btn book-btn" href="#">Book Now from $229</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="connected-room.jpg" alt="Connected Room" />
+            <div class="room-badge">
+              <span class="badge-item">Size 50m²</span>
+              <span class="badge-item">Max People 4</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Connected Room</h3>
+            <p>Two interconnected rooms perfect for families needing extra privacy.</p>
+            <a class="btn book-btn" href="#">Book Now from $249</a>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="category-title">Luxury Suites</h3>
+      <div class="rooms-grid">
+        <article class="room-card">
+          <div class="card-image">
+            <img src="executive-suite.jpg" alt="Executive Suite" />
+            <div class="room-badge">
+              <span class="badge-item">Size 70m²</span>
+              <span class="badge-item">Max People 5</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Executive Suite</h3>
+            <p>Luxurious suite with separate living room and premium amenities.</p>
+            <a class="btn book-btn" href="#">Book Now from $299</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="presidential-suite.jpg" alt="Presidential Suite" />
+            <div class="room-badge">
+              <span class="badge-item">Size 90m²</span>
+              <span class="badge-item">Max People 6</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Presidential Suite</h3>
+            <p>Our finest suite with panoramic views and exclusive services.</p>
+            <a class="btn book-btn" href="#">Book Now from $399</a>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="card-image">
+            <img src="royal-suite.jpg" alt="Royal Suite" />
+            <div class="room-badge">
+              <span class="badge-item">Size 100m²</span>
+              <span class="badge-item">Max People 6</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Royal Suite</h3>
+            <p>Ultimate luxury with multiple rooms and private terrace.</p>
+            <a class="btn book-btn" href="#">Book Now from $449</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="facilities" class="facilities">
+    <div class="container">
+      <div class="section-title">
+        <p class="subtitle">Our Services</p>
+        <h2>Hotel Facilities</h2>
+      </div>
+
+      <div class="facilities-grid">
+        <div class="facility-card">
+          <div class="facility-image">
+            <img src="https://images.unsplash.com/photo-1567197427669-a0d3603a3586" alt="Swimming Pool" />
+            <div class="facility-overlay"></div>
+          </div>
+          <div class="facility-content">
+            <h3>Swimming Pool</h3>
+            <p>Luxury Pool</p>
+            <a href="#" class="facility-link">Details</a>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-image">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="Restaurant" />
+            <div class="facility-overlay"></div>
+          </div>
+          <div class="facility-content">
+            <h3>Fine Dining</h3>
+            <p>Gourmet Restaurant</p>
+            <a href="#" class="facility-link">Details</a>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-image">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="Free WiFi" />
+            <div class="facility-overlay"></div>
+          </div>
+          <div class="facility-content">
+            <h3>Free WiFi</h3>
+            <p>High-Speed Internet</p>
+            <a href="#" class="facility-link">Details</a>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-image">
+            <img src="fitness center.jpg" alt="Fitness Center" />
+            <div class="facility-overlay"></div>
+          </div>
+          <div class="facility-content">
+            <h3>Fitness Center</h3>
+            <p>Modern Equipment</p>
+            <a href="#" class="facility-link">Details</a>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-image">
+            <img src="https://images.unsplash.com/photo-1609587312208-cea54be969e7" alt="Parking" />
+            <div class="facility-overlay"></div>
+          </div>
+          <div class="facility-content">
+            <h3>Parking</h3>
+            <p>24/7 Secure Parking</p>
+            <a href="#" class="facility-link">Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>TESTIMONIALS</h2>
+      </div>
+
+      <div class="testimonials-slider">
+        <button class="nav-arrow prev-arrow"><</button>
+        <button class="nav-arrow next-arrow">></button>
+
+        <div class="testimonials-track">
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img src="https://i.pravatar.cc/150?img=1" alt="Customer 1" class="profile-img">
+              <h3>tj webdev</h3>
+            </div>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+            </p>
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img src="https://i.pravatar.cc/150?img=2" alt="Customer 2" class="profile-img">
+              <h3>tj webdev</h3>
+            </div>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+            </p>
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img src="https://i.pravatar.cc/150?img=3" alt="Customer 3" class="profile-img">
+              <h3>tj webdev</h3>
+            </div>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+            </p>
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img src="https://i.pravatar.cc/150?img=4" alt="Customer 4" class="profile-img">
+              <h3>tj webdev</h3>
+            </div>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+            </p>
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img src="https://i.pravatar.cc/150?img=5" alt="Customer 5" class="profile-img">
+              <h3>tj webdev</h3>
+            </div>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+            </p>
+            <div class="rating">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-nav">
+          <button class="nav-dot active"></button>
+          <button class="nav-dot"></button>
+          <button class="nav-dot"></button>
+          <button class="nav-dot"></button>
+          <button class="nav-dot"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <p class="subtitle">Get in Touch</p>
+        <h2>Contact Us</h2>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-item">
+            <h3>Location</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</p>
+          </div>
+          <div class="info-item">
+            <h3>Phone</h3>
+            <p><i class="fas fa-phone"></i> +63 912 345 6789</p>
+          </div>
+          <div class="info-item">
+            <h3>Email</h3>
+            <p><i class="fas fa-envelope"></i> info@hotelname.com</p>
+          </div>
+          <div class="map">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.2222483619123!2d120.97288427586673!3d14.583197177125003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca21c6d57d6f%3A0x6f05cad108533e4a!2sMasangkay%20St%2C%20Binondo%2C%20Manila%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1699519129061!5m2!1sen!2sph" 
+              width="100%" 
+              height="300" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subject">
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Message" required rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <h1 class="footer-logo">Hotel Name</h1>
+          <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="quick-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#rooms">Our Rooms</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="contact-links">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
+            <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+            <li><i class="fas fa-clock"></i> 24/7 Open</li>
+          </ul>
+        </div>
+
+        <div class="newsletter">
+          <h3>Newsletter</h3>
+          <p>Subscribe to receive special offers and updates</p>
+          <form class="newsletter-form">
+            <div class="form-group">
+              <input type="email" placeholder="Your Email Address" required>
+              <button type="submit" class="btn">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Hotel Name. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    window.onload = function() {
+        const msgBox = document.getElementById('alert-message');
+        if (msgBox) {
+            setTimeout(() => {
+                msgBox.style.opacity = '0';
+                setTimeout(() => msgBox.remove(), 500); // Remove after fade out
+            }, 4000); 
+        }
+    };
+  </script>
+</body>
+</html>
