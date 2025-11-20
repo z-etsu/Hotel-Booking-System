@@ -1,3 +1,6 @@
+<?php
+session_start(); // **START SESSION: Must be at the very top**
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,24 +8,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hotel Booking System</title>
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .message-box {
+      position: fixed;
+      top: 80px; /* Below the navbar */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      border-radius: 5px;
+      z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .message-box.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .message-box.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .message-box.show {
+        opacity: 1;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- 🌿 Navbar -->
+  <?php if (isset($_SESSION['message'])): ?>
+    <div id="alert-message" class="message-box <?php echo $_SESSION['message_type']; ?> show">
+        <?php echo $_SESSION['message']; ?>
+    </div>
+    <?php 
+    // Clear the session message immediately after displaying it
+    unset($_SESSION['message']);
+    unset($_SESSION['message_type']);
+    ?>
+  <?php endif; ?>
+
   <header id="navbar">
     <div class="container">
       <h1 class="logo">Hotel Name</h1>
       <nav>
-        <a href="#">Home</a>
-        <a href="rooms.html">Rooms</a>
+        <a href="index.php">Home</a> <a href="rooms.html">Rooms</a>
         <a href="#">Facilities</a>
         <a href="#">About</a>
-        <a href="login.html">Login / Register</a>
-      </nav>
+        
+        <?php if (isset($_SESSION['user_name'])): ?>
+          <a href="#" style="color: var(--primary-color); font-weight: bold;">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></a>
+          <a href="logout.php" style="background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 5px;">Logout</a>
+        <?php else: ?>
+          <a href="login.html">Login / Register</a>
+        <?php endif; ?>
+        </nav>
     </div>
   </header>
 
-  <!-- 🌅 Hero Section -->
   <section class="hero">
     <div id="slideshow">
       <img src="slide2.jpg" class="slide active" />
@@ -38,7 +84,6 @@
     </div>
   </section>
 
-  <!-- Filter Bar (UI only) -->
   <section class="filter-bar">
     <div class="container">
       <div class="filter-item">
@@ -80,18 +125,15 @@
     </div>
   </section>
 
-  <!-- Rooms Section -->
   <section id="rooms" class="rooms">
     <div class="container">
       <div class="section-title">
-        <p class="subtitle">Hotel &amp; Spa Adina</p>
-        <h2>Room &amp; Suites</h2>
+        <p class="subtitle">Hotel & Spa Adina</p>
+        <h2>Room & Suites</h2>
       </div>
 
-      <!-- Standard Rooms (1-2 People) -->
       <h3 class="category-title">Standard Rooms</h3>
       <div class="rooms-grid">
-        <!-- Single Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/singleroom1.jpg" alt="Single Room" />
@@ -107,7 +149,6 @@
           </div>
         </article>
 
-        <!-- Double Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/double1.jpg" alt="Double Room" />
@@ -123,7 +164,6 @@
           </div>
         </article>
 
-        <!-- Twin Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/twin1.jpg" alt="Twin Room" />
@@ -140,10 +180,8 @@
         </article>
       </div>
 
-      <!-- Family Rooms (3-4 People) -->
       <h3 class="category-title">Family Rooms</h3>
       <div class="rooms-grid">
-        <!-- Triple Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/triple1.jpg" alt="Triple Room" />
@@ -159,7 +197,6 @@
           </div>
         </article>
 
-        <!-- Family Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/family1.jpg" alt="Family Room" />
@@ -175,7 +212,6 @@
           </div>
         </article>
 
-        <!-- Connected Room -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/connected1.jpg" alt="Connected Room" />
@@ -192,10 +228,8 @@
         </article>
       </div>
 
-      <!-- Suites (5-6 People) -->
       <h3 class="category-title">Luxury Suites</h3>
       <div class="rooms-grid">
-        <!-- Executive Suite -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/executive2.png" alt="Executive Suite" />
@@ -211,7 +245,6 @@
           </div>
         </article>
 
-        <!-- Presidential Suite -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/presidential1.avif" alt="Presidential Suite" />
@@ -227,7 +260,6 @@
           </div>
         </article>
 
-        <!-- Royal Suite -->
         <article class="room-card">
           <div class="card-image">
             <img src="images/royal1.jpg" alt="Royal Suite" />
@@ -246,7 +278,6 @@
     </div>
   </section>
 
-  <!-- Facilities Section -->
   <section id="facilities" class="facilities">
     <div class="container">
       <div class="section-title">
@@ -255,7 +286,6 @@
       </div>
 
       <div class="facilities-grid">
-        <!-- Swimming Pool -->
         <div class="facility-card">
           <div class="facility-image">
             <img src="https://images.unsplash.com/photo-1567197427669-a0d3603a3586" alt="Swimming Pool" />
@@ -268,7 +298,6 @@
           </div>
         </div>
 
-        <!-- Restaurant -->
         <div class="facility-card">
           <div class="facility-image">
             <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="Restaurant" />
@@ -281,7 +310,6 @@
           </div>
         </div>
 
-        <!-- Free WiFi -->
         <div class="facility-card">
           <div class="facility-image">
             <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="Free WiFi" />
@@ -294,7 +322,6 @@
           </div>
         </div>
 
-        <!-- Fitness Center -->
         <div class="facility-card">
           <div class="facility-image">
             <img src="fitness center.jpg" alt="Fitness Center" />
@@ -307,7 +334,6 @@
           </div>
         </div>
 
-        <!-- Parking -->
         <div class="facility-card">
           <div class="facility-image">
             <img src="https://images.unsplash.com/photo-1609587312208-cea54be969e7" alt="Parking" />
@@ -323,7 +349,6 @@
     </div>
   </section>
 
-  <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="container">
       <div class="section-title">
@@ -331,12 +356,10 @@
       </div>
 
       <div class="testimonials-slider">
-        <!-- Navigation Arrows -->
-        <button class="nav-arrow prev-arrow">&lt;</button>
-        <button class="nav-arrow next-arrow">&gt;</button>
+        <button class="nav-arrow prev-arrow"><</button>
+        <button class="nav-arrow next-arrow">></button>
 
         <div class="testimonials-track">
-          <!-- Testimonial Card 1 -->
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=1" alt="Customer 1" class="profile-img">
@@ -350,7 +373,6 @@
             </div>
           </div>
 
-          <!-- Testimonial Card 2 -->
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=2" alt="Customer 2" class="profile-img">
@@ -364,7 +386,6 @@
             </div>
           </div>
 
-          <!-- Testimonial Card 3 -->
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=3" alt="Customer 3" class="profile-img">
@@ -378,7 +399,6 @@
             </div>
           </div>
 
-          <!-- Testimonial Card 4 -->
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=4" alt="Customer 4" class="profile-img">
@@ -392,7 +412,6 @@
             </div>
           </div>
 
-          <!-- Testimonial Card 5 -->
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=5" alt="Customer 5" class="profile-img">
@@ -407,7 +426,6 @@
           </div>
         </div>
 
-        <!-- Navigation Dots -->
         <div class="slider-nav">
           <button class="nav-dot active"></button>
           <button class="nav-dot"></button>
@@ -419,7 +437,6 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section id="contact" class="contact">
     <div class="container">
       <div class="section-title">
@@ -473,11 +490,9 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <!-- Hotel Info -->
         <div class="footer-info">
           <h1 class="footer-logo">Hotel Name</h1>
           <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
@@ -489,7 +504,6 @@
           </div>
         </div>
 
-        <!-- Quick Links -->
         <div class="quick-links">
           <h3>Quick Links</h3>
           <ul>
@@ -500,7 +514,6 @@
           </ul>
         </div>
 
-        <!-- Contact Info -->
         <div class="contact-links">
           <h3>Contact Info</h3>
           <ul>
@@ -511,7 +524,6 @@
           </ul>
         </div>
 
-        <!-- Newsletter -->
         <div class="newsletter">
           <h3>Newsletter</h3>
           <p>Subscribe to receive special offers and updates</p>
@@ -524,14 +536,25 @@
         </div>
       </div>
 
-      <!-- Footer Bottom -->
       <div class="footer-bottom">
-        <p>&copy; 2025 Hotel Name. All rights reserved.</p>
+        <p>© 2025 Hotel Name. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    window.onload = function() {
+        const msgBox = document.getElementById('alert-message');
+        if (msgBox) {
+            setTimeout(() => {
+                msgBox.style.opacity = '0';
+                setTimeout(() => msgBox.remove(), 500); // Remove after fade out
+            }, 4000); 
+        }
+    };
+  </script>
 </body>
 </html>
