@@ -5,7 +5,7 @@ const rooms = [
     {
         name: "Single Room",
         category: "standard",
-        description: "A cozy and thoughtfully designed space perfect for solo travelers. The Single Room offers a warm, modern aesthetic, complete with all essential amenities for a restful stay. Ideal for short business trips or personal getaways.",
+        description: "A cozy and thoughtfully designed space perfect for solo travelers and business professionals. The Single Room offers a warm, modern aesthetic, complete with all essential amenities for a restful stay. Each room features carefully curated furnishings that maximize comfort in an intimate setting, with soft ambient lighting and peaceful décor that creates a serene retreat. Ideal for short business trips, romantic getaways, or personal leisure. Natural light streams through soundproof windows, while the modern workstation ensures productivity. Premium bedding and blackout curtains guarantee uninterrupted rest.",
         size: "20 M²",
         maxPeople: 1,
         price: 89,
@@ -13,8 +13,7 @@ const rooms = [
         images: [
             "images/singleroom1.jpg",
             "images/singleroom2.jpg",
-            "images/singleroom3.jpg",
-            "slide2.jpg"
+            "images/singleroom3.jpg"
         ],
         highlights: [
             "Modern, minimalist interior design",
@@ -30,21 +29,22 @@ const rooms = [
             "Mini Refrigerator", "Coffee & Tea Set", "Work Desk", "Smart TV",
             "Private Bathroom", "City View", "In-Room Safe",
             "Hair Dryer", "Iron (on request)", "Daily Housekeeping"
-        ],
-        extraAmenities: [
-            "Room Service", "Hair Dryer", "In-room Safe",
-            "Complimentary Toiletries", "24-hour Front Desk Support",
-            "Laundry Service (on request)"
         ]
     },
     {
         name: "Double Room",
         category: "standard",
-        description: "Comfortable room with a double bed and modern amenities.",
+        description: "Ideal for couples and those seeking extra comfort and space. Our Double Room features a luxurious king-size bed with premium Egyptian cotton linens, creating the perfect sanctuary for relaxation. The room is thoughtfully appointed with contemporary furnishings, mood lighting, and elegant décor that creates an inviting atmosphere. Enjoy a spacious layout with a comfortable seating area, large work desk, and floor-to-ceiling windows with city views. The marble-finished private bathroom includes rainfall shower, premium toiletries, and heated towel racks. Perfect for romantic escapes or extended stays.",
         size: "30 M²",
         maxPeople: 2,
         price: 129,
-        imageUrl: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600",
+        imageUrl: "images/double1.jpg",
+         images: [
+            "images/double1.jpg",
+            "images/double2.jpg",
+            "images/double3.jpg",
+            "images/double4.jpg"
+        ],
         featuredAmenities: [
             "Double Bed", "Mini Refrigerator", "Work Desk",
             "Smart TV", "Private Bathroom", "City View"
@@ -58,11 +58,16 @@ const rooms = [
     {
         name: "Twin Room",
         category: "standard",
-        description: "Spacious room with two single beds, perfect for sharing.",
+        description: "Perfect for two guests who prefer separate sleeping arrangements. Our Twin Room offers two comfortable single beds with luxury bedding, individual reading lights, and personal climate controls for optimal comfort. The spacious 35 m² layout provides ample room to move around, with a private balcony offering stunning city or garden views. The room features modern décor, contemporary furnishings, and a well-appointed bathroom with walk-in shower. Ideal for business colleagues, friends, or family members traveling together who appreciate personal space and comfort.",
         size: "35 M²",
         maxPeople: 2,
         price: 139,
-        imageUrl: "https://images.unsplash.com/photo-1549294413-26f195200c82?auto=format&fit=crop&w=600",
+        imageUrl: "images/twin1.jpg",
+        images: [
+            "images/twin1.jpg",
+            "images/twin2.jpg",
+            "images/twin3.jpg"
+        ],
         featuredAmenities: [
             "Two Single Beds", "Private Balcony", "Desk",
             "Smart TV", "Mini Refrigerator", "Private Bathroom"
@@ -75,11 +80,16 @@ const rooms = [
     {
         name: "Triple Room",
         category: "family",
-        description: "Spacious room with three single beds or one double and one single bed.",
+        description: "An excellent choice for small families or groups of three seeking comfortable accommodations. The Triple Room features flexible bed configurations: three single beds or one double bed with one single bed, allowing you to customize your sleeping arrangement. The spacious 40 m² space includes a dining area, abundant storage with a large closet, and separate living zones for privacy and relaxation. Modern amenities include air conditioning, flat-screen TV, mini refrigerator, and a work desk. The private bathroom features shower facilities and premium toiletries. Perfect for extended family stays or friend group travels.",
         size: "40 M²",
         maxPeople: 3,
         price: 189,
-        imageUrl: "https://images.unsplash.com/photo-1596394331432-8e7275811c03?auto=format&fit=crop&w=600",
+        imageUrl: "images/triple1.jpg",
+        images: [
+            "images/triple1.jpg",
+            "images/triple2.jpg",
+            "images/triple3.jpg"
+        ],
         featuredAmenities: [
             "Three Beds", "Large Closet", "Extra Bed",
             "Private Bathroom", "Dining Area", "Mini Refrigerator"
@@ -92,11 +102,17 @@ const rooms = [
     {
         name: "Family Room",
         category: "family",
-        description: "Perfect for families with two double beds and extra living space.",
+        description: "Designed specifically for families seeking comfort and space. The Family Room features two spacious double beds, ensuring everyone sleeps well throughout their stay. The 45 m² layout includes a separate living area with a sofa bed for additional sleeping or relaxing space, a full kitchenette for preparing light meals and snacks, and a dining area perfect for family bonding. Amenities include a microwave, mini refrigerator, and ample storage. The room is equipped with child-safe outlets and can accommodate a crib upon request. Modern entertainment options, high-speed Wi-Fi, and a marble bathroom with bath and shower combination ensure family comfort.",
         size: "45 M²",
         maxPeople: 4,
         price: 229,
-        imageUrl: "https://images.unsplash.com/photo-1582719478250-c8fbe21396c1?auto=format&fit=crop&w=600",
+        imageUrl: "images/family1.jpg",
+        images: [
+            "images/family1.jpg",
+            "images/family2.jpg",
+            "images/family3.jpg",
+            "images/family4.jpg"
+        ],
         featuredAmenities: [
             "Two Double Beds", "Kitchenette", "Sofa Bed",
             "Dining Area", "Connecting Rooms Available", "Private Bathroom"
@@ -110,11 +126,15 @@ const rooms = [
     {
         name: "Connected Room",
         category: "family",
-        description: "Two interconnected rooms perfect for families needing extra privacy.",
+        description: "The ultimate family accommodation offering two interconnected bedrooms with flexibility and privacy. This 50 m² suite features two separate bedrooms with double beds, two full private bathrooms, and a shared living area with sofa bed and dining space. The connecting door allows easy access between rooms while maintaining privacy for different family groups. Each bedroom has independent climate control, entertainment systems, and work areas. The kitchenette enables meal preparation, and connecting room amenities include microwave, mini refrigerator, and abundant storage. Perfect for extended family stays, multi-generational trips, or when multiple families travel together and desire both togetherness and personal space.",
         size: "50 M²",
         maxPeople: 4,
         price: 249,
-        imageUrl: "https://images.unsplash.com/photo-1582736340176-0f72390f7a6a?auto=format&fit=crop&w=600",
+        imageUrl: "images/connected1.jpg",
+        images: [
+            "images/connected1.jpg",
+            "images/connected2.jpg"
+        ],
         featuredAmenities: [
             "Two Bedrooms", "Two Bathrooms", "Connecting Door",
             "Private Balcony", "Sofa Bed", "Mini Refrigerator"
@@ -128,11 +148,16 @@ const rooms = [
     {
         name: "Executive Suite",
         category: "suite",
-        description: "Luxurious suite with separate living room and premium amenities.",
+        description: "Experience luxury and sophistication in our magnificent Executive Suite. This 70 m² masterpiece features a lavish bedroom with king-size bed, premium bedding, and ambient lighting, combined with a sophisticated separate living room for entertaining or relaxing. Floor-to-ceiling windows frame panoramic city views, accessible from your private balcony. The marble bathroom is a spa-like retreat featuring a luxurious Jacuzzi bathtub, walk-in shower, heated towel racks, and premium amenities. The living area includes fine furnishings, entertainment system, work desk, and a fully stocked mini bar. Executive Suite guests enjoy 24-hour room service, premium toiletries, and personalized concierge services. Perfect for distinguished guests, special occasions, or those seeking the ultimate in hotel luxury.",
         size: "70 M²",
         maxPeople: 5,
         price: 399,
-        imageUrl: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=600",
+        imageUrl: "images/executive1.png",
+        images: [
+            "images/executive1.png",
+            "images/executive2.png",
+            "images/executive3.png"
+        ],
         featuredAmenities: [
             "King Bed", "Living Area", "Private Balcony",
             "Bathtub / Jacuzzi", "Mini Bar", "Walk-In Closet"
@@ -146,11 +171,19 @@ const rooms = [
     {
         name: "Presidential Suite",
         category: "suite",
-        description: "Our finest suite with panoramic views and exclusive services.",
+        description: "The epitome of luxury and elegance awaits in our prestigious Presidential Suite. Spanning 90 m² of pure opulence, this extraordinary space features a grand master bedroom with a sumptuous king-size bed, a sophisticated living and dining area, and two lavishly appointed bathrooms. Each detail has been curated for discerning guests: Italian marble finishes, designer furnishings, state-of-the-art entertainment systems, and a fully equipped mini bar. The private balcony offers breathtaking panoramic views perfect for morning coffee or evening relaxation. Complimentary butler service attends to your every need, and 24-hour room service ensures unparalleled comfort. A wine chiller, premium toiletries, and personalized concierge services complete this extraordinary experience. Reserved for our most distinguished guests and special occasions.",
         size: "90 M²",
         maxPeople: 6,
         price: 599,
-        imageUrl: "https://images.unsplash.com/photo-1608198399988-341a0f484828?auto=format&fit=crop&w=600",
+        imageUrl: "images/presidential1.avif",
+        images: [
+            "images/presidential1.avif",
+            "images/presidential2.avif",
+            "images/presidential3.avif",
+            "images/presidential4.avif",
+            "images/presidential5.avif",
+            "images/presidential6.avif"
+        ],
         featuredAmenities: [
             "Master Bedroom", "Dining Area", "2 Bathrooms",
             "Private Balcony", "Butler Service", "Mini Bar"
@@ -164,11 +197,20 @@ const rooms = [
     {
         name: "Royal Suite",
         category: "suite",
-        description: "Ultimate luxury with multiple rooms and private terrace.",
+        description: "Indulge in unparalleled magnificence with our ultimate Royal Suite, the crown jewel of our hotel collection. This expansive 100 m² sanctuary features multiple lavish spaces: a grand master bedroom with premium king-size bed, sophisticated living and entertainment areas, and a spa-inspired bathroom with a luxurious Jacuzzi, rainfall shower, and heated marble finishes. The exclusive private terrace provides a serene retreat with panoramic views perfect for relaxation or entertaining. Every element exudes refinement: hand-picked designer furnishings, premium linens, cutting-edge technology, and extensive amenities. A fully stocked premium bar, wine chiller, and butler service are at your disposal. Wake to welcome drinks, enjoy personalized concierge services, and experience 24-hour room service featuring gourmet cuisine. The Royal Suite is reserved exclusively for our most discerning guests seeking the absolute pinnacle of luxury hospitality.",
         size: "100 M²",
         maxPeople: 6,
         price: 749,
-        imageUrl: "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600",
+        imageUrl: "images/royal1.jpg",
+        images: [
+            "images/royal1.jpg",
+            "images/royal4.jpg",
+            "images/royal5.jpg",
+            "images/royal6.jpg",
+            "images/royal7.jpg",
+            "images/royal8.webp",
+            "images/royal9.webp"
+        ],
         featuredAmenities: [
             "King Bed", "Private Terrace", "Living Area",
             "Jacuzzi", "Mini Bar", "Walk-In Closet"

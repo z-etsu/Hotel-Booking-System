@@ -77,32 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         // --- SLIDESHOW SETUP ---
-        const imageContainer = document.querySelector('.main-image-container');
-        const slideUrls = room.images && room.images.length
-            ? room.images
-            : [
-                room.imageUrl.replace('w=600', 'w=800&q=70'),
-                room.imageUrl.replace('w=600', 'w=800&q=80&fit=facearea'),
-                room.imageUrl.replace('w=600', 'w=800&q=90&fit=crop&crop=left')
-            ];
-
-        imageContainer.innerHTML = slideUrls.map(
-            url => `<img src="${url}" class="room-slide-image" alt="${room.name}">`
-        ).join('');
-
-        const slides = document.querySelectorAll('.room-slide-image');
+        const slides = mainImageContainer.querySelectorAll('.room-slide-image');
         let currentSlide = 0;
 
         function updateSlideshow() {
-            imageContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            mainImageContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        // Navigation arrows
         document.querySelector('.next-arrow')?.addEventListener('click', () => {
             currentSlide = (currentSlide + 1) % slides.length;
             updateSlideshow();
         });
-
         document.querySelector('.prev-arrow')?.addEventListener('click', () => {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             updateSlideshow();

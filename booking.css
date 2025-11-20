@@ -70,8 +70,8 @@
 .booking-details-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 40px;
-  
+  gap: 45px;
+  margin-bottom: 60px;
 }
 
 
@@ -135,15 +135,14 @@
   overflow: hidden;
   border-radius: 12px;
   background-color: #f4f1ec;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 .main-image-container {
   display: flex;
   width: 100%;
   height: 100%;
   transition: transform 0.6s ease;
+  will-change: transform;
 }
 .room-slide-image {
   flex-shrink: 0;
@@ -165,16 +164,41 @@
 }
 
 .overview{
-  margin-top: 15px;
-  font-size: 1.4rem;
-  color: #555;
-  
+  margin-top: 25px;
+  background: linear-gradient(135deg, #fff 0%, #faf7f3 100%);
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0e8e0;
+  border-left: 4px solid #8b6239;
+  will-change: transform;
+  animation: fadeIn 0.8s ease;
 }
 
 .overview h2{
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #532200;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.overview h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #8b6239, #532200);
+  border-radius: 2px;
+}
+
+.overview p{
+  font-size: 0.95rem;
+  color: #5e4a3c;
+  line-height: 1.7;
+  letter-spacing: 0.2px;
 }
 /* --- ARROWS --- */
 .nav-arrow {
@@ -212,11 +236,11 @@
 
 /* Summary Card */
 .booking-summary-card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background: linear-gradient(135deg, #fff 0%, #faf7f3 100%);
+  border: 1px solid #e8e0d8;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 24px;
   animation: fadeIn 0.8s ease;
 }
 .summary-top {
@@ -258,11 +282,11 @@
 
 /* Quick Facts */
 .key-details-widget {
-  background: #fff;
-  padding: 20px;
+  background: linear-gradient(135deg, #fff 0%, #faf7f3 100%);
+  padding: 24px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e8e0d8;
 }
 .key-details-widget h2 {
   font-size: 1.2rem;
@@ -288,11 +312,11 @@
 
 /* Booking Widget */
 .booking-widget {
-  background: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e0e0e0;
+  background: linear-gradient(135deg, #fff 0%, #faf7f3 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8e0d8;
   position: sticky;
   top: 30px;
 }
@@ -515,8 +539,13 @@
 .main-content-column {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Matches the grid column gap for consistency */
+  gap: 30px;
 }
+
+.image-gallery-side {
+  flex-shrink: 0;
+}
+
 /* ---------------------------------------------------------
    🌿 NAVBAR STYLES (Enhanced for Booking Page)
    Dark background, light text, smooth transitions
