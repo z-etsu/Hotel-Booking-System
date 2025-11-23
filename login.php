@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Set error message in session
         $_SESSION['message'] = 'Please enter both email and password.';
         $_SESSION['message_type'] = 'error';
-        header("Location: login.html");
+        header("Location: login-page.php");
         exit;
     }
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Set error message and redirect
         $_SESSION['message'] = 'A server error occurred during login.';
         $_SESSION['message_type'] = 'error';
-        header("Location: login.html");
+        header("Location: login-page.php");
         exit;
     }
 
@@ -43,31 +43,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // User found
         $user = $result->fetch_assoc();
         
-        // 4. Verify the password
+    // 4. Verify the password
         if (password_verify($password, $user['password_hash'])) {
             // Password is correct! Set session variables.
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['first_name'];
+            $_SESSION['user_email'] = $email;
             
-            // Set success message in session before redirecting to the new index.php
+            // Set success message in session before redirecting to the success page
             $_SESSION['message'] = 'Login successful! Welcome, ' . htmlspecialchars($user['first_name']) . '.';
             $_SESSION['message_type'] = 'success';
             
-            // Redirect to the new index.php
-            header("Location: index.php"); 
+            // Redirect to the login success page
+            header("Location: login-success.php"); 
             exit();
         } else {
             // Incorrect password
             $_SESSION['message'] = 'Invalid email or password.';
             $_SESSION['message_type'] = 'error';
-            header("Location: login.html");
+            header("Location: login-page.php");
             exit;
         }
     } else {
         // User not found
         $_SESSION['message'] = 'Invalid email or password.';
         $_SESSION['message_type'] = 'error';
-        header("Location: login.html");
+        header("Location: login-page.php");
         exit;
     }
 
@@ -76,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 } else {
     // If someone tries to access login.php directly without POST
-    header("Location: login.html");
+    header("Location: login-page.php");
     exit;
 }
 ?>

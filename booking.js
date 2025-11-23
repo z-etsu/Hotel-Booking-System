@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.booking-page-main').innerHTML = `
             <div class="container" style="text-align:center; padding: 100px;">
                 <h1>Room Data Missing</h1>
-                <p>The room data could not be loaded. Please go back to <a href="rooms.html">Rooms</a>.</p>
+                <p>The room data could not be loaded. Please go back to <a href="rooms.php">Rooms</a>.</p>
             </div>`;
         return;
     }
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="container" style="text-align:center; padding: 100px;">
                 <h1>404: Room Not Found</h1>
                 <p>The selected room details could not be loaded.</p>
-                <a href="rooms.html" class="btn book-final-btn" style="width:auto;">View All Rooms</a>
+                <a href="rooms.php" class="btn book-final-btn" style="width:auto;">View All Rooms</a>
             </div>`;
         return;
     }
@@ -120,21 +120,156 @@ document.addEventListener('DOMContentLoaded', () => {
             bookingForm.appendChild(priceInput);
         }
 
-        // Booking button behaviour: validate and simulate
+        // DATE RANGE PICKER WITH LITEPICKR
+        const checkInInput = document.getElementById('check-in');
+        const checkOutInput = document.getElementById('check-out');
+        const widgetPrice = document.getElementById('widget-price');
+
+        // Get today's date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Wait for Litepickr to be available
+        function initializeDatePicker() {
+            if (typeof Litepicker === 'undefined') {
+                // Litepickr not loaded yet, try again
+                setTimeout(initializeDatePicker, 100);
+                return;
+            }
+
+            // Shared date range state
+            let startDate = null;
+            let endDate = null;
+
+            // Check-in date picker
+            const checkInPicker = new Litepicker({
+                element: checkInInput,
+                minDate: today,
+                maxDate: new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000),
+                numberOfMonths: 2,
+                numberOfColumns: 2,
+                lang: 'en-US',
+                format: 'YYYY-MM-DD',
+                showTooltip: true,
+                singleMonth: false,
+                resetButton: true,
+                autoApply: true,
+                onSelect: function(date) {
+                    startDate = date;
+                    checkInInput.value = date ? date.format('YYYY-MM-DD') : '';
+                    // If checkout is already selected and is before checkin, clear it
+                    if (endDate && startDate && endDate < startDate) {
+                        endDate = null;
+                        checkOutInput.value = '';
+                    }
+                    if (startDate && endDate) {
+                        calculatePrice();
+                    }
+                },
+                onClose: function(date) {
+                    if (startDate && endDate) {
+                        calculatePrice();
+                    }
+                }
+            });
+
+            // Check-out date picker
+            const checkOutPicker = new Litepicker({
+                element: checkOutInput,
+                minDate: startDate || today,
+                maxDate: new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000),
+                numberOfMonths: 2,
+                numberOfColumns: 2,
+                lang: 'en-US',
+                format: 'YYYY-MM-DD',
+                showTooltip: true,
+                singleMonth: false,
+                resetButton: true,
+                autoApply: true,
+                onSelect: function(date) {
+                    endDate = date;
+                    checkOutInput.value = date ? date.format('YYYY-MM-DD') : '';
+                    if (startDate && endDate) {
+                        calculatePrice();
+                    }
+                },
+                onClose: function(date) {
+                    if (startDate && endDate) {
+                        calculatePrice();
+                    }
+                }
+            });
+
+            // Update checkout min date when checkin changes
+            checkInInput.addEventListener('change', function() {
+                if (checkInInput.value) {
+                    const newMinDate = new Date(checkInInput.value);
+                    checkOutPicker.setOptions({ minDate: newMinDate });
+                }
+            });
+        }
+
+        // Initialize when DOM is ready
+        initializeDatePicker();
+
+        // Calculate and update price based on nights
+        function calculatePrice() {
+            const checkInVal = checkInInput.value;
+            const checkOutVal = checkOutInput.value;
+
+            if (!checkInVal || !checkOutVal) {
+                widgetPrice.textContent = `$${room.price}`;
+                return;
+            }
+
+            const checkIn = new Date(checkInVal);
+            const checkOut = new Date(checkOutVal);
+
+            if (checkOut <= checkIn) {
+                widgetPrice.textContent = `$${room.price}`;
+                return;
+            }
+
+            const msPerDay = 24 * 60 * 60 * 1000;
+            const nights = Math.ceil((checkOut - checkIn) / msPerDay);
+
+            if (nights > 0) {
+                const total = nights * room.price;
+                widgetPrice.innerHTML = `$${total.toLocaleString()}<br><small style="font-size: 0.85rem; color: #666;">${nights} night${nights !== 1 ? 's' : ''}</small>`;
+            } else {
+                widgetPrice.textContent = `$${room.price}`;
+            }
+        }
+
+        // Booking button behaviour: validate and submit
         const bookBtn = document.getElementById('book-final-btn');
         if (bookBtn) {
-            bookBtn.addEventListener('click', () => {
-                const checkIn = document.getElementById('check-in').value;
-                const checkOut = document.getElementById('check-out').value;
+            bookBtn.addEventListener('click', async () => {
+                // Check if user is logged in
+                const userLoggedIn = document.getElementById('user-logged-in').value === 'true';
+                if (!userLoggedIn) {
+                    alert('Please log in first.');
+                    return;
+                }
+
+                const checkInVal = checkInInput.value;
+                const checkOutVal = checkOutInput.value;
                 const guests = parseInt(document.getElementById('guests').value, 10);
 
-                if (!checkIn || !checkOut) {
+                if (!checkInVal || !checkOutVal) {
                     alert('Please select check-in and check-out dates.');
                     return;
                 }
 
-                const inDate = new Date(checkIn);
-                const outDate = new Date(checkOut);
+                const inDate = new Date(checkInVal);
+                const outDate = new Date(checkOutVal);
+                
+                // Validate dates
+                if (inDate < today) {
+                    alert('Check-in date cannot be in the past.');
+                    return;
+                }
+
                 if (outDate <= inDate) {
                     alert('Check-out must be after check-in.');
                     return;
@@ -147,14 +282,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // calculate nights
                 const msPerDay = 24 * 60 * 60 * 1000;
-                const nights = Math.round((outDate - inDate) / msPerDay);
+                const nights = Math.ceil((outDate - inDate) / msPerDay);
                 const total = nights * room.price;
 
-                // Here you'd normally send bookingForm via fetch or standard form submit
-                // We'll simulate a confirmation modal/alert
-                if (confirm(`Reserve ${room.name} for ${nights} night(s) at $${room.price}/night? Total: $${total}`)) {
-                    // simulate success
-                    alert('Booking simulated — success! (Replace with real payment/submit flow)');
+                // Show confirmation
+                if (!confirm(`Reserve ${room.name} for ${nights} night${nights !== 1 ? 's' : ''} at $${room.price}/night?\n\nTotal: $${total.toLocaleString()}`)) {
+                    return;
+                }
+
+                // Disable button while processing
+                bookBtn.disabled = true;
+                const originalText = bookBtn.textContent;
+                bookBtn.textContent = 'Processing...';
+
+                try {
+                    // Submit booking to backend
+                    const formData = new FormData();
+                    formData.append('room_name', room.name);
+                    formData.append('check_in', checkInVal);
+                    formData.append('check_out', checkOutVal);
+                    formData.append('price_per_night', room.price);
+                    formData.append('number_of_nights', nights);
+                    formData.append('total_price', total);
+                    formData.append('number_of_guests', guests);
+
+                    const response = await fetch('process_booking.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert(`Booking confirmed! Your Order ID is: #${result.order_id}\n\nYou will be redirected to your bookings page.`);
+                        // Redirect to bookings page
+                        window.location.href = 'bookings.php';
+                    } else {
+                        alert('Booking failed: ' + (result.message || 'Unknown error'));
+                        bookBtn.disabled = false;
+                        bookBtn.textContent = originalText;
+                    }
+                } catch (error) {
+                    console.error('Booking error:', error);
+                    alert('An error occurred while processing your booking. Please try again.');
+                    bookBtn.disabled = false;
+                    bookBtn.textContent = originalText;
                 }
             });
         }

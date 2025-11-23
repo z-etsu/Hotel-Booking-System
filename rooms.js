@@ -240,8 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const min = parseInt(value.slice(0, -1));
             return { min: min, max: Infinity };
         }
-        const parts = value.split('-');
-        return { min: parseInt(parts[0]), max: parseInt(parts[1]) };
+        if (value.includes('-')) {
+            const parts = value.split('-');
+            return { min: parseInt(parts[0]), max: parseInt(parts[1]) };
+        }
+        // Single value like '1', '2', etc.
+        const num = parseInt(value);
+        return { min: num, max: num };
     }
 
     // If we're on the rooms listing page (roomCardsDisplay exists) then run the listing/filtering code
@@ -257,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const roomSlug = roomName.toLowerCase().replace(/\s+/g, '-');
 
                 // Redirect to booking page with slug param
-                window.location.href = `booking.html?room=${encodeURIComponent(roomSlug)}`;
+                window.location.href = `booking.php?room=${encodeURIComponent(roomSlug)}`;
             }
         });
 

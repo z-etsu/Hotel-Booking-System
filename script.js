@@ -160,6 +160,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Book Now button handlers for index page - redirect to booking page
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle both on-page clicks and direct href navigation
+    document.querySelectorAll('.book-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Get the room name from the card
+            const roomName = this.closest('.room-card').querySelector('h3').textContent;
+            // Convert room name to URL slug
+            const roomSlug = roomName.toLowerCase().replace(/\s+/g, '-');
+            // Navigate to booking page with room parameter
+            window.location.href = `booking.php?room=${encodeURIComponent(roomSlug)}`;
+        });
+    });
+});
+
 // Add this to your script.js
 document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.room-slide');

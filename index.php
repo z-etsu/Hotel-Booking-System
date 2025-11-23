@@ -39,7 +39,7 @@ session_start(); // **START SESSION: Must be at the very top**
   </style>
 </head>
 
-<body>
+<body class="page-transition">
   <?php if (isset($_SESSION['message'])): ?>
     <div id="alert-message" class="message-box <?php echo $_SESSION['message_type']; ?> show">
         <?php echo $_SESSION['message']; ?>
@@ -51,23 +51,8 @@ session_start(); // **START SESSION: Must be at the very top**
     ?>
   <?php endif; ?>
 
-  <header id="navbar">
-    <div class="container">
-      <h1 class="logo">Hotel Name</h1>
-      <nav>
-        <a href="index.php">Home</a> <a href="rooms.html">Rooms</a>
-        <a href="#">Facilities</a>
-        <a href="#">About</a>
-        
-        <?php if (isset($_SESSION['user_name'])): ?>
-          <a href="#" style="color: var(--primary-color); font-weight: bold;">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></a>
-          <a href="logout.php" style="background-color: var(--primary-color); color: white; padding: 8px 15px; border-radius: 5px;">Logout</a>
-        <?php else: ?>
-          <a href="login.html">Login / Register</a>
-        <?php endif; ?>
-        </nav>
-    </div>
-  </header>
+  <!-- Include the navbar -->
+  <?php include 'navbar.php'; ?>
 
   <section class="hero">
     <div id="slideshow">
@@ -84,46 +69,7 @@ session_start(); // **START SESSION: Must be at the very top**
     </div>
   </section>
 
-  <section class="filter-bar">
-    <div class="container">
-      <div class="filter-item">
-        <label>Check in
-          <input type="date" name="checkin" />
-        </label>
-      </div>
 
-      <div class="filter-item">
-        <label>Check out
-          <input type="date" name="checkout" />
-        </label>
-      </div>
-
-      <div class="filter-item">
-        <label>Adults
-          <select name="adults">
-            <option>1 Adult</option>
-            <option selected>2 Adults</option>
-            <option>3 Adults</option>
-            <option>4 Adults</option>
-          </select> 
-        </label>
-      </div>
-
-      <div class="filter-item">
-        <label>Children
-          <select name="children">
-            <option>No Kid</option>
-            <option>1 Kid</option>
-            <option>2 Kids</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="filter-item">
-        <button class="btn check-btn">Check Now</button>
-      </div>
-    </div>
-  </section>
 
   <section id="rooms" class="rooms">
     <div class="container">
@@ -145,7 +91,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Single Room</h3>
             <p>Cozy room perfect for solo travelers with essential amenities.</p>
-            <a class="btn book-btn" href="#">Book Now from $89</a>
+            <a class="btn book-btn" href="booking.php?room=single-room">Book Now from $89</a>
           </div>
         </article>
 
@@ -160,7 +106,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Double Room</h3>
             <p>Comfortable room with a double bed and modern amenities.</p>
-            <a class="btn book-btn" href="#">Book Now from $129</a>
+            <a class="btn book-btn" href="booking.php?room=double-room">Book Now from $129</a>
           </div>
         </article>
 
@@ -175,7 +121,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Twin Room</h3>
             <p>Spacious room with two single beds, perfect for sharing.</p>
-            <a class="btn book-btn" href="#">Book Now from $139</a>
+            <a class="btn book-btn" href="booking.php?room=twin-room">Book Now from $139</a>
           </div>
         </article>
       </div>
@@ -193,7 +139,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Triple Room</h3>
             <p>Spacious room with three single beds or one double and one single bed.</p>
-            <a class="btn book-btn" href="#">Book Now from $189</a>
+            <a class="btn book-btn" href="booking.php?room=triple-room">Book Now from $189</a>
           </div>
         </article>
 
@@ -208,7 +154,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Family Room</h3>
             <p>Perfect for families with two double beds and extra living space.</p>
-            <a class="btn book-btn" href="#">Book Now from $229</a>
+            <a class="btn book-btn" href="booking.php?room=family-room">Book Now from $229</a>
           </div>
         </article>
 
@@ -223,7 +169,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Connected Room</h3>
             <p>Two interconnected rooms perfect for families needing extra privacy.</p>
-            <a class="btn book-btn" href="#">Book Now from $249</a>
+            <a class="btn book-btn" href="booking.php?room=connected-room">Book Now from $249</a>
           </div>
         </article>
       </div>
@@ -241,7 +187,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Executive Suite</h3>
             <p>Luxurious suite with separate living room and premium amenities.</p>
-            <a class="btn book-btn" href="#">Book Now from $299</a>
+            <a class="btn book-btn" href="booking.php?room=executive-suite">Book Now from $299</a>
           </div>
         </article>
 
@@ -256,7 +202,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Presidential Suite</h3>
             <p>Our finest suite with panoramic views and exclusive services.</p>
-            <a class="btn book-btn" href="#">Book Now from $399</a>
+            <a class="btn book-btn" href="booking.php?room=presidential-suite">Book Now from $399</a>
           </div>
         </article>
 
@@ -271,7 +217,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Royal Suite</h3>
             <p>Ultimate luxury with multiple rooms and private terrace.</p>
-            <a class="btn book-btn" href="#">Book Now from $449</a>
+            <a class="btn book-btn" href="booking.php?room=royal-suite">Book Now from $449</a>
           </div>
         </article>
       </div>
@@ -281,67 +227,67 @@ session_start(); // **START SESSION: Must be at the very top**
   <section id="facilities" class="facilities">
     <div class="container">
       <div class="section-title">
-        <p class="subtitle">Our Services</p>
-        <h2>Hotel Facilities</h2>
+        <p class="subtitle">What We Offer</p>
+        <h2>Room Features & Amenities</h2>
       </div>
 
       <div class="facilities-grid">
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1567197427669-a0d3603a3586" alt="Swimming Pool" />
+            <img src="https://images.unsplash.com/photo-1540932239986-310128078ceb" alt="Premium Bedding" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
-            <h3>Swimming Pool</h3>
-            <p>Luxury Pool</p>
+            <h3>Premium Bedding</h3>
+            <p>Luxurious Egyptian cotton sheets and hypoallergenic pillows</p>
             <a href="#" class="facility-link">Details</a>
           </div>
         </div>
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="Restaurant" />
+            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45" alt="Smart Entertainment" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
-            <h3>Fine Dining</h3>
-            <p>Gourmet Restaurant</p>
+            <h3>Smart Entertainment</h3>
+            <p>Modern TV with streaming services and cable channels</p>
             <a href="#" class="facility-link">Details</a>
           </div>
         </div>
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="Free WiFi" />
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="High-Speed WiFi" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
-            <h3>Free WiFi</h3>
-            <p>High-Speed Internet</p>
+            <h3>High-Speed WiFi</h3>
+            <p>Complimentary internet throughout the room</p>
             <a href="#" class="facility-link">Details</a>
           </div>
         </div>
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="fitness center.jpg" alt="Fitness Center" />
+            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14" alt="Luxury Bathroom" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
-            <h3>Fitness Center</h3>
-            <p>Modern Equipment</p>
+            <h3>Luxury Bathroom</h3>
+            <p>Premium toiletries and rainfall shower</p>
             <a href="#" class="facility-link">Details</a>
           </div>
         </div>
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1609587312208-cea54be969e7" alt="Parking" />
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="In-Room Bar" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
-            <h3>Parking</h3>
-            <p>24/7 Secure Parking</p>
+            <h3>In-Room Beverage Bar</h3>
+            <p>Mini fridge, coffee maker, and 24/7 refreshments</p>
             <a href="#" class="facility-link">Details</a>
           </div>
         </div>

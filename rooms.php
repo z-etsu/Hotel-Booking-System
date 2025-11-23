@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,18 +15,7 @@
 
 <body class="page-transition">
     <!-- Navbar -->
-    <header id="navbar">
-        <div class="container">
-            <h1 class="logo">Hotel Name</h1>
-            <nav>
-                <a href="index.php">Home</a>
-                <a href="rooms.php">Rooms</a>
-                <a href="facilities.php">Facilities</a>
-                <a href="#">About</a>
-                <a href="login-page.php">Login / Register</a>
-            </nav>
-        </div>
-    </header>
+    <?php include 'navbar.php'; ?>
 
     <!-- Hero Section with Slideshow -->
     <section class="rooms-hero">

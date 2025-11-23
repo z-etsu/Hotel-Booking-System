@@ -1,44 +1,50 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Hotel Name</title>
+    <title>Register - Hotel Name</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
     <style>
-      /* --- Custom Styles for Auth Pages (Re-using the same theme) --- */
+      /* --- Custom Styles for Auth Pages --- */
       .auth-container {
+        /* Pushes the form down below the fixed navbar */
         padding-top: 100px;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--bg-color);
+        background-color: var(--bg-color); /* Light background */
         padding-bottom: 4rem;
         padding-left: 1rem;
         padding-right: 1rem;
       }
       .auth-form {
         background-color: #ffffff;
-        padding: 3rem; 
-        border-radius: 10px;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-        max-width: 450px; /* Standard width for login form */
+        padding: 3rem; /* Increased padding */
+        border-radius: 10px; /* Slightly more rounded */
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* Stronger, professional shadow */
+        max-width: 550px; /* Slightly wider form */
         width: 100%;
       }
       .auth-form h2 {
         color: #111;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2rem; /* Increased margin */
         font-family: var(--brand-font);
-        font-weight: 500;
+        font-weight: 500; 
         letter-spacing: 0.1em;
         text-transform: uppercase;
         font-size: 2rem;
       }
+      /* Inherit form group styling from contact section for consistency */
       .auth-form .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem; /* Increased spacing between fields */
       }
       .auth-form input {
         width: 100%;
@@ -48,7 +54,7 @@
         font-size: 1rem; /* Larger font size */
         transition: border-color 0.3s, box-shadow 0.3s;
         color: #333;
-        -webkit-appearance: none; 
+        -webkit-appearance: none; /* Resetting default browser styles */
         -moz-appearance: none;
         appearance: none;
       }
@@ -62,11 +68,12 @@
       .auth-form input::placeholder {
         color: #999;
       }
+
       .auth-form .btn {
         width: 100%;
         padding: 1.1rem; /* Bigger button */
         font-size: 1.1rem;
-        background-color: var(--accent);
+        background-color: var(--accent); 
         border: none;
         cursor: pointer;
         font-family: var(--brand-font);
@@ -94,66 +101,170 @@
         color: #9a6b06;
       }
       
-      /* Error/Success Message Styles */
-      .error-message {
-        background-color: #f8d7da;
-        border: 2px solid #f5c6cb;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 6px;
-        margin-bottom: 1.5rem;
+      /* Grid for Name Fields - Stays inside the box */
+      .name-fields {
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr; /* F, MI, L */
+        gap: 1.5rem; /* Increased gap */
+        margin-bottom: 0.5rem; /* Adjusted margin since form-group has its own */
+      }
+      .name-fields .form-group {
+          margin-bottom: 0;
+      }
+      
+      .birthday-label {
+        color: #333; 
+        display: block; 
+        margin-bottom: 0.5rem; 
+        font-size: 0.9rem;
         font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        animation: slideDown 0.3s ease-out;
       }
-
-      .error-message::before {
-        content: "⚠";
-        font-size: 1.3rem;
-        flex-shrink: 0;
-      }
-
-      .success-message {
-        background-color: #d4edda;
-        border: 2px solid #c3e6cb;
-        color: #155724;
-        padding: 1rem;
-        border-radius: 6px;
-        margin-bottom: 1.5rem;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        animation: slideDown 0.3s ease-out;
-      }
-
-      .success-message::before {
-        content: "✓";
-        font-size: 1.3rem;
-        flex-shrink: 0;
-      }
-
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
+      
+      @media (max-width: 600px) {
+        .auth-form {
+          padding: 2rem;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+        /* Stack name fields on mobile to ensure they stay inside the box */
+        .name-fields {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .name-fields .form-group {
+          margin-bottom: 1.5rem;
         }
       }
       
-      @media (max-width: 500px) {
-        .auth-form {
+      /* Success Modal Styles */
+      .success-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        animation: fadeIn 0.3s ease-in;
+      }
+      
+      .success-modal.show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .modal-content {
+        background-color: #ffffff;
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        animation: slideUp 0.3s ease-out;
+      }
+      
+      .modal-content .success-icon {
+        width: 80px;
+        height: 80px;
+        background-color: #4CAF50;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 3rem;
+        color: white;
+      }
+      
+      .modal-content h3 {
+        color: #111;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-family: var(--brand-font);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+      }
+      
+      .modal-content p {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      
+      .modal-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+      
+      .modal-actions a,
+      .modal-actions button {
+        padding: 0.9rem 2rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        text-decoration: none;
+        border: none;
+        font-family: var(--brand-font);
+        transition: all 0.3s ease;
+      }
+      
+      .modal-actions a.login-btn {
+        background-color: var(--accent);
+        color: white;
+      }
+      
+      .modal-actions a.login-btn:hover {
+        background-color: #9a6b06;
+        transform: translateY(-2px);
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      @media (max-width: 600px) {
+        .modal-content {
           padding: 2rem;
+        }
+        
+        .modal-content h3 {
+          font-size: 1.5rem;
+        }
+        
+        .modal-actions {
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+        
+        .modal-actions a {
+          width: 100%;
         }
       }
     </style>
 </head>
-<body>
+<body class="page-transition">
     <header id="navbar" class="scrolled">
       <div class="container">
         <h1 class="logo">Hotel Name</h1>
@@ -162,34 +273,26 @@
           <a href="#rooms">Rooms</a>
           <a href="#facilities">Facilities</a>
           <a href="#contact">About</a>
-          <a href="login.html" style="color: var(--accent);">Login / Register</a>
+          <a href="login-page.php" style="color: var(--accent);">Login / Register</a>
         </nav>
       </div>
     </header>
 
     <div class="auth-container">
-        <!-- ACTION and METHOD added here -->
-        <form class="auth-form" id="loginForm" action="login.php" method="POST">
-            <h2>Login to Your Account</h2>
-            
-            <div class="form-group">
-                <!-- NAME attribute added -->
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
-            </div>
-            
-            <div class="form-group">
-                <!-- NAME attribute added -->
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            
-            <button type="submit" class="btn">Login</button>
-            
-            <p>
-                Don't have an account? <a href="register.html">Register now</a>.
-            </p>
-        </form>
     </div>
-    
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal show">
+      <div class="modal-content">
+        <div class="success-icon">✓</div>
+        <h3>Registration Successful!</h3>
+        <p>Your account has been created successfully. You can now log in with your email and password.</p>
+        <div class="modal-actions">
+          <a href="login-page.php" class="login-btn">Go to Login</a>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
           <div class="footer-grid">
@@ -240,14 +343,11 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Auto-hide error messages after 5 seconds
-        const errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach(function(msg) {
-          setTimeout(() => {
-            msg.style.opacity = '0';
-            setTimeout(() => msg.remove(), 300);
-          }, 5000);
-        });
+        // Show modal immediately on page load
+        const successModal = document.getElementById('successModal');
+        if (successModal) {
+          successModal.classList.add('show');
+        }
       });
     </script>
 </body>

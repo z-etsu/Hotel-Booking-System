@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +97,37 @@
         color: #9a6b06;
       }
       
+      /* Password Toggle Styles */
+      .password-group {
+        position: relative;
+      }
+      
+      .password-toggle {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #666;
+        transition: color 0.3s ease;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .password-toggle:hover {
+        color: var(--accent);
+      }
+      
+      .password-group input[type="password"],
+      .password-group input[type="text"] {
+        padding-right: 3rem;
+      }
+      
       /* Error/Success Message Styles */
       .error-message {
         background-color: #f8d7da;
@@ -153,7 +187,7 @@
       }
     </style>
 </head>
-<body>
+<body class="page-transition">
     <header id="navbar" class="scrolled">
       <div class="container">
         <h1 class="logo">Hotel Name</h1>
@@ -162,32 +196,48 @@
           <a href="#rooms">Rooms</a>
           <a href="#facilities">Facilities</a>
           <a href="#contact">About</a>
-          <a href="login.html" style="color: var(--accent);">Login / Register</a>
+          <a href="login-page.php" style="color: var(--accent);">Login / Register</a>
         </nav>
       </div>
     </header>
 
     <div class="auth-container">
-        <!-- ACTION and METHOD added here -->
-        <form class="auth-form" id="loginForm" action="login.php" method="POST">
-            <h2>Login to Your Account</h2>
-            
-            <div class="form-group">
-                <!-- NAME attribute added -->
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
+        <div style="width: 100%; max-width: 450px;">
+          <!-- Display error or success messages -->
+          <?php if (isset($_SESSION['message'])): ?>
+            <div class="<?php echo ($_SESSION['message_type'] === 'error') ? 'error-message' : 'success-message'; ?>">
+              <?php echo htmlspecialchars($_SESSION['message']); ?>
             </div>
-            
-            <div class="form-group">
-                <!-- NAME attribute added -->
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            
-            <button type="submit" class="btn">Login</button>
-            
-            <p>
-                Don't have an account? <a href="register.html">Register now</a>.
-            </p>
-        </form>
+            <?php 
+            unset($_SESSION['message']);
+            unset($_SESSION['message_type']);
+            ?>
+          <?php endif; ?>
+
+          <!-- ACTION and METHOD added here -->
+          <form class="auth-form" id="loginForm" action="login.php" method="POST">
+              <h2>Login to Your Account</h2>
+              
+              <div class="form-group">
+                  <!-- NAME attribute added -->
+                  <input type="email" id="email" name="email" placeholder="Email Address" required>
+              </div>
+              
+              <div class="form-group password-group">
+                  <!-- NAME attribute added -->
+                  <input type="password" id="password" name="password" placeholder="Password" required>
+                  <button type="button" class="password-toggle" id="togglePassword">
+                    <span id="toggleIcon">👁️</span>
+                  </button>
+              </div>
+              
+              <button type="submit" class="btn">Login</button>
+              
+              <p>
+                  Don't have an account? <a href="register.html">Register now</a>.
+              </p>
+          </form>
+        </div>
     </div>
     
     <footer class="footer">
@@ -245,9 +295,24 @@
         errorMessages.forEach(function(msg) {
           setTimeout(() => {
             msg.style.opacity = '0';
+            msg.style.transition = 'opacity 0.3s ease-out';
             setTimeout(() => msg.remove(), 300);
           }, 5000);
         });
+        
+        // Password toggle functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+        
+        if (togglePassword && passwordInput) {
+          togglePassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            toggleIcon.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+          });
+        }
       });
     </script>
 </body>

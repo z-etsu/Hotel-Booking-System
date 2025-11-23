@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Registration successful
         $_SESSION['message'] = 'Registration successful! You can now log in.';
         $_SESSION['message_type'] = 'success';
-        header("Location: login.html");
+        header("Location: register-success.php");
         exit;
     } else {
         // Check for specific error like duplicate entry (e.g., email UNIQUE constraint)

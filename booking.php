@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,25 +11,19 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rooms.css" />
   <link rel="stylesheet" href="booking.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker@latest/dist/litepicker.css">
+  <script src="https://cdn.jsdelivr.net/npm/litepicker@latest/dist/litepicker.js"></script>
   <script src="rooms.js"></script>
   <script src="booking.js" defer></script>
 </head>
-<body class="page-transition">
-  <!-- Navbar (re-using #navbar; 'scrolled' class makes it white as requested) -->
-  <header id="navbar" class="scrolled">
-    <div class="container">
-      <h1 class="logo">Hotel Name</h1>
-      <nav>
-        <a href="index.php">Home</a>
-        <a href="rooms.html">Rooms</a>
-        <a href="#">Facilities</a>
-        <a href="#">About</a>
-        <a href="#">Login / Register</a>
-      </nav>
-    </div>
-  </header>
+<body class="page-transition booking-page">
+  <!-- Navbar -->
+  <?php include 'navbar.php'; ?>
+  
+  <!-- Store login status for JavaScript -->
+  <input type="hidden" id="user-logged-in" value="<?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>">
 
-  <!-- Main booking content (warm beige background will be added in CSS) -->
+  <!-- Main booking content -->
   <main class="booking-page-main warm-bg">
     <div class="container">
 
@@ -34,7 +31,7 @@
       <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-top:18px;">
         <a href="index.php">Home</a>
         <span aria-hidden="true">›</span>
-        <a href="rooms.html">Rooms</a>
+        <a href="rooms.php">Rooms</a>
         <span aria-hidden="true">›</span>
         <span id="breadcrumb-room" class="current">Room</span>
       </nav>
@@ -69,7 +66,7 @@
 
         <!-- RIGHT: Sidebar -->
         <aside class="booking-sidebar-compact" aria-label="Booking widget and details">
-          <!-- You’re booking summary -->
+          <!-- You're booking summary -->
           <div class="booking-summary-card">
             <div class="summary-top">
               <div class="summary-room">
@@ -106,20 +103,15 @@
               <div class="form-group">
                 <label for="check-in">Check-in Date</label>
                 <input type="date" id="check-in" name="checkin" />
-                <small class="field-note">Check-in after 2:00 PM</small>
               </div>
               <div class="form-group">
                 <label for="check-out">Check-out Date</label>
                 <input type="date" id="check-out" name="checkout" />
-                <small class="field-note">Check-out before 12:00 PM</small>
               </div>
               <div class="form-group">
                 <label for="guests">Guests</label>
                 <select id="guests" name="guests">
-                  <option value="1">1 Adult</option>
-                  <option value="2">2 Adults</option>
-                  <option value="3">3 Adults</option>
-                  <option value="4">4 Adults</option>
+                  <option value="1">1 Guest</option>
                 </select>
               </div>
               <button type="button" class="btn book-final-btn" id="book-final-btn">Reserve & Pay</button>
@@ -166,28 +158,17 @@
           </ul>
         </section>
 
-        <!-- Good to Know -->
-        <section class="good-to-know" style="margin-top:24px;">
-          <h2>Good to Know</h2>
-          <ul class="policy-list">
-            <li><strong>Check-in:</strong> After 2:00 PM</li>
-            <li><strong>Check-out:</strong> Before 12:00 PM</li>
-            <li><strong>Cancellation:</strong> Free cancellation up to 48 hours before arrival. 10% deposit for guaranteed reservations.</li>
-            <li><strong>Children & extra beds:</strong> Cribs and extra beds available on request (may incur an extra charge).</li>
-          </ul>
-        </section>
-
       </article>
     </div> <!-- container -->
   </main>
 
-  <!-- Optional footer (keeps the page balanced) -->
+  <!-- Optional footer -->
   <footer class="site-footer" aria-hidden="true" style="padding:40px 0; text-align:center; color:#666;">
     © <span id="currentYear"></span> Hotel Name. All rights reserved.
   </footer>
 
   <script>
-    // small enhancement: sync breadcrumb room label and booking summary with room title (populated by booking.js)
+    // Sync breadcrumb and summary with room data
     (function() {
       const observer = new MutationObserver(() => {
         const rn = document.getElementById('room-name')?.textContent || '';
@@ -205,8 +186,44 @@
       observer.observe(document.getElementById('room-name'), { childList: true, subtree: true });
     })();
 
-    // set footer year
+    // Set footer year
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Dynamic guest dropdown based on room capacity
+    function updateGuestOptions(maxCapacity) {
+      const guestsSelect = document.getElementById('guests');
+      guestsSelect.innerHTML = ''; // Clear existing options
+
+      for (let i = 1; i <= maxCapacity; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i === 1 ? '1 Guest' : `${i} Guests`;
+        guestsSelect.appendChild(option);
+      }
+
+      // Set default to first option
+      guestsSelect.value = 1;
+    }
+
+    // Observer to watch for capacity changes
+    const capacityObserver = new MutationObserver(() => {
+      const capacityText = document.getElementById('detail-capacity')?.textContent || '';
+      const capacity = parseInt(capacityText);
+      if (capacity && capacity > 0) {
+        updateGuestOptions(capacity);
+      }
+    });
+
+    capacityObserver.observe(document.getElementById('detail-capacity'), { childList: true, subtree: true });
+
+    // Initialize with default capacity if already loaded
+    const initialCapacity = document.getElementById('detail-capacity')?.textContent || '';
+    if (initialCapacity) {
+      const capacity = parseInt(initialCapacity);
+      if (capacity > 0) {
+        updateGuestOptions(capacity);
+      }
+    }
   </script>
 </body>
 </html>
