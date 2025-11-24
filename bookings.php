@@ -47,14 +47,6 @@ $stmt->close();
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
 
-    <script>
-        // Keep navbar in scrolled state for bookings page
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
-            navbar.classList.add('scrolled');
-        }
-    </script>
-
     <main class="bookings-main-container">
         <div class="container">
             <!-- Breadcrumb -->
