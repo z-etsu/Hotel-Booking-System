@@ -214,9 +214,9 @@ session_start();
       <h1 class="logo">Hotel Name</h1>
       <nav>
         <a href="index.php">Home</a>
-        <a href="#rooms">Rooms</a>
-        <a href="#facilities">Facilities</a>
-        <a href="#contact">About</a>
+        <a href="rooms.php">Rooms</a>
+        <a href="facilities.php">Facilities</a>
+        <a href="about.php">About</a>
         <a href="login-page.php" style="color: var(--accent);">Login / Register</a>
       </nav>
     </div>
