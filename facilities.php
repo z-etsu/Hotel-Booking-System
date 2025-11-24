@@ -655,7 +655,7 @@ session_start();
                         <li><a href="index.php">Home</a></li>
                         <li><a href="rooms.php">Our Rooms</a></li>
                         <li><a href="facilities.php">Facilities</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="about.php">About</a></li>
                     </ul>
                 </div>
                 <div class="contact-links">

@@ -1,341 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Hotel Name</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
-    <style>
-      /* --- Custom Styles for Auth Pages --- */
-      .auth-container {
-        /* Pushes the form down below the fixed navbar */
-        padding-top: 100px;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--bg-color); /* Light background */
-        padding-bottom: 4rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .auth-form {
-        background-color: #ffffff;
-        padding: 3rem; /* Increased padding */
-        border-radius: 10px; /* Slightly more rounded */
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* Stronger, professional shadow */
-        max-width: 550px; /* Slightly wider form */
-        width: 100%;
-      }
-      .auth-form h2 {
-        color: #111;
-        text-align: center;
-        margin-bottom: 2rem; /* Increased margin */
-        font-family: var(--brand-font);
-        font-weight: 500; 
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        font-size: 2rem;
-      }
-      /* Inherit form group styling from contact section for consistency */
-      .auth-form .form-group {
-        margin-bottom: 1.5rem; /* Increased spacing between fields */
-      }
-      .auth-form input {
-        width: 100%;
-        padding: 1rem 1.25rem; /* Bigger padding for larger inputs */
-        border: 2px solid #e0e0e0; /* Thicker, defined border */
-        border-radius: 6px;
-        font-size: 1rem; /* Larger font size */
-        transition: border-color 0.3s, box-shadow 0.3s;
-        color: #333;
-        -webkit-appearance: none; /* Resetting default browser styles */
-        -moz-appearance: none;
-        appearance: none;
-      }
-      /* Professional input focus state */
-      .auth-form input:focus {
-        outline: none;
-        border-color: var(--accent); /* Accent color border */
-        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2); /* Soft glow */
-        background-color: #fff;
-      }
-      .auth-form input::placeholder {
-        color: #999;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register - Hotel Name</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+        <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+        <style>
+            /* --- Custom Styles for Auth Pages --- */
+            .auth-container {
+                /* Pushes the form down below the fixed navbar */
+                padding-top: 100px;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--bg-color); /* Light background */
+                padding-bottom: 4rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .auth-form {
+                background-color: #ffffff;
+                padding: 3rem; /* Increased padding */
+                border-radius: 10px; /* Slightly more rounded */
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Stronger, professional shadow */
+                max-width: 550px; /* Slightly wider form */
+                width: 100%;
+            }
+            .auth-form h2 {
+                color: #111;
+                text-align: center;
+                margin-bottom: 2rem; /* Increased margin */
+                font-family: var(--brand-font);
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-size: 2rem;
+            }
+            /* Inherit form group styling from contact section for consistency */
+            .auth-form .form-group {
+                margin-bottom: 1.5rem; /* Increased spacing between fields */
+            }
+            .auth-form input {
+                width: 100%;
+                padding: 1rem 1.25rem; /* Bigger padding for larger inputs */
+                border: 2px solid #e0e0e0; /* Thicker, defined border */
+                border-radius: 6px;
+                font-size: 1rem; /* Larger font size */
+                transition: border-color 0.3s, box-shadow 0.3s;
+                color: #333;
+                -webkit-appearance: none; /* Resetting default browser styles */
+                -moz-appearance: none;
+                appearance: none;
+            }
+            /* Professional input focus state */
+            .auth-form input:focus {
+                outline: none;
+                border-color: var(--accent); /* Accent color border */
+                box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2); /* Soft glow */
+                background-color: #fff;
+            }
+            .auth-form input::placeholder {
+                color: #999;
+            }
 
-      .auth-form .btn {
-        width: 100%;
-        padding: 1.1rem; /* Bigger button */
-        font-size: 1.1rem;
-        background-color: var(--accent); 
-        border: none;
-        cursor: pointer;
-        font-family: var(--brand-font);
-        border-radius: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 500;
-      }
-      .auth-form .btn:hover {
-        background-color: #9a6b06;
-      }
-      .auth-form p {
-        text-align: center; 
-        margin-top: 2rem; 
-        color: #666; 
-        font-size: 1rem;
-      }
-      .auth-form a {
-        color: var(--accent); 
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s;
-      }
-      .auth-form a:hover {
-        color: #9a6b06;
-      }
-      
-      /* Grid for Name Fields - Stays inside the box */
-      .name-fields {
-        display: grid;
-        grid-template-columns: 2fr 1fr 2fr; /* F, MI, L */
-        gap: 1.5rem; /* Increased gap */
-        margin-bottom: 0.5rem; /* Adjusted margin since form-group has its own */
-      }
-      .name-fields .form-group {
-          margin-bottom: 0;
-      }
-      
-      .birthday-label {
-        color: #333; 
-        display: block; 
-        margin-bottom: 0.5rem; 
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-      
-      /* Password Toggle Styles */
-      .password-group {
-        position: relative;
-      }
-      
-      .password-toggle {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        font-size: 1.2rem;
-        color: #666;
-        transition: color 0.3s ease;
-        background: none;
-        border: none;
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .password-toggle:hover {
-        color: var(--accent);
-      }
-      
-      .password-group input[type="password"],
-      .password-group input[type="text"] {
-        padding-right: 3rem;
-      }
-      
-      @media (max-width: 600px) {
-        .auth-form {
-          padding: 2rem;
-        }
-        /* Stack name fields on mobile to ensure they stay inside the box */
-        .name-fields {
-          grid-template-columns: 1fr;
-          gap: 0;
-        }
-        .name-fields .form-group {
-          margin-bottom: 1.5rem;
-        }
-      }
-    </style>
-</head>
-<body>
-    <header id="navbar" class="scrolled">
-      <div class="container">
-        <h1 class="logo">Hotel Name</h1>
-        <nav>
-          <a href="index.php">Home</a>
-          <a href="#rooms">Rooms</a>
-          <a href="#facilities">Facilities</a>
-          <a href="#contact">About</a>
-          <a href="login-page.php" style="color: var(--accent);">Login / Register</a>
-        </nav>
-      </div>
-    </header>
+            .auth-form .btn {
+                width: 100%;
+                padding: 1.1rem; /* Bigger button */
+                font-size: 1.1rem;
+                background-color: var(--accent);
+                border: none;
+                cursor: pointer;
+                font-family: var(--brand-font);
+                border-radius: 6px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                font-weight: 500;
+            }
+            .auth-form .btn:hover {
+                background-color: #9a6b06;
+            }
+            .auth-form p {
+                text-align: center;
+                margin-top: 2rem;
+                color: #666;
+                font-size: 1rem;
+            }
+            .auth-form a {
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s;
+            }
+            .auth-form a:hover {
+                color: #9a6b06;
+            }
 
-    <div class="auth-container">
-        <!-- ACTION and METHOD added here -->
-        <form class="auth-form" id="registerForm" action="register.php" method="POST">
-            <h2>Guest Registration</h2>
+            /* Grid for Name Fields - Stays inside the box */
+            .name-fields {
+                display: grid;
+                grid-template-columns: 2fr 1fr 2fr; /* F, MI, L */
+                gap: 1.5rem; /* Increased gap */
+                margin-bottom: 0.5rem; /* Adjusted margin since form-group has its own */
+            }
+            .name-fields .form-group {
+                margin-bottom: 0;
+            }
 
-            <div class="name-fields">
+            .birthday-label {
+                color: #333;
+                display: block;
+                margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+
+            /* Password Toggle Styles */
+            .password-group {
+                position: relative;
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                font-size: 1.2rem;
+                color: #666;
+                transition: color 0.3s ease;
+                background: none;
+                border: none;
+                padding: 0.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .password-toggle:hover {
+                color: var(--accent);
+            }
+
+            .password-group input[type="password"],
+            .password-group input[type="text"] {
+                padding-right: 3rem;
+            }
+
+            @media (max-width: 600px) {
+                .auth-form {
+                    padding: 2rem;
+                }
+                /* Stack name fields on mobile to ensure they stay inside the box */
+                .name-fields {
+                    grid-template-columns: 1fr;
+                    gap: 0;
+                }
+                .name-fields .form-group {
+                    margin-bottom: 1.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header id="navbar" class="scrolled">
+            <div class="container">
+                <h1 class="logo">Hotel Name</h1>
+                <nav>
+                    <a href="index.php">Home</a>
+                    <a href="rooms.php">Rooms</a>
+                    <a href="facilities.php">Facilities</a>
+                    <a href="about.php">About</a>
+                    <a href="login-page.php" style="color: var(--accent)">Login / Register</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="auth-container">
+            <!-- ACTION and METHOD added here -->
+            <form class="auth-form" id="registerForm" action="register.php" method="POST">
+                <h2>Guest Registration</h2>
+
+                <div class="name-fields">
+                    <div class="form-group">
+                        <!-- NAME attribute added -->
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                    </div>
+                    <div class="form-group">
+                        <!-- NAME attribute added -->
+                        <input type="text" id="middleInitial" name="middleInitial" placeholder="MI" maxlength="1" />
+                    </div>
+                    <div class="form-group">
+                        <!-- NAME attribute added -->
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthday" class="birthday-label">Birthday (16+ required)</label>
+                    <input type="text" id="birthday" name="birthday" placeholder="Select your birthday" required />
+                </div>
+
                 <div class="form-group">
                     <!-- NAME attribute added -->
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required />
                 </div>
-                <div class="form-group">
-                    <!-- NAME attribute added -->
-                    <input type="text" id="middleInitial" name="middleInitial" placeholder="MI" maxlength="1">
-                </div>
-                <div class="form-group">
-                    <!-- NAME attribute added -->
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="birthday" class="birthday-label">Birthday (16+ required)</label>
-                <input type="text" id="birthday" name="birthday" placeholder="Select your birthday" required>
-            </div>
-            
-            <div class="form-group">
-                <!-- NAME attribute added -->
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
-            </div>
-            
-            <div class="form-group password-group">
-                <!-- NAME attribute added -->
-                <input type="password" id="password" name="password" placeholder="Password (min 8 chars)" required minlength="8">
-                <button type="button" class="password-toggle" id="togglePassword">
-                  <span id="toggleIcon">👁️</span>
-                </button>
-            </div>
-            
-            <button type="submit" class="btn">Register Account</button>
-            
-            <p>
-                Already have an account? <a href="login-page.php">Login here</a>.
-            </p>
-        </form>
-    </div>
 
-    <footer class="footer">
-        <div class="container">
-          <div class="footer-grid">
-            <div class="footer-info">
-              <h1 class="footer-logo">Hotel Name</h1>
-              <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-            <div class="quick-links">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="index.php#rooms">Our Rooms</a></li>
-                <li><a href="index.php#facilities">Facilities</a></li>
-                <li><a href="index.php#testimonials">Testimonials</a></li>
-                <li><a href="index.php#contact">Contact Us</a></li>
-              </ul>
-            </div>
-            <div class="contact-links">
-              <h3>Contact Info</h3>
-              <ul>
-                <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
-                <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-                <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-                <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
-                <li><i class="fas fa-clock"></i> 24/7 Open</li>
-              </ul>
-            </div>
-            <div class="newsletter">
-              <h3>Newsletter</h3>
-              <p>Subscribe to receive special offers and updates</p>
-              <form class="newsletter-form">
-                <div class="form-group">
-                  <input type="email" placeholder="Your Email Address" required>
-                  <button type="submit" class="btn">Subscribe</button>
+                <div class="form-group password-group">
+                    <!-- NAME attribute added -->
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password (min 8 chars)"
+                        required
+                        minlength="8" />
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <span id="toggleIcon">👁️</span>
+                    </button>
                 </div>
-              </form>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p>© 2025 Hotel Name. All rights reserved.</p>
-          </div>
+
+                <button type="submit" class="btn">Register Account</button>
+
+                <p>Already have an account? <a href="login-page.php">Login here</a>.</p>
+            </form>
         </div>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Password toggle functionality
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
-        
-        if (togglePassword && passwordInput) {
-          togglePassword.addEventListener('click', function(e) {
-            e.preventDefault();
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            toggleIcon.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
-          });
-        }
-        
-        const today = new Date();
-        const minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
-        const maxDate16YearsAgo = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
-        
-        // Initialize Flatpickr with 16+ validation
-        flatpickr('#birthday', {
-          mode: 'single',
-          dateFormat: 'Y-m-d',
-          maxDate: maxDate16YearsAgo,
-          minDate: minDate,
-          yearRange: [1925, new Date().getFullYear() - 16],
-          defaultDate: maxDate16YearsAgo,
-          altInput: true,
-          altFormat: 'F j, Y',
-          animate: true,
-          theme: 'light'
-        });
-        
-        // Validate on form submission
-        const registerForm = document.getElementById('registerForm');
-        registerForm.addEventListener('submit', function(e) {
-          const birthdayValue = document.getElementById('birthday').value;
-          
-          if (!birthdayValue) {
-            e.preventDefault();
-            alert('Please select a valid birthday.');
-            document.getElementById('birthday').focus();
-            return;
-          }
-          
-          const birthday = new Date(birthdayValue);
-          const age = today.getFullYear() - birthday.getFullYear();
-          const monthDiff = today.getMonth() - birthday.getMonth();
-          const dayDiff = today.getDate() - birthday.getDate();
-          
-          if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-            age--;
-          }
-          
-          if (age < 16) {
-            e.preventDefault();
-            alert('You must be at least 16 years old to register.');
-            document.getElementById('birthday').focus();
-            return;
-          }
-        });
-      });
-    </script>
-</body>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <h1 class="footer-logo">Hotel Name</h1>
+                        <p>
+                            Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service,
+                            elegant accommodations, and unforgettable experiences.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="rooms.php">Our Rooms</a></li>
+                            <li><a href="facilities.php">Facilities</a></li>
+                            <li><a href="about.php">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="contact-links">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
+                            <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+                            <li><i class="fas fa-clock"></i> 24/7 Open</li>
+                        </ul>
+                    </div>
+                    <div class="newsletter">
+                        <h3>Newsletter</h3>
+                        <p>Subscribe to receive special offers and updates</p>
+                        <form class="newsletter-form">
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email Address" required />
+                                <button type="submit" class="btn">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 Hotel Name. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Password toggle functionality
+                const togglePassword = document.getElementById("togglePassword");
+                const passwordInput = document.getElementById("password");
+                const toggleIcon = document.getElementById("toggleIcon");
+
+                if (togglePassword && passwordInput) {
+                    togglePassword.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                        passwordInput.setAttribute("type", type);
+                        toggleIcon.textContent = type === "password" ? "👁️" : "👁️‍🗨️";
+                    });
+                }
+
+                const today = new Date();
+                const minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+                const maxDate16YearsAgo = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+
+                // Initialize Flatpickr with 16+ validation
+                flatpickr("#birthday", {
+                    mode: "single",
+                    dateFormat: "Y-m-d",
+                    maxDate: maxDate16YearsAgo,
+                    minDate: minDate,
+                    yearRange: [1925, new Date().getFullYear() - 16],
+                    defaultDate: maxDate16YearsAgo,
+                    altInput: true,
+                    altFormat: "F j, Y",
+                    animate: true,
+                    theme: "light",
+                });
+
+                // Validate on form submission
+                const registerForm = document.getElementById("registerForm");
+                registerForm.addEventListener("submit", function (e) {
+                    const birthdayValue = document.getElementById("birthday").value;
+
+                    if (!birthdayValue) {
+                        e.preventDefault();
+                        alert("Please select a valid birthday.");
+                        document.getElementById("birthday").focus();
+                        return;
+                    }
+
+                    const birthday = new Date(birthdayValue);
+                    const age = today.getFullYear() - birthday.getFullYear();
+                    const monthDiff = today.getMonth() - birthday.getMonth();
+                    const dayDiff = today.getDate() - birthday.getDate();
+
+                    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                        age--;
+                    }
+
+                    if (age < 16) {
+                        e.preventDefault();
+                        alert("You must be at least 16 years old to register.");
+                        document.getElementById("birthday").focus();
+                        return;
+                    }
+                });
+            });
+        </script>
+    </body>
 </html>

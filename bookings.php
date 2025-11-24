@@ -190,8 +190,52 @@ $stmt->close();
         }
     </style>
 
-    <footer class="site-footer" aria-hidden="true" style="padding:40px 0; text-align:center; color:#666; margin-top:60px;">
-        © <span id="currentYear"></span> Hotel Name. All rights reserved.
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h1 class="footer-logo">Hotel Name</h1>
+                    <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="rooms.php">Our Rooms</a></li>
+                        <li><a href="facilities.php">Facilities</a></li>
+                        <li><a href="about.php">About</a></li>
+                    </ul>
+                </div>
+                <div class="contact-links">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
+                        <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                        <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Open</li>
+                    </ul>
+                </div>
+                <div class="newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive special offers and updates</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email Address" required>
+                            <button type="submit" class="btn">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Hotel Name. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
