@@ -1,0 +1,285 @@
+/* About Page Styles */
+
+.about-hero {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-color);
+    background: url("images/presidential1.avif") center/cover no-repeat;
+    position: relative;
+}
+
+.about-hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.about-hero .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    padding: 0 20px;
+}
+
+.about-hero h1 {
+    font-size: 2.6rem;
+    margin-bottom: 12px;
+}
+
+.about-hero p {
+    max-width: 780px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.05rem;
+}
+
+.about-hero-buttons {
+    margin-top: 20px;
+}
+
+.about-hero .btn {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.about-hero .btn-light {
+    background: #fff;
+    color: #111;
+    padding: 10px 16px;
+    margin-left: 12px;
+}
+
+/* Team Grid */
+.team-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.team-member {
+    width: 220px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.team-member h4 {
+    margin-top: 12px;
+    color: #111;
+}
+
+.team-member p {
+    color: #666;
+    font-size: 0.92rem;
+}
+
+/* Values Grid */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.values-grid > div {
+    background: #fff;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.values-grid h4 {
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.values-grid p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Contact Section */
+.about-contact-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.about-contact-info {
+    flex: 1;
+    min-width: 260px;
+}
+
+.about-contact-info p {
+    color: #666;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+.about-contact-map {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-contact-map iframe {
+    width: 100%;
+    height: 260px;
+    border: 0;
+    border-radius: 8px;
+}
+
+/* Story Section */
+.story-content {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.story-text {
+    flex: 1;
+    min-width: 280px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.story-image {
+    flex: 1;
+    min-width: 280px;
+}
+
+.story-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+    height: 220px;
+}
+
+/* Mission & Vision */
+.mission-vision-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.mission-card,
+.vision-card {
+    flex: 1;
+    min-width: 240px;
+    background: #fff;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.mission-card h3,
+.vision-card h3 {
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.mission-card p,
+.vision-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Main Container */
+.about-main {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-section {
+    margin-bottom: 48px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        height: 50vh;
+    }
+
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+
+    .team-grid {
+        gap: 16px;
+    }
+
+    .team-member {
+        width: 180px;
+    }
+
+    .story-content {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-hero {
+        height: 45vh;
+    }
+
+    .about-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .about-hero p {
+        font-size: 0.95rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-member {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .story-content {
+        flex-direction: column;
+    }
+
+    .about-hero .btn {
+        display: block;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .about-contact-wrapper {
+        flex-direction: column;
+    }
+}
