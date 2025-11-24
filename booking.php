@@ -277,6 +277,290 @@ session_start();
       }
     }
   </script>
+
+  <!-- Themed Alert Modal -->
+  <div id="themed-alert-modal" class="themed-modal">
+    <div class="themed-modal-content">
+      <button class="modal-close-btn">&times;</button>
+      <div class="modal-icon alert-icon">⚠️</div>
+      <h2>Alert</h2>
+      <p id="alert-message-content"></p>
+      <button id="alert-ok-btn" class="btn btn-modal-primary">OK</button>
+    </div>
+  </div>
+
+  <!-- Booking Confirmation Modal -->
+  <div id="booking-confirmation-modal" class="themed-modal">
+    <div class="themed-modal-content">
+      <button class="modal-close-btn">&times;</button>
+      <div class="modal-icon confirm-icon">✓</div>
+      <h2>Confirm Your Reservation</h2>
+      <div class="confirmation-details">
+        <div class="detail-row">
+          <span class="detail-label">Room:</span>
+          <span id="confirm-room-name" class="detail-value"></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Duration:</span>
+          <span id="confirm-nights" class="detail-value"></span> nights
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Price per Night:</span>
+          <span id="confirm-price-per-night" class="detail-value"></span>
+        </div>
+        <div class="detail-row highlight">
+          <span class="detail-label">Total Price:</span>
+          <span id="confirm-total" class="detail-value total-price"></span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancel-confirmation-btn" class="btn btn-modal-secondary">Cancel</button>
+        <button id="confirm-booking-btn" class="btn btn-modal-primary">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Success Modal -->
+  <div id="booking-success-modal" class="themed-modal">
+    <div class="themed-modal-content">
+      <div class="modal-icon success-icon">✓</div>
+      <h2>Booking Confirmed!</h2>
+      <p>Your reservation has been successfully created.</p>
+      <div class="order-id-box">
+        <p class="order-id-label">Your Order ID:</p>
+        <p class="order-id-value">#<span id="success-order-id"></span></p>
+      </div>
+      <p class="redirect-message">Redirecting to your bookings page...</p>
+    </div>
+  </div>
+
+  <style>
+    /* Themed Modal Styles */
+    .themed-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .themed-modal.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .themed-modal-content {
+      background-color: #fdf8f4;
+      padding: 40px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      text-align: center;
+      animation: slideUp 0.3s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close-btn:hover {
+      color: #333;
+    }
+
+    .modal-icon {
+      font-size: 56px;
+      margin-bottom: 15px;
+      display: block;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      color: #111;
+    }
+
+    .themed-modal-content h2 {
+      font-size: 1.6rem;
+      color: #111;
+      margin-bottom: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-family: 'Cinzel', 'Georgia', serif;
+    }
+
+    .themed-modal-content p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .confirmation-details {
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+      border: 1px solid #e6e1d8;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-row.highlight {
+      padding-top: 12px;
+      border-top: 2px solid #e6e1d8;
+    }
+
+    .detail-label {
+      color: #666;
+      font-weight: 500;
+    }
+
+    .detail-value {
+      color: #111;
+      font-weight: 500;
+    }
+
+    .total-price {
+      color: #b8860b;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .order-id-box {
+      background-color: #fff;
+      border: 2px solid #b8860b;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .order-id-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0 0 10px 0;
+    }
+
+    .order-id-value {
+      font-size: 1.8rem;
+      color: #b8860b;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .redirect-message {
+      font-size: 0.85rem;
+      color: #999;
+      font-style: italic;
+      margin-top: 15px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .btn-modal-primary {
+      background-color: #532200;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 1px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-modal-primary:hover {
+      background-color: #3e1a00;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(83, 34, 0, 0.3);
+    }
+
+    .btn-modal-secondary {
+      background-color: #ddd;
+      color: #333;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 1px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-modal-secondary:hover {
+      background-color: #ccc;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .themed-modal-content {
+        width: 95%;
+        padding: 25px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+
+      .modal-actions .btn {
+        max-width: 100%;
+      }
+    }
+  </style>
 </body>
 
 </html>
