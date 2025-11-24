@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Check if user is logged in
                 const userLoggedIn = document.getElementById('user-logged-in').value === 'true';
                 if (!userLoggedIn) {
-                    alert('Please log in first.');
+                    showThemedAlert('Please log in first.');
                     return;
                 }
 
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const guests = parseInt(document.getElementById('guests').value, 10);
 
                 if (!checkInVal || !checkOutVal) {
-                    alert('Please select check-in and check-out dates.');
+                    showThemedAlert('Please select check-in and check-out dates.');
                     return;
                 }
 
@@ -266,17 +266,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Validate dates
                 if (inDate < today) {
-                    alert('Check-in date cannot be in the past.');
+                    showThemedAlert('Check-in date cannot be in the past.');
                     return;
                 }
 
                 if (outDate <= inDate) {
-                    alert('Check-out must be after check-in.');
+                    showThemedAlert('Check-out must be after check-in.');
                     return;
                 }
 
                 if (guests > room.maxPeople) {
-                    alert(`The selected room allows up to ${room.maxPeople} guest(s). Please adjust the guest count or choose a different room.`);
+                    showThemedAlert(`The selected room allows up to ${room.maxPeople} guest(s). Please adjust the guest count or choose a different room.`);
                     return;
                 }
 
@@ -285,49 +285,120 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nights = Math.ceil((outDate - inDate) / msPerDay);
                 const total = nights * room.price;
 
-                // Show confirmation
-                if (!confirm(`Reserve ${room.name} for ${nights} night${nights !== 1 ? 's' : ''} at $${room.price}/night?\n\nTotal: $${total.toLocaleString()}`)) {
-                    return;
-                }
+                // Show confirmation with themed modal
+                showConfirmationModal(room.name, nights, room.price, total, async () => {
+                    // Disable button while processing
+                    bookBtn.disabled = true;
+                    const originalText = bookBtn.textContent;
+                    bookBtn.textContent = 'Processing...';
 
-                // Disable button while processing
-                bookBtn.disabled = true;
-                const originalText = bookBtn.textContent;
-                bookBtn.textContent = 'Processing...';
+                    try {
+                        // Submit booking to backend
+                        const formData = new FormData();
+                        formData.append('room_name', room.name);
+                        formData.append('check_in', checkInVal);
+                        formData.append('check_out', checkOutVal);
+                        formData.append('price_per_night', room.price);
+                        formData.append('number_of_nights', nights);
+                        formData.append('total_price', total);
+                        formData.append('number_of_guests', guests);
 
-                try {
-                    // Submit booking to backend
-                    const formData = new FormData();
-                    formData.append('room_name', room.name);
-                    formData.append('check_in', checkInVal);
-                    formData.append('check_out', checkOutVal);
-                    formData.append('price_per_night', room.price);
-                    formData.append('number_of_nights', nights);
-                    formData.append('total_price', total);
-                    formData.append('number_of_guests', guests);
+                        const response = await fetch('process_booking.php', {
+                            method: 'POST',
+                            body: formData
+                        });
 
-                    const response = await fetch('process_booking.php', {
-                        method: 'POST',
-                        body: formData
-                    });
+                        const result = await response.json();
 
-                    const result = await response.json();
-
-                    if (result.success) {
-                        alert(`Booking confirmed! Your Order ID is: #${result.order_id}\n\nYou will be redirected to your bookings page.`);
-                        // Redirect to bookings page
-                        window.location.href = 'bookings.php';
-                    } else {
-                        alert('Booking failed: ' + (result.message || 'Unknown error'));
+                        if (result.success) {
+                            showSuccessModal(result.order_id);
+                            // Redirect after 2 seconds
+                            setTimeout(() => {
+                                window.location.href = 'bookings.php';
+                            }, 2000);
+                        } else {
+                            showThemedAlert('Booking failed: ' + (result.message || 'Unknown error'));
+                            bookBtn.disabled = false;
+                            bookBtn.textContent = originalText;
+                        }
+                    } catch (error) {
+                        console.error('Booking error:', error);
+                        showThemedAlert('An error occurred while processing your booking. Please try again.');
                         bookBtn.disabled = false;
                         bookBtn.textContent = originalText;
                     }
-                } catch (error) {
-                    console.error('Booking error:', error);
-                    alert('An error occurred while processing your booking. Please try again.');
-                    bookBtn.disabled = false;
-                    bookBtn.textContent = originalText;
-                }
+                });
+            });
+        }
+
+        // Themed Modal Functions
+        function showThemedAlert(message) {
+            const modal = document.getElementById('themed-alert-modal');
+            const content = document.getElementById('alert-message-content');
+            if (modal && content) {
+                content.textContent = message;
+                modal.classList.add('show');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function showConfirmationModal(roomName, nights, pricePerNight, total, onConfirm) {
+            const modal = document.getElementById('booking-confirmation-modal');
+            if (modal) {
+                document.getElementById('confirm-room-name').textContent = roomName;
+                document.getElementById('confirm-nights').textContent = nights;
+                document.getElementById('confirm-price-per-night').textContent = `$${pricePerNight.toLocaleString()}`;
+                document.getElementById('confirm-total').textContent = `$${total.toLocaleString()}`;
+                
+                const confirmBtn = document.getElementById('confirm-booking-btn');
+                const cancelBtn = document.getElementById('cancel-confirmation-btn');
+                
+                confirmBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    onConfirm();
+                };
+                
+                cancelBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                };
+                
+                modal.classList.add('show');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function showSuccessModal(orderId) {
+            const modal = document.getElementById('booking-success-modal');
+            if (modal) {
+                document.getElementById('success-order-id').textContent = orderId;
+                modal.classList.add('show');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Close themed alert modal
+        const alertModal = document.getElementById('themed-alert-modal');
+        if (alertModal) {
+            const closeBtn = alertModal.querySelector('.modal-close-btn');
+            const okBtn = document.getElementById('alert-ok-btn');
+            
+            closeBtn?.addEventListener('click', () => {
+                alertModal.classList.remove('show');
+                alertModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            okBtn?.addEventListener('click', () => {
+                alertModal.classList.remove('show');
+                alertModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             });
         }
 
