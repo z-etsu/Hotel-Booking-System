@@ -38,8 +38,9 @@ if (!isset($_SESSION)) {
     // Check if we're on the booking page - if so, start in scrolled state
     const isBookingPage = document.body.classList.contains('booking-page');
     const isBookingsPage = document.body.classList.contains('bookings-page');
+    const isSettingsPage = document.body.classList.contains('settings-page');
     
-    if (isBookingPage || isBookingsPage) {
+    if (isBookingPage || isBookingsPage || isSettingsPage) {
         navbar.classList.add('scrolled');
     }
 
@@ -47,8 +48,8 @@ if (!isset($_SESSION)) {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
-            // Don't remove scrolled class if on booking page or bookings page
-            if (!isBookingPage && !isBookingsPage) {
+            // Don't remove scrolled class if on booking page, bookings page, or settings page
+            if (!isBookingPage && !isBookingsPage && !isSettingsPage) {
                 navbar.classList.remove('scrolled');
             }
         }

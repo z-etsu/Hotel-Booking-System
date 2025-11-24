@@ -2,12 +2,13 @@
 
 .settings-page {
     background-color: var(--bg-color);
+    padding-top: 110px;
 }
 
 .settings-main {
     min-height: calc(100vh - 200px);
     padding: 60px 20px;
-    margin-top: 40px;
+    margin-top: 0;
 }
 
 .settings-main .container {
@@ -301,14 +302,7 @@
 }
 
 .info-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(184, 134, 11, 0.1);
-    border-radius: 50%;
-    flex-shrink: 0;
+    display: none;
 }
 
 .info-icon i {
@@ -367,14 +361,7 @@
 }
 
 .action-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(184, 134, 11, 0.1);
-    border-radius: 50%;
-    flex-shrink: 0;
+    display: none;
 }
 
 .action-card.danger .action-icon {

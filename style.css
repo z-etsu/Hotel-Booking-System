@@ -71,16 +71,22 @@ nav a,
 /* 🌿 Navbar */
 #navbar {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     /* reduce outer padding so navbar feels more compact */
     padding: 20px 20px;
     display: flex;
     justify-content: center; /* keep inner container centered */
     align-items: center;
-    transition: all 0.4s ease;
     z-index: 1000;
     background: transparent;
     overflow: visible;
+}
+
+/* Navbar transitions - only for appearance, not position */
+#navbar.scrolled {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
 /* Make the inner container hold the logo and nav side-by-side */
