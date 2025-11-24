@@ -13,7 +13,7 @@ if (!isset($_SESSION)) {
             <a href="rooms.php">Rooms</a>
             <a href="facilities.php">Facilities</a>
             <a href="#">About</a>
-          
+            <a href="#"></a>
             
             <?php if (isset($_SESSION['user_name'])): ?>
                 <div class="user-greeting-container" style="position:relative;display:inline-block;">

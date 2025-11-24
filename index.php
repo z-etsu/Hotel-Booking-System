@@ -384,8 +384,15 @@ session_start(); // **START SESSION: Must be at the very top**
   </section>
 
   <script>
-    // Testimonials carousel will be initialized by script.js
-    // No need for duplicate initialization here
+    // Initialize testimonials carousel - ensure first card is visible
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstCard = document.querySelector('.testimonial-card');
+      const firstDot = document.querySelector('.nav-dot');
+      if (firstCard && firstDot) {
+        firstCard.classList.add('active');
+        firstDot.classList.add('active');
+      }
+    });
   </script>
 
   <section id="contact" class="contact">
