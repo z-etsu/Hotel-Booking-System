@@ -12,9 +12,9 @@ if (!isset($_SESSION)) {
             <a href="index.php">Home</a>
             <a href="rooms.php">Rooms</a>
             <a href="facilities.php">Facilities</a>
-            <a href="#">About</a>
+            <a href="about.php">About</a>
           
-            
+
             <?php if (isset($_SESSION['user_name'])): ?>
                 <div class="user-greeting-container" style="position:relative;display:inline-block;">
                     <span class="user-greeting" id="userGreeting" style="cursor:pointer;">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
@@ -35,14 +35,14 @@ if (!isset($_SESSION)) {
     // Navbar scroll detection
     const navbar = document.getElementById('navbar');
     
-    // Check if we're on the booking page or bookings page - if so, start in scrolled state
+    // Check if we're on the booking page - if so, start in scrolled state
     const isBookingPage = document.body.classList.contains('booking-page');
     const isBookingsPage = document.body.classList.contains('bookings-page');
     
     if (isBookingPage || isBookingsPage) {
         navbar.classList.add('scrolled');
     }
-    
+
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
