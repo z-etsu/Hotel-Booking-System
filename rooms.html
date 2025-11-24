@@ -1,182 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rooms & Suites - Hotel Name</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="rooms.css" />
+        <script src="rooms.js" defer></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rooms & Suites - Hotel Name</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="rooms.css">
-    <script src="rooms.js" defer></script>
-</head>
-
-<body class="page-transition">
-    <!-- Navbar -->
-    <header id="navbar">
-        <div class="container">
-            <h1 class="logo">Hotel Name</h1>
-            <nav>
-                <a href="index.php">Home</a>
-                <a href="rooms.php">Rooms</a>
-                <a href="facilities.php">Facilities</a>
-                <a href="#">About</a>
-                <a href="login-page.php">Login / Register</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section with Slideshow -->
-    <section class="rooms-hero">
-        <div id="slideshow">
-            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200"
-                class="slide active" alt="Luxury Suite" />
-            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200"
-                class="slide" alt="Presidential Suite" />
-            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200"
-                class="slide" alt="Royal Suite" />
-        </div>
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1>Our Rooms & Suites</h1>
-            <p>Experience luxury and comfort in every stay</p>
-        </div>
-    </section>
-
-    <!-- Filter Bar -->
-
-
-
-    <!-- Category Navigation -->
-    <section class="room-categories">
-        <div class="container">
-            <div class="category-labels">
-                <label class="category-label active" data-category="all">
-                    <input type="radio" name="category" value="all" checked>
-                    <span>All Rooms</span>
-                </label>
-                <label class="category-label" data-category="standard">
-                    <input type="radio" name="category" value="standard">
-                    <span>Standard</span>
-                </label>
-                <label class="category-label" data-category="family">
-                    <input type="radio" name="category" value="family">
-                    <span>Family</span>
-                </label>
-                <label class="category-label" data-category="suite">
-                    <input type="radio" name="category" value="suite">
-                    <span>Suites</span>
-                </label>
+    <body class="page-transition">
+        <!-- Navbar -->
+        <header id="navbar">
+            <div class="container">
+                <h1 class="logo">Hotel Name</h1>
+                <nav>
+                    <a href="index.php">Home</a>
+                    <a href="rooms.php">Rooms</a>
+                    <a href="facilities.php">Facilities</a>
+                    <a href="#">About</a>
+                    <a href="login-page.php">Login / Register</a>
+                </nav>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section class="room-listings">
-        <div class="container main-content-grid">
+        <!-- Hero Section with Slideshow -->
+        <section class="rooms-hero">
+            <div id="slideshow">
+                <img
+                    src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200"
+                    class="slide active"
+                    alt="Luxury Suite" />
+                <img
+                    src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200"
+                    class="slide"
+                    alt="Presidential Suite" />
+                <img
+                    src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200"
+                    class="slide"
+                    alt="Royal Suite" />
+            </div>
+            <div class="overlay"></div>
+            <div class="hero-content">
+                <h1>Our Rooms & Suites</h1>
+                <p>Experience luxury and comfort in every stay</p>
+            </div>
+        </section>
 
-            <aside class="room-sidebar">
-                <h2>Filter Your Stay</h2>
+        <!-- Filter Bar -->
 
-                <div class="filter-group">
-                    <h3>💵 Price Range (per night)</h3>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="0-150"> $0 - $150</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="151-300"> $151 -
-                        $300</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="301-500"> $301 -
-                        $500</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="501-1000"> $501+</label>
+        <!-- Category Navigation -->
+        <section class="room-categories">
+            <div class="container">
+                <div class="category-labels">
+                    <label class="category-label active" data-category="all">
+                        <input type="radio" name="category" value="all" checked />
+                        <span>All Rooms</span>
+                    </label>
+                    <label class="category-label" data-category="standard">
+                        <input type="radio" name="category" value="standard" />
+                        <span>Standard</span>
+                    </label>
+                    <label class="category-label" data-category="family">
+                        <input type="radio" name="category" value="family" />
+                        <span>Family</span>
+                    </label>
+                    <label class="category-label" data-category="suite">
+                        <input type="radio" name="category" value="suite" />
+                        <span>Suites</span>
+                    </label>
                 </div>
+            </div>
+        </section>
 
-                <div class="filter-group">
-                    <h3>👨‍👩‍👧‍👦 Max Capacity</h3>
-                    <label class="filter-checkbox"><input type="checkbox" name="capacity" value="1"> 1 Person</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="capacity" value="2"> 2 People</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="capacity" value="3-4"> 3 - 4
-                        People</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="capacity" value="5+"> 5+ People</label>
-                </div>
+        <section class="room-listings">
+            <div class="container main-content-grid">
+                <aside class="room-sidebar">
+                    <h2>Filter Your Stay</h2>
 
-                <div class="filter-group">
-                    <h3>✨ Key Amenities</h3>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Private Balcony">
-                        Private Balcony</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Kitchenette">
-                        Kitchenette</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Jacuzzi"> Jacuzzi /
-                        Bathtub</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Connecting Door">
-                        Connecting Rooms</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Butler Service"> Butler
-                        Service</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Sofa Bed"> Sofa
-                        Bed</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Dining Area"> Dining
-                        Area</label>
-                </div>
-                
-                <button class="btn apply-filters-btn">Apply Filters</button>
-            </aside>
+                    <div class="filter-group">
+                        <h3>💵 Price Range (per night)</h3>
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="price" value="0-150" /> $0 - $150</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="price" value="151-300" /> $151 - $300</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="price" value="301-500" /> $301 - $500</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="price" value="501-1000" /> $501+</label
+                        >
+                    </div>
 
-            <div class="room-cards-display">
-            </div> <!-- End of room-cards-display -->
+                    <div class="filter-group">
+                        <h3>👨‍👩‍👧‍👦 Max Capacity</h3>
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="capacity" value="1" /> 1 Person</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="capacity" value="2" /> 2 People</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="capacity" value="3-4" /> 3 - 4 People</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="capacity" value="5+" /> 5+ People</label
+                        >
+                    </div>
 
-        </div>
-    </section>
+                    <div class="filter-group">
+                        <h3>✨ Key Amenities</h3>
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Private Balcony" /> Private Balcony</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Kitchenette" /> Kitchenette</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Jacuzzi" /> Jacuzzi / Bathtub</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Connecting Door" /> Connecting Rooms</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Butler Service" /> Butler Service</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Sofa Bed" /> Sofa Bed</label
+                        >
+                        <label class="filter-checkbox"
+                            ><input type="checkbox" name="amenity" value="Dining Area" /> Dining Area</label
+                        >
+                    </div>
 
+                    <button class="btn apply-filters-btn">Apply Filters</button>
+                </aside>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-info">
-                    <h1 class="footer-logo">Hotel Name</h1>
-                    <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <div class="room-cards-display"></div>
+                <!-- End of room-cards-display -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <h1 class="footer-logo">Hotel Name</h1>
+                        <p>
+                            Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service,
+                            elegant accommodations, and unforgettable experiences.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="rooms.php">Our Rooms</a></li>
+                            <li><a href="facilities.php">Facilities</a></li>
+                            <li><a href="about.php">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="contact-links">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
+                            <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+                            <li><i class="fas fa-clock"></i> 24/7 Open</li>
+                        </ul>
+                    </div>
+                    <div class="newsletter">
+                        <h3>Newsletter</h3>
+                        <p>Subscribe to receive special offers and updates</p>
+                        <form class="newsletter-form">
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email Address" required />
+                                <button type="submit" class="btn">Subscribe</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="quick-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="rooms.php">Our Rooms</a></li>
-                        <li><a href="facilities.php">Facilities</a></li>
-                        <li><a href="about.php">About</a></li>
-                    </ul>
-                </div>
-                <div class="contact-links">
-                    <h3>Contact Info</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
-                        <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-                        <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
-                        <li><i class="fas fa-clock"></i> 24/7 Open</li>
-                    </ul>
-                </div>
-                <div class="newsletter">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to receive special offers and updates</p>
-                    <form class="newsletter-form">
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email Address" required>
-                            <button type="submit" class="btn">Subscribe</button>
-                        </div>
-                    </form>
+                <div class="footer-bottom">
+                    <p>© 2025 Hotel Name. All rights reserved.</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2025 Hotel Name. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
-    <script src="script.js"></script>
-
-
-
-</body>
-
+        <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>

@@ -35,6 +35,7 @@ $stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +44,7 @@ $stmt->close();
     <link rel="stylesheet" href="bookings.css">
     <script src="bookings.js" defer></script>
 </head>
+
 <body class="page-transition bookings-page">
     <!-- Navbar -->
     <?php include 'navbar.php'; ?>
@@ -183,6 +185,7 @@ $stmt->close();
                 opacity: 0;
                 transform: translateX(-50%) translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
@@ -242,5 +245,6 @@ $stmt->close();
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
+
 </html>
 <?php $conn->close(); ?>

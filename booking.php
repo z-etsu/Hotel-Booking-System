@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -16,10 +17,11 @@ session_start();
   <script src="rooms.js"></script>
   <script src="booking.js" defer></script>
 </head>
+
 <body class="page-transition booking-page">
   <!-- Navbar -->
   <?php include 'navbar.php'; ?>
-  
+
   <!-- Store login status for JavaScript -->
   <input type="hidden" id="user-logged-in" value="<?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>">
 
@@ -227,7 +229,10 @@ session_start();
           if (sCat) sCat.textContent = cat;
         }
       });
-      observer.observe(document.getElementById('room-name'), { childList: true, subtree: true });
+      observer.observe(document.getElementById('room-name'), {
+        childList: true,
+        subtree: true
+      });
     })();
 
     // Set footer year
@@ -258,7 +263,10 @@ session_start();
       }
     });
 
-    capacityObserver.observe(document.getElementById('detail-capacity'), { childList: true, subtree: true });
+    capacityObserver.observe(document.getElementById('detail-capacity'), {
+      childList: true,
+      subtree: true
+    });
 
     // Initialize with default capacity if already loaded
     const initialCapacity = document.getElementById('detail-capacity')?.textContent || '';
@@ -270,4 +278,5 @@ session_start();
     }
   </script>
 </body>
+
 </html>

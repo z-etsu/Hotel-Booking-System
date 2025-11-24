@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +72,7 @@ session_start();
             display: flex;
             flex-direction: column;
             height: 100%;
-            
+
         }
 
         .facility-card:hover {
@@ -242,6 +243,7 @@ session_start();
         }
     </style>
 </head>
+
 <body class="page-transition">
     <!-- Include the navbar -->
     <?php include 'navbar.php'; ?>
@@ -684,4 +686,5 @@ session_start();
         </div>
     </footer>
 </body>
+
 </html>

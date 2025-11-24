@@ -104,7 +104,7 @@ session_start();
                     <label class="filter-checkbox"><input type="checkbox" name="amenity" value="Dining Area"> Dining
                         Area</label>
                 </div>
-                
+
                 <button class="btn apply-filters-btn">Apply Filters</button>
             </aside>
 

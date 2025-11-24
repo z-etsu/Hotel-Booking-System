@@ -14,7 +14,7 @@ if (!isset($_SESSION)) {
             <a href="facilities.php">Facilities</a>
             <a href="about.php">About</a>
             <a href="#"></a>
-            
+
             <?php if (isset($_SESSION['user_name'])): ?>
                 <div class="user-greeting-container" style="position:relative;display:inline-block;">
                     <span class="user-greeting" id="userGreeting" style="cursor:pointer;">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
@@ -34,13 +34,13 @@ if (!isset($_SESSION)) {
 <script>
     // Navbar scroll detection
     const navbar = document.getElementById('navbar');
-    
+
     // Check if we're on the booking page - if so, start in scrolled state
     const isBookingPage = document.body.classList.contains('booking-page');
     if (isBookingPage) {
         navbar.classList.add('scrolled');
     }
-    
+
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -52,20 +52,20 @@ if (!isset($_SESSION)) {
         }
     });
 
-        // User dropdown menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const userGreeting = document.getElementById('userGreeting');
-            const userDropdown = document.getElementById('userDropdown');
-            if (userGreeting && userDropdown) {
-                userGreeting.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
-                });
-                document.addEventListener('click', function(e) {
-                    if (!userGreeting.contains(e.target) && !userDropdown.contains(e.target)) {
-                        userDropdown.style.display = 'none';
-                    }
-                });
-            }
-        });
+    // User dropdown menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const userGreeting = document.getElementById('userGreeting');
+        const userDropdown = document.getElementById('userDropdown');
+        if (userGreeting && userDropdown) {
+            userGreeting.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
+            });
+            document.addEventListener('click', function(e) {
+                if (!userGreeting.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.style.display = 'none';
+                }
+            });
+        }
+    });
 </script>
