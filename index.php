@@ -383,6 +383,18 @@ session_start(); // **START SESSION: Must be at the very top**
     </div>
   </section>
 
+  <script>
+    // Initialize testimonials carousel - ensure first card is visible
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstCard = document.querySelector('.testimonial-card');
+      const firstDot = document.querySelector('.nav-dot');
+      if (firstCard && firstDot) {
+        firstCard.classList.add('active');
+        firstDot.classList.add('active');
+      }
+    });
+  </script>
+
   <section id="contact" class="contact">
     <div class="container">
       <div class="section-title">
