@@ -22,16 +22,8 @@ function changeSlide() {
 }
 
 setInterval(changeSlide, 5000);
-
-// 🌿 Navbar scroll effect
-const navbar = document.getElementById("navbar");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
-});
+// 🌿 Navbar scroll effect is handled in navbar.php
+// No need for duplicate code here
 
 // Testimonials Slider
 document.addEventListener('DOMContentLoaded', () => {
@@ -153,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize first card as active
   updateSliderPosition();
+  updateDots();
 
   // Handle window resize
   window.addEventListener('resize', () => {
