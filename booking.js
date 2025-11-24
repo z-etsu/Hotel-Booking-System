@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('room-title').textContent = `${room.name} - Hotel Name`;
         document.getElementById('room-name').textContent = room.name;
         document.getElementById('room-category').textContent = (room.category || '').toUpperCase() + ' ROOM';
+        document.getElementById('room-tagline').textContent = room.tagline || '';
         document.getElementById('room-description').textContent = room.description;
 
         document.getElementById('detail-size').textContent = room.size || '';
@@ -54,6 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Amenities
         const amenitiesList = document.getElementById('full-amenities-list');
         amenitiesList.innerHTML = (room.amenities || []).map(a => `<li>${a}</li>`).join('');
+
+        // Highlights (Why Guests Love This Room)
+        const highlightsContainer = document.getElementById('highlights-container');
+        if (highlightsContainer && room.highlights && room.highlights.length > 0) {
+            highlightsContainer.innerHTML = room.highlights.map(highlight => {
+                const parts = highlight.split(/:\s+/); // split on ": " to get title and description
+                const title = parts[0] || highlight;
+                const description = parts[1] || '';
+                return `
+                    <div class="highlight">
+                        <strong>${title}</strong>
+                        ${description ? `<p>${description}</p>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
 
         // Photo gallery: prefer room.images array, fallback to imageUrl
         const galleryImages = (room.images && room.images.length > 0) ? room.images : [room.imageUrl];

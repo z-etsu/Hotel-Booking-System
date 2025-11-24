@@ -136,19 +136,8 @@ session_start();
         <!-- Why Guests Love This Room -->
         <section class="room-highlights" style="margin-top:20px;">
           <h2>Why Guests Love This Room</h2>
-          <div class="highlights-grid">
-            <div class="highlight">
-              <strong>Panoramic Views</strong>
-              <p>Wake up to stunning city vistas from your private balcony.</p>
-            </div>
-            <div class="highlight">
-              <strong>Spacious Living</strong>
-              <p>Separate living area perfect for families or extended stays.</p>
-            </div>
-            <div class="highlight">
-              <strong>Luxury Bathroom</strong>
-              <p>Relax in a deep soaking tub or rain shower with premium toiletries.</p>
-            </div>
+          <div class="highlights-grid" id="highlights-container">
+            <!-- populated by JS -->
           </div>
         </section>
 
