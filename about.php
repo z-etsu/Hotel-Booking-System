@@ -10,6 +10,7 @@ session_start(); // Ensure session is available for navbar and messages
     <title>About Us - Hotel Name</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="about.css" />
+    <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body class="page-transition">

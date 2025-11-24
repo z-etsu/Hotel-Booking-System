@@ -11,6 +11,7 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="rooms.css">
     <script src="rooms.js" defer></script>
+    <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body class="page-transition">

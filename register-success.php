@@ -296,6 +296,7 @@ session_start();
       }
     }
   </style>
+  <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body class="page-transition">

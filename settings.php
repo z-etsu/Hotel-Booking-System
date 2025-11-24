@@ -112,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="settings.css" />
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body class="page-transition settings-page">

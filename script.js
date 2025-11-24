@@ -199,3 +199,48 @@ document.addEventListener('DOMContentLoaded', function() {
         priceDisplay.textContent = `$0 - $${e.target.value}`;
     });
 });
+
+// ✨ Smooth Page Transition Effect - Blur Out on Link Click
+document.addEventListener('DOMContentLoaded', () => {
+    // Handle all internal navigation links with smooth blur transition
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Skip if link has special attributes (target="_blank", mailto, etc.)
+            if (link.target === '_blank' || link.href.includes('mailto:') || link.href.includes('tel:') || link.href.startsWith('#')) {
+                return;
+            }
+
+            // Check if it's an internal link (same domain)
+            const currentDomain = window.location.origin;
+            if (!link.href.startsWith(currentDomain)) {
+                return;
+            }
+
+            // Prevent default navigation
+            e.preventDefault();
+
+            const targetUrl = link.href;
+            const body = document.body;
+
+            // Apply blur-out animation
+            body.style.transition = 'opacity 0.4s ease-out, filter 0.4s ease-out';
+            body.style.opacity = '0';
+            body.style.filter = 'blur(10px)';
+
+            // Navigate after animation completes
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 400);
+        });
+    });
+
+    // Handle form submissions with transition
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', () => {
+            const body = document.body;
+            body.style.transition = 'opacity 0.4s ease-out, filter 0.4s ease-out';
+            body.style.opacity = '0';
+            body.style.filter = 'blur(10px)';
+        });
+    });
+});

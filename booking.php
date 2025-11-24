@@ -16,6 +16,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/litepicker@latest/dist/litepicker.js"></script>
   <script src="rooms.js"></script>
   <script src="booking.js" defer></script>
+  <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body class="page-transition booking-page">
@@ -336,19 +337,21 @@ session_start();
       background-color: rgba(0, 0, 0, 0.5);
       align-items: center;
       justify-content: center;
-      animation: fadeIn 0.3s ease-in-out;
+      animation: blurIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .themed-modal.show {
       display: flex;
     }
 
-    @keyframes fadeIn {
+    @keyframes blurIn {
       from {
         opacity: 0;
+        filter: blur(8px);
       }
       to {
         opacity: 1;
+        filter: blur(0px);
       }
     }
 
@@ -361,17 +364,19 @@ session_start();
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       position: relative;
       text-align: center;
-      animation: slideUp 0.3s ease-in-out;
+      animation: slideUpBlur 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    @keyframes slideUp {
+    @keyframes slideUpBlur {
       from {
-        transform: translateY(30px);
+        transform: translateY(20px);
         opacity: 0;
+        filter: blur(6px);
       }
       to {
         transform: translateY(0);
         opacity: 1;
+        filter: blur(0px);
       }
     }
 
