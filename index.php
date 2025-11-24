@@ -7,7 +7,7 @@ session_start(); // **START SESSION: Must be at the very top**
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hotel Booking System</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
 
   <style>
     .message-box {
@@ -234,7 +234,7 @@ session_start(); // **START SESSION: Must be at the very top**
       <div class="facilities-grid">
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1540932239986-310128078ceb" alt="Premium Bedding" />
+            <img src="facilities_img/prem.png" alt="Premium Bedding" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
@@ -246,7 +246,7 @@ session_start(); // **START SESSION: Must be at the very top**
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45" alt="Smart Entertainment" />
+            <img src="facilities_img/tv.jpg" alt="Smart Entertainment" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
@@ -258,7 +258,7 @@ session_start(); // **START SESSION: Must be at the very top**
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="High-Speed WiFi" />
+            <img src="facilities_img/wifi.avif" alt="High-Speed WiFi" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
@@ -270,7 +270,7 @@ session_start(); // **START SESSION: Must be at the very top**
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14" alt="Luxury Bathroom" />
+            <img src="facilities_img/luxurybath.jpg" alt="Luxury Bathroom" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
@@ -282,7 +282,7 @@ session_start(); // **START SESSION: Must be at the very top**
 
         <div class="facility-card">
           <div class="facility-image">
-            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="In-Room Bar" />
+            <img src="facilities_img/bevbar.webp" alt="In-Room Bar" />
             <div class="facility-overlay"></div>
           </div>
           <div class="facility-content">
@@ -309,7 +309,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=1" alt="Customer 1" class="profile-img">
-              <h3>tj webdev</h3>
+              <h3>Harvey Poge</h3>
             </div>
             <p class="testimonial-text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
@@ -322,7 +322,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=2" alt="Customer 2" class="profile-img">
-              <h3>tj webdev</h3>
+              <h3>Jhon Gundam</h3>
             </div>
             <p class="testimonial-text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
@@ -335,7 +335,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=3" alt="Customer 3" class="profile-img">
-              <h3>tj webdev</h3>
+              <h3>Jasher Maangas</h3>
             </div>
             <p class="testimonial-text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
@@ -348,7 +348,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=4" alt="Customer 4" class="profile-img">
-              <h3>tj webdev</h3>
+              <h3>Jaspher Aton</h3>
             </div>
             <p class="testimonial-text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
@@ -361,7 +361,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="testimonial-card">
             <div class="testimonial-profile">
               <img src="https://i.pravatar.cc/150?img=5" alt="Customer 5" class="profile-img">
-              <h3>tj webdev</h3>
+              <h3>Kurt Loverboy123</h3>
             </div>
             <p class="testimonial-text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
@@ -382,6 +382,18 @@ session_start(); // **START SESSION: Must be at the very top**
       </div>
     </div>
   </section>
+
+  <script>
+    // Initialize testimonials carousel - ensure first card is visible
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstCard = document.querySelector('.testimonial-card');
+      const firstDot = document.querySelector('.nav-dot');
+      if (firstCard && firstDot) {
+        firstCard.classList.add('active');
+        firstDot.classList.add('active');
+      }
+    });
+  </script>
 
   <section id="contact" class="contact">
     <div class="container">
@@ -489,7 +501,7 @@ session_start(); // **START SESSION: Must be at the very top**
   </footer>
 
   <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=<?php echo time(); ?>"></script>
 
   <script>
     window.onload = function() {

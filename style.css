@@ -662,16 +662,17 @@ nav a:hover {
 }
 
 .testimonials-track {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   position: relative;
   padding: 2rem 1rem;
   min-height: 300px;
+  height: 300px;
 }
 
 .testimonial-card {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: calc(100% - 2rem);
   background: #fff;
   border-radius: 8px;
@@ -680,26 +681,29 @@ nav a:hover {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.8) translateX(-100%) translateZ(-100px);
+  transform: translate(-50%, -50%) scale(0.8) translateX(-100%);
+  z-index: 0;
 }
 
 .testimonial-card.active {
   opacity: 1;
-  transform: scale(1) translateX(0) translateZ(0);
+  transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
-  position: relative;
+  z-index: 10;
 }
 
 .testimonial-card.prev {
   opacity: 0.3;
-  transform: scale(0.85) translateX(-85%) translateZ(-50px);
+  transform: translate(-50%, -50%) scale(0.85) translateX(-100%);
   pointer-events: none;
+  z-index: 5;
 }
 
 .testimonial-card.next {
   opacity: 0.3;
-  transform: scale(0.85) translateX(85%) translateZ(-50px);
+  transform: translate(-50%, -50%) scale(0.85) translateX(100%);
   pointer-events: none;
+  z-index: 5;
 }
 
 .testimonial-profile {

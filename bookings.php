@@ -242,7 +242,9 @@ $stmt->close();
     </footer>
 
     <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
     </script>
 </body>
 

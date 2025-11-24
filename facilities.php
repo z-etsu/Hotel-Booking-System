@@ -262,7 +262,7 @@ session_start();
             <h2>Dining & Beverages</h2>
             <div class="facilities-grid">
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/fine-dining.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Fine Dining Restaurant</h3>
                         <p>Our award-winning restaurant offers international cuisine prepared by world-class chefs using the finest ingredients.</p>
@@ -288,7 +288,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1521305573892-bf25b6d56a07?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/bar.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Bar & Lounge</h3>
                         <p>Unwind at our sophisticated bar with an extensive selection of cocktails, wines, and spirits.</p>
@@ -301,7 +301,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1504674900769-7ee9fa7ee25e?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/room-services.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Room Service</h3>
                         <p>24/7 in-room dining service with full menu delivery to your room whenever you need it.</p>
@@ -335,7 +335,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1576610616656-570fed09d322?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/swimming-pool.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Swimming Pool</h3>
                         <p>Olympic-sized heated pool perfect for swimming, relaxation, and water activities throughout the year.</p>
@@ -348,7 +348,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1584821294908-994662202b81?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/spa.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Spa & Massage</h3>
                         <p>Rejuvenate your mind and body with our professional spa treatments and therapeutic massage services.</p>
@@ -462,7 +462,7 @@ session_start();
             <h2>Entertainment & Recreation</h2>
             <div class="facilities-grid">
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1514528387789-4226437266b3?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/kids-club.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Kids Club</h3>
                         <p>Safe and fun environment for children with supervised activities and entertainment programs.</p>
@@ -488,7 +488,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1507842072343-583f20270319?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/library.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Library & Reading Room</h3>
                         <p>Quiet retreat with an extensive collection of books and comfortable seating areas.</p>
@@ -501,7 +501,7 @@ session_start();
                 </div>
 
                 <div class="facility-card">
-                    <div class="facility-card-icon" style="background-image: url('https://images.unsplash.com/photo-1522869635100-ce06161e7015?w=500&h=300&fit=crop');"></div>
+                    <div class="facility-card-icon" style="background-image: url('facilities_img/movie-theater.jpg');"></div>
                     <div class="facility-card-content">
                         <h3>Movie Theater</h3>
                         <p>Private screening room with comfortable seating and latest films available for viewing.</p>
