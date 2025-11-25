@@ -1,5 +1,42 @@
 <?php
 session_start(); // **START SESSION: Must be at the very top**
+require_once 'db_connect.php';
+
+// Get room availability data
+$roomAvailability = [];
+$bookingsQuery = "
+    SELECT room_name, COUNT(*) as booked_count
+    FROM bookings
+    WHERE (status = 'active' OR status = 'booked')
+    AND check_out >= CURDATE()
+    GROUP BY room_name
+";
+$bookingsResult = $conn->query($bookingsQuery);
+if ($bookingsResult) {
+    while ($row = $bookingsResult->fetch_assoc()) {
+        $roomAvailability[$row['room_name']] = $row['booked_count'];
+    }
+}
+
+// Room quantities
+$roomQuantities = [
+    'Single Room' => 12,
+    'Double Room' => 15,
+    'Twin Room' => 10,
+    'Triple Room' => 8,
+    'Family Room' => 7,
+    'Connected Room' => 5,
+    'Executive Suite' => 6,
+    'Presidential Suite' => 3,
+    'Royal Suite' => 2
+];
+
+// Calculate availability
+$availability = [];
+foreach ($roomQuantities as $roomName => $totalQuantity) {
+    $bookedCount = isset($roomAvailability[$roomName]) ? $roomAvailability[$roomName] : 0;
+    $availability[$roomName] = $totalQuantity - $bookedCount;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +128,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Single Room</h3>
             <p>Cozy room perfect for solo travelers with essential amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=single-room">Book Now from ₱5,000</a>
+            <?php if ($availability['Single Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=single-room">Book Now from ₱5,000</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -106,7 +147,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Double Room</h3>
             <p>Comfortable room with a double bed and modern amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=double-room">Book Now from ₱7,200</a>
+            <?php if ($availability['Double Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=double-room">Book Now from ₱7,200</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -121,7 +166,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Twin Room</h3>
             <p>Spacious room with two single beds, perfect for sharing.</p>
-            <a class="btn book-btn" href="booking.php?room=twin-room">Book Now from ₱7,800</a>
+            <?php if ($availability['Twin Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=twin-room">Book Now from ₱7,800</a>
+            <?php endif; ?>
           </div>
         </article>
       </div>
@@ -139,7 +188,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Triple Room</h3>
             <p>Spacious room with three single beds or one double and one single bed.</p>
-            <a class="btn book-btn" href="booking.php?room=triple-room">Book Now from ₱10,600</a>
+            <?php if ($availability['Triple Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=triple-room">Book Now from ₱10,600</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -154,7 +207,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Family Room</h3>
             <p>Perfect for families with two double beds and extra living space.</p>
-            <a class="btn book-btn" href="booking.php?room=family-room">Book Now from ₱12,800</a>
+            <?php if ($availability['Family Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=family-room">Book Now from ₱12,800</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -169,7 +226,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Connected Room</h3>
             <p>Two interconnected rooms perfect for families needing extra privacy.</p>
-            <a class="btn book-btn" href="booking.php?room=connected-room">Book Now from ₱14,000</a>
+            <?php if ($availability['Connected Room'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=connected-room">Book Now from ₱14,000</a>
+            <?php endif; ?>
           </div>
         </article>
       </div>
@@ -187,7 +248,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Executive Suite</h3>
             <p>Luxurious suite with separate living room and premium amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=executive-suite">Book Now from ₱16,800</a>
+            <?php if ($availability['Executive Suite'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=executive-suite">Book Now from ₱16,800</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -202,7 +267,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Presidential Suite</h3>
             <p>Our finest suite with panoramic views and exclusive services.</p>
-            <a class="btn book-btn" href="booking.php?room=presidential-suite">Book Now from ₱22,400</a>
+            <?php if ($availability['Presidential Suite'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=presidential-suite">Book Now from ₱22,400</a>
+            <?php endif; ?>
           </div>
         </article>
 
@@ -217,7 +286,11 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Royal Suite</h3>
             <p>Ultimate luxury with multiple rooms and private terrace.</p>
-            <a class="btn book-btn" href="booking.php?room=royal-suite">Book Now from ₱25,200</a>
+            <?php if ($availability['Royal Suite'] <= 0): ?>
+              <button class="btn book-btn disabled" disabled>Fully Booked</button>
+            <?php else: ?>
+              <a class="btn book-btn" href="booking.php?room=royal-suite">Book Now from ₱25,200</a>
+            <?php endif; ?>
           </div>
         </article>
       </div>
@@ -500,7 +573,8 @@ session_start(); // **START SESSION: Must be at the very top**
     </div>
   </footer>
 
-  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+  <!-- FontAwesome commented out - using placeholder. Replace with valid kit ID if needed -->
+  <!-- <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script> -->
   <script src="script.js?v=<?php echo time(); ?>"></script>
 
   <script>

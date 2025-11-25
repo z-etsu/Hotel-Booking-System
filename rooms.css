@@ -1061,3 +1061,21 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Disabled Button Styling */
+.book-now-btn.disabled,
+.book-now-btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border: 1px solid #aaa;
+    opacity: 0.7;
+    transition: none;
+    pointer-events: none !important;
+}
+
+.book-now-btn.disabled:hover,
+.book-now-btn:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}

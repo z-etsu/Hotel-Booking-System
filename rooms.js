@@ -1,5 +1,10 @@
 // FILE: rooms.js (UPDATED)
 
+// Function to show fully booked alert
+function showFullyBookedAlert(roomName) {
+    alert(`Sorry! ${roomName} is currently fully booked. Please check back later or explore our other available rooms.`);
+}
+
 // ROOM DATA (top-level so other pages can access it via window.rooms)
 const rooms = [
     {
@@ -523,11 +528,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Get availability data (passed from PHP)
             const availability = window.roomAvailability ? window.roomAvailability[room.name] : null;
+            const isFullyBooked = availability !== null && availability <= 0;
             const availabilityBadge = availability !== null ? 
                 `<div class="availability-badge ${availability > 0 ? 'available' : 'unavailable'}">
                     <span class="availability-icon">${availability > 0 ? '✓' : '✕'}</span>
                     <span class="availability-text">${availability > 0 ? availability + ' rooms available' : 'Fully booked'}</span>
                 </div>` : '';
+
+            const bookButtonHtml = isFullyBooked 
+                ? `<a href="javascript:void(0)" class="btn book-now-btn disabled" data-fully-booked="true" tabindex="-1" onclick="showFullyBookedAlert('${room.name}'); return false;">Fully Booked</a>`
+                : `<a href="#" class="btn book-now-btn" data-room-name="${room.name}">Book Now</a>`;
 
             return `
                 <div class="room-card ${room.category}" data-price="${room.price}" data-id="${room.name
@@ -547,7 +557,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${availabilityBadge}
                         <div class="room-card-footer">
                             <span class="room-card-price">From ₱${room.price.toLocaleString()}<small>/night</small></span>
-                            <a href="#" class="btn book-now-btn">Book Now</a>
+                            ${bookButtonHtml}
                         </div>
                     </div>
                 </div>
@@ -662,5 +672,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             setInterval(nextHeroSlide, 5000);
         }
+
+        // Handle book-now-btn clicks for available rooms
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.book-now-btn');
+            if (btn) {
+                // Prevent any action if disabled
+                if (btn.classList.contains('disabled') || btn.getAttribute('data-fully-booked') === 'true') {
+                    e.preventDefault();
+                    showFullyBookedAlert(btn.getAttribute('data-room-name') || btn.textContent.trim());
+                    return;
+                }
+                if (btn.hasAttribute('data-room-name')) {
+                    e.preventDefault();
+                    const roomName = btn.getAttribute('data-room-name');
+                    const roomSlug = roomName.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `booking.php?room=${encodeURIComponent(roomSlug)}`;
+                }
+            }
+        });
     } // end if(roomCardsDisplay)
 });

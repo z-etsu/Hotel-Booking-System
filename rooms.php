@@ -182,7 +182,8 @@ if ($bookingsResult) {
         </div>
     </footer>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <!-- FontAwesome commented out - using placeholder. Replace with valid kit ID if needed -->
+    <!-- <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script> -->
     <script>
         // Pass room availability from PHP to JavaScript
         window.roomAvailability = <?php 
@@ -207,8 +208,6 @@ if ($bookingsResult) {
             echo json_encode($availability);
         ?>;
     </script>
-    <script src="script.js"></script>
-
 
 
 </body>

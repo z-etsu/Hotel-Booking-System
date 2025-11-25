@@ -85,7 +85,18 @@ $stmt->close();
                                         <span class="booking-order-id">Order #<?php echo htmlspecialchars($booking['id']); ?></span>
                                     </div>
                                     <div class="booking-status-badge" data-status="<?php echo htmlspecialchars($booking['status']); ?>">
-                                        <?php echo ucfirst(htmlspecialchars($booking['status'])); ?>
+                                        <?php
+                                            $status = htmlspecialchars($booking['status']);
+                                            $statusClass = '';
+                                            if ($status === 'booked') {
+                                                $statusClass = 'status-booked';
+                                            } elseif ($status === 'active') {
+                                                $statusClass = 'status-active';
+                                            }
+                                        ?>
+                                        <span class="<?php echo $statusClass; ?>">
+                                            <?php echo ucfirst($status); ?>
+                                        </span>
                                     </div>
                                 </div>
 

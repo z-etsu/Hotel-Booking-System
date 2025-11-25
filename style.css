@@ -516,10 +516,27 @@ nav a:hover {
     letter-spacing: 0.05em;
     border-radius: 2px;
     transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .book-btn:hover {
     background: #222;
+}
+
+.book-btn.disabled,
+.book-btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border: 1px solid #aaa;
+    opacity: 0.7;
+    pointer-events: none !important;
+}
+
+.book-btn.disabled:hover,
+.book-btn:disabled:hover {
+    background-color: #ccc;
 }
 
 /* Facilities Section */

@@ -164,6 +164,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle both on-page clicks and direct href navigation
     document.querySelectorAll('.book-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
+            // If button is disabled, prevent navigation
+            if (this.disabled || this.classList.contains('disabled')) {
+                e.preventDefault();
+                return;
+            }
+            
             e.preventDefault();
             // Get the room name from the card
             const roomName = this.closest('.room-card').querySelector('h3').textContent;
