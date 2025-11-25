@@ -9,6 +9,7 @@ const quoteElement = document.getElementById("quote");
 let current = 0;
 
 function changeSlide() {
+  if (slides.length === 0 || !quoteElement) return; // Skip if not on homepage
   slides[current].classList.remove("active");
   current = (current + 1) % slides.length;
   slides[current].classList.add("active");
@@ -21,7 +22,9 @@ function changeSlide() {
   }, 800);
 }
 
-setInterval(changeSlide, 5000);
+if (slides.length > 0) {
+  setInterval(changeSlide, 5000);
+}
 // 🌿 Navbar scroll effect is handled in navbar.php
 // No need for duplicate code here
 
@@ -30,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const track = document.querySelector('.testimonials-track');
   const cards = document.querySelectorAll('.testimonial-card');
   const dots = document.querySelectorAll('.nav-dot');
+  
+  // Skip if testimonials not on this page
+  if (!track || cards.length === 0) return;
   
   let isDragging = false;
   let startPos = 0;
@@ -212,7 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a:not(.amenity-item)').forEach(link => {
         link.addEventListener('click', (e) => {
             // Skip if link has special attributes (target="_blank", mailto, etc.)
-            if (link.target === '_blank' || link.href.includes('mailto:') || link.href.includes('tel:') || link.href.startsWith('#')) {
+            if (link.target === '_blank' || link.href.includes('mailto:') || link.href.includes('tel:')) {
+                return;
+            }
+
+            // Skip anchor links (hash links on same page)
+            if (link.href.startsWith('#') || link.href.endsWith('#') || link.href.includes('#')) {
                 return;
             }
 

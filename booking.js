@@ -52,6 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('widget-price').textContent = `$${room.price}`;
         document.getElementById('detail-price-small').textContent = `$${room.price}`;
 
+        // Populate guests dropdown based on room max capacity
+        const guestsSelect = document.getElementById('guests');
+        if (guestsSelect && room.maxPeople) {
+            guestsSelect.innerHTML = '';
+            for (let i = 1; i <= room.maxPeople; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i} Guest${i > 1 ? 's' : ''}`;
+                guestsSelect.appendChild(option);
+            }
+        }
+
         // Amenities
         const amenitiesList = document.getElementById('full-amenities-list');
         amenitiesList.innerHTML = (room.amenities || []).map(a => `<li>${a}</li>`).join('');
