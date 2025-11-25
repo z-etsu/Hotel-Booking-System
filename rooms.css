@@ -956,6 +956,35 @@
     margin-bottom: 5px;
 }
 
+/* Availability Badge */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.availability-badge.available {
+    background-color: rgba(39, 174, 96, 0.15);
+    color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.availability-badge.unavailable {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.availability-icon {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
 .room-card-footer {
     margin-top: auto;
     /* Pushes footer to the bottom */

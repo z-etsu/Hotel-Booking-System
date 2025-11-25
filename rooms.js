@@ -520,6 +520,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const moreCount = room.amenities.length - (room.featuredAmenities?.length || 0);
             const moreLink =
                 moreCount > 0 ? `<span class="more-amenities" data-room="${room.name}">+${moreCount} more</span>` : "";
+            
+            // Get availability data (passed from PHP)
+            const availability = window.roomAvailability ? window.roomAvailability[room.name] : null;
+            const availabilityBadge = availability !== null ? 
+                `<div class="availability-badge ${availability > 0 ? 'available' : 'unavailable'}">
+                    <span class="availability-icon">${availability > 0 ? '✓' : '✕'}</span>
+                    <span class="availability-text">${availability > 0 ? availability + ' rooms available' : 'Fully booked'}</span>
+                </div>` : '';
 
             return `
                 <div class="room-card ${room.category}" data-price="${room.price}" data-id="${room.name
@@ -536,6 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="room-card-amenities">
                             ${(room.featuredAmenities || []).map((a) => `<span>${a}</span>`).join(" ")} ${moreLink}
                         </div>
+                        ${availabilityBadge}
                         <div class="room-card-footer">
                             <span class="room-card-price">From ₱${room.price.toLocaleString()}<small>/night</small></span>
                             <a href="#" class="btn book-now-btn">Book Now</a>

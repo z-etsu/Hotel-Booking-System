@@ -1,5 +1,22 @@
 <?php
 session_start();
+require_once 'db_connect.php';
+
+// Get room availability data
+$roomAvailability = [];
+$bookingsQuery = "
+    SELECT room_name, COUNT(*) as booked_count
+    FROM bookings
+    WHERE status = 'active'
+    AND check_out >= CURDATE()
+    GROUP BY room_name
+";
+$bookingsResult = $conn->query($bookingsQuery);
+if ($bookingsResult) {
+    while ($row = $bookingsResult->fetch_assoc()) {
+        $roomAvailability[$row['room_name']] = $row['booked_count'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,6 +183,30 @@ session_start();
     </footer>
 
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <script>
+        // Pass room availability from PHP to JavaScript
+        window.roomAvailability = <?php 
+            // Calculate available rooms for each room type
+            $roomQuantities = [
+                "Single Room" => 12,
+                "Double Room" => 15,
+                "Twin Room" => 10,
+                "Triple Room" => 8,
+                "Family Room" => 7,
+                "Connected Room" => 5,
+                "Executive Suite" => 6,
+                "Presidential Suite" => 3,
+                "Royal Suite" => 2
+            ];
+            
+            $availability = [];
+            foreach ($roomQuantities as $roomName => $totalQuantity) {
+                $bookedCount = isset($roomAvailability[$roomName]) ? $roomAvailability[$roomName] : 0;
+                $availability[$roomName] = $totalQuantity - $bookedCount;
+            }
+            echo json_encode($availability);
+        ?>;
+    </script>
     <script src="script.js"></script>
 
 
