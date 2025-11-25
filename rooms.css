@@ -184,7 +184,7 @@
 }
 
 .category-label::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -212,7 +212,7 @@
 }
 
 .category-label.active,
-.category-label input[type="radio"]:checked+span {
+.category-label input[type="radio"]:checked + span {
     transform: translateY(-2px);
     color: #3e1a00;
     opacity: 1;
@@ -220,7 +220,7 @@
 }
 
 .category-label.active::after,
-.category-label input[type="radio"]:checked+span::after {
+.category-label input[type="radio"]:checked + span::after {
     width: 100%;
 }
 
@@ -395,7 +395,7 @@
 /* Rooms Hero Slideshow */
 .rooms-hero {
     height: 60vh;
-    background: url('luxury-suite.jpg') center/cover no-repeat;
+    background: url("luxury-suite.jpg") center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
@@ -417,7 +417,6 @@
     gap: 1rem;
     align-items: center;
 }
-
 
 .category-buttons {
     display: flex;
@@ -849,7 +848,6 @@
     gap: 30px;
     /* Space between cards */
     margin-top: 30px;
-
 }
 
 /* --- Individual Room Card Style --- */
@@ -865,7 +863,6 @@
     display: flex;
     flex-direction: column;
 }
-
 
 .room-card::before {
     content: "";
@@ -988,12 +985,11 @@
     color: white;
     border-radius: 4px;
     text-decoration: none;
-   
 }
 
 .room-card:hover .room-card-footer .btn {
-  transform: translateY(0);
-  opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .room-card-footer .btn:hover {
@@ -1036,5 +1032,3 @@
         grid-template-columns: 1fr;
     }
 }
-
-
