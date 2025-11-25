@@ -5,9 +5,9 @@ session_start();
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register - Hotel Name</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Elegante</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
@@ -302,7 +302,7 @@ session_start();
 <body class="page-transition">
   <header id="navbar" class="scrolled">
     <div class="container">
-      <h1 class="logo">Hotel Name</h1>
+      <h1 class="logo">Elegante</h1>
       <nav>
         <a href="index.php">Home</a>
         <a href="#rooms">Rooms</a>
@@ -332,7 +332,7 @@ session_start();
     <div class="container">
       <div class="footer-grid">
         <div class="footer-info">
-          <h1 class="footer-logo">Hotel Name</h1>
+          <h1 class="footer-logo">Elegante</h1>
           <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -371,7 +371,7 @@ session_start();
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Hotel Name. All rights reserved.</p>
+        <p>© 2025 Elegante. All rights reserved.</p>
       </div>
     </div>
   </footer>

@@ -5,9 +5,9 @@ session_start(); // Ensure session is available for navbar and messages
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Hotel Name</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Elegante</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="about.css" />
     <script src="script.js?v=<?php echo time(); ?>"></script>
@@ -27,8 +27,8 @@ session_start(); // Ensure session is available for navbar and messages
     <section class="about-hero">
         <div class="overlay"></div>
         <div class="hero-inner">
-            <h1>About Hotel Name</h1>
-            <p>Blending warm Filipino hospitality with modern luxury, Hotel Name has been welcoming guests since 2012. Our commitment is to create memorable stays where comfort, care and attention to detail come standard.</p>
+            <h1>About Elegante</h1>
+            <p>Blending warm Filipino hospitality with modern luxury, Elegante has been welcoming guests since 2012. Our commitment is to create memorable stays where comfort, care and attention to detail come standard.</p>
             <div class="about-hero-buttons">
                 <a class="btn" href="rooms.php">Explore Rooms</a>
                 <a class="btn btn-light" href="#contact">Contact Us</a>
@@ -44,7 +44,7 @@ session_start(); // Ensure session is available for navbar and messages
             </div>
             <div class="story-content">
                 <div class="story-text">
-                    <p>Founded by a family of travelers and hospitality professionals, Hotel Name began as a small boutique property and has grown into a full-service hotel while keeping its original values intact: personalized service, thoughtful design, and a love for our neighborhood. We pride ourselves on authentic service informed by local culture and modern comforts.</p>
+                    <p>Founded by a family of travelers and hospitality professionals, Elegante began as a small boutique property and has grown into a full-service hotel while keeping its original values intact: personalized service, thoughtful design, and a love for our neighborhood. We pride ourselves on authentic service informed by local culture and modern comforts.</p>
                 </div>
                 <div class="story-image">
                     <img src="images/presidential2.avif" alt="Hotel lobby" />
@@ -90,6 +90,16 @@ session_start(); // Ensure session is available for navbar and messages
                     <h4>Liza de la Cruz</h4>
                     <p>Guest Relations</p>
                 </div>
+                <div class="team-member">
+                    <img src="images/presidential6.avif" alt="Director of Sales" />
+                    <h4>Isabella Rodriguez</h4>
+                    <p>Director of Sales</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/presidential2.avif" alt="Wellness Manager" />
+                    <h4>Paolo Mendez</h4>
+                    <p>Wellness & Spa Manager</p>
+                </div>
             </div>
         </section>
 
@@ -119,7 +129,7 @@ session_start(); // Ensure session is available for navbar and messages
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-info">
-                    <h1 class="footer-logo">Hotel Name</h1>
+                    <h1 class="footer-logo">Elegante</h1>
                     <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -159,7 +169,7 @@ session_start(); // Ensure session is available for navbar and messages
             </div>
 
             <div class="footer-bottom">
-                <p>© 2025 Hotel Name. All rights reserved.</p>
+                <p>© 2025 Elegante. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -312,7 +312,7 @@ session_start(); // **START SESSION: Must be at the very top**
               <h3>Harvey Poge</h3>
             </div>
             <p class="testimonial-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+              My stay at Elegante was absolutely incredible! The service was impeccable, the rooms were luxurious and immaculate, and the attention to detail was extraordinary. I felt completely pampered throughout my visit. Highly recommend!
             </p>
             <div class="rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -325,7 +325,7 @@ session_start(); // **START SESSION: Must be at the very top**
               <h3>Jhon Gundam</h3>
             </div>
             <p class="testimonial-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+              The Presidential Suite exceeded all my expectations. Every amenity was thoughtfully provided, from the premium toiletries to the stunning panoramic views. The staff went above and beyond to make our anniversary celebration unforgettable. We'll definitely return!
             </p>
             <div class="rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -338,7 +338,7 @@ session_start(); // **START SESSION: Must be at the very top**
               <h3>Jasher Maangas</h3>
             </div>
             <p class="testimonial-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+              Perfect location with world-class accommodations. The Family Room was spacious and comfortable for all of us. The kids loved the safe and friendly environment. Excellent dining options and the front desk staff was incredibly helpful. Worth every penny!
             </p>
             <div class="rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -351,7 +351,7 @@ session_start(); // **START SESSION: Must be at the very top**
               <h3>Jaspher Aton</h3>
             </div>
             <p class="testimonial-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+              This is my third stay and it keeps getting better! The attention to detail is remarkable. The concierge helped arrange everything I needed for my business meetings. The room amenities and Wi-Fi speed are exceptional. Management truly cares about guest satisfaction.
             </p>
             <div class="rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -364,7 +364,7 @@ session_start(); // **START SESSION: Must be at the very top**
               <h3>Kurt Loverboy123</h3>
             </div>
             <p class="testimonial-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero sed tempore illo atque beatae asperiores.
+              Absolutely stunning property with impeccable service. The luxury is evident in every corner, from the elegant lobby to the sophisticated room design. Breakfast was delicious and the spa facilities were divine. This is truly a gem for anyone seeking a premium hotel experience.
             </p>
             <div class="rating">
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -452,7 +452,7 @@ session_start(); // **START SESSION: Must be at the very top**
     <div class="container">
       <div class="footer-grid">
         <div class="footer-info">
-          <h1 class="footer-logo">Hotel Name</h1>
+          <h1 class="footer-logo">Elegante</h1>
           <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -495,7 +495,7 @@ session_start(); // **START SESSION: Must be at the very top**
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 Hotel Name. All rights reserved.</p>
+        <p>© 2025 Elegante. All rights reserved.</p>
       </div>
     </div>
   </footer>

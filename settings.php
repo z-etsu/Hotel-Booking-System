@@ -106,9 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings - Hotel Name</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Elegante</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="settings.css" />
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-info">
-                    <h1 class="footer-logo">Hotel Name</h1>
+                    <h1 class="footer-logo">Elegante</h1>
                     <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -343,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Hotel Name. All rights reserved.</p>
+                <p>© 2025 Elegante. All rights reserved.</p>
             </div>
         </div>
     </footer>

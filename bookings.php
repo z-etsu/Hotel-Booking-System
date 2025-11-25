@@ -38,7 +38,7 @@ $stmt->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookings - Hotel Name</title>
+    <title>My Bookings - Elegante</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bookings.css" />
     <script src="bookings.js" defer></script>
@@ -192,7 +192,7 @@ $stmt->close();
     </style>
 
     <footer class="site-footer" aria-hidden="true" style="padding:40px 0; text-align:center; color:#666; margin-top:60px;">
-        © <span id="currentYear"></span> Hotel Name. All rights reserved.
+        © <span id="currentYear"></span> Elegante. All rights reserved.
     </footer>
 
     <script>

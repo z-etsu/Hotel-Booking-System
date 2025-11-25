@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 ?>
 <header id="navbar">
     <div class="container">
-        <a href="index.php" style="text-decoration: none;" class="logo-link"><h1 class="logo">Hotel Name</h1></a>
+        <a href="index.php" style="text-decoration: none;" class="logo-link"><h1 class="logo">Elegante</h1></a>
         <nav>
             <a href="index.php">Home</a>
             <a href="rooms.php">Rooms</a>

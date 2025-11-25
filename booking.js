@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate page
     function renderRoomDetails(room) {
-        document.getElementById('room-title').textContent = `${room.name} - Hotel Name`;
+        document.getElementById('room-title').textContent = `${room.name} - Elegante`;
         document.getElementById('room-name').textContent = room.name;
         document.getElementById('room-category').textContent = (room.category || '').toUpperCase() + ' ROOM';
         document.getElementById('room-tagline').textContent = room.tagline || '';

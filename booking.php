@@ -7,7 +7,7 @@ session_start();
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title id="room-title">Room Details - Hotel Name</title>
+  <title id="room-title">Room Details - Elegante</title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rooms.css" />
@@ -159,7 +159,7 @@ session_start();
     <div class="container">
       <div class="footer-grid">
         <div class="footer-info">
-          <h1 class="footer-logo">Hotel Name</h1>
+          <h1 class="footer-logo">Elegante</h1>
           <p>Experience luxury and comfort in the heart of Manila. Our hotel offers exceptional service, elegant accommodations, and unforgettable experiences.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -198,7 +198,7 @@ session_start();
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Hotel Name. All rights reserved.</p>
+        <p>© 2025 Elegante. All rights reserved.</p>
       </div>
     </div>
   </footer>
