@@ -79,6 +79,16 @@ foreach ($roomQuantities as $roomName => $quantity) {
     $availableRooms[$roomName] = $rooms;
 }
 
+// Get already assigned room numbers (only from booked bookings)
+$assignedRoomsQuery = "SELECT room_number FROM bookings WHERE status = 'booked' AND room_number IS NOT NULL";
+$assignedRoomsResult = $conn->query($assignedRoomsQuery);
+$assignedRooms = [];
+if ($assignedRoomsResult) {
+    while ($row = $assignedRoomsResult->fetch_assoc()) {
+        $assignedRooms[] = $row['room_number'];
+    }
+}
+
 // Fetch all bookings with user info
 $bookingsQuery = "SELECT b.*, u.first_name, u.last_name, u.email FROM bookings b LEFT JOIN users u ON b.user_id = u.id ORDER BY b.order_date DESC";
 $bookingsResult = $conn->query($bookingsQuery);
@@ -663,6 +673,7 @@ foreach ($bookedBookings as $booking) {
     <script>
         // Room prefixes and quantities
         const availableRooms = <?php echo json_encode($availableRooms); ?>;
+        const assignedRooms = <?php echo json_encode($assignedRooms); ?>;
 
         function switchTab(tabName) {
             // Hide all tabs
@@ -689,7 +700,17 @@ foreach ($bookedBookings as $booking) {
                 availableRooms[roomName].forEach(roomNumber => {
                     const option = document.createElement('option');
                     option.value = roomNumber;
-                    option.textContent = roomNumber;
+                    
+                    // Check if room is already assigned
+                    if (assignedRooms.includes(roomNumber)) {
+                        option.textContent = roomNumber + ' (Already Assigned)';
+                        option.disabled = true;
+                        option.style.color = '#999';
+                        option.style.backgroundColor = '#f5f5f5';
+                    } else {
+                        option.textContent = roomNumber + ' (Available)';
+                    }
+                    
                     roomSelect.appendChild(option);
                 });
             }
