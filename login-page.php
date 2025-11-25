@@ -212,7 +212,7 @@ session_start();
 <body class="page-transition">
   <header id="navbar" class="scrolled">
     <div class="container">
-      <h1 class="logo">Elegante</h1>
+      <a href="index.php" style="text-decoration: none;"><h1 class="logo">Elegante</h1></a>
       <nav>
         <a href="index.php">Home</a>
         <a href="rooms.php">Rooms</a>

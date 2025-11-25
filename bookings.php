@@ -115,11 +115,11 @@ $stmt->close();
                                     <div class="booking-details-right">
                                         <div class="booking-detail-item">
                                             <span class="detail-label">💰 Price per Night</span>
-                                            <span class="detail-value">${<?php echo number_format($booking['price_per_night'], 2); ?></span>
+                                            <span class="detail-value">₱<?php echo number_format($booking['price_per_night'], 0); ?></span>
                                         </div>
                                         <div class="booking-detail-item">
                                             <span class="detail-label">💵 Total Price</span>
-                                            <span class="detail-value-total">${<?php echo number_format($booking['total_price'], 2); ?></span>
+                                            <span class="detail-value-total">₱<?php echo number_format($booking['total_price'], 0); ?></span>
                                         </div>
                                         <div class="booking-detail-item">
                                             <span class="detail-label">📝 Booking Date</span>

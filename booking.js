@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('detail-size').textContent = room.size || '';
         document.getElementById('detail-capacity').textContent = `${room.maxPeople} people`;
-        document.getElementById('detail-price').textContent = `$${room.price}`;
+        document.getElementById('detail-price').textContent = `₱${room.price.toLocaleString()}`;
 
-        document.getElementById('widget-price').textContent = `$${room.price}`;
-        document.getElementById('detail-price-small').textContent = `$${room.price}`;
+        document.getElementById('widget-price').textContent = `₱${room.price.toLocaleString()}`;
+        document.getElementById('detail-price-small').textContent = `₱${room.price.toLocaleString()}`;
 
         // Populate guests dropdown based on room max capacity
         const guestsSelect = document.getElementById('guests');
@@ -377,8 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal) {
                 document.getElementById('confirm-room-name').textContent = roomName;
                 document.getElementById('confirm-nights').textContent = nights;
-                document.getElementById('confirm-price-per-night').textContent = `$${pricePerNight.toLocaleString()}`;
-                document.getElementById('confirm-total').textContent = `$${total.toLocaleString()}`;
+                document.getElementById('confirm-price-per-night').textContent = `₱${pricePerNight.toLocaleString()}`;
+                document.getElementById('confirm-total').textContent = `₱${total.toLocaleString()}`;
                 
                 const confirmBtn = document.getElementById('confirm-booking-btn');
                 const cancelBtn = document.getElementById('cancel-confirmation-btn');

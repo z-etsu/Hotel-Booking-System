@@ -82,7 +82,7 @@ $cancelledBookings = $cancelledBookingsData['cancelled_count'];
                     <div class="card-icon">📊</div>
                     <p class="card-label">Total Bookings</p>
                     <div class="card-value"><?php echo number_format($totalBookings); ?></div>
-                    <p class="card-subtext">₹<?php echo number_format($totalRevenue, 2); ?> total revenue</p>
+                    <p class="card-subtext">₱<?php echo number_format($totalRevenue, 0); ?> total revenue</p>
                 </div>
 
                 <!-- Active Bookings Card -->
@@ -103,9 +103,9 @@ $cancelledBookings = $cancelledBookingsData['cancelled_count'];
 
                 <!-- Revenue Card -->
                 <div class="analytics-card warning total-revenue">
-                    <div class="card-icon">₹</div>
+                    <div class="card-icon">₱</div>
                     <p class="card-label">Total Revenue</p>
-                    <div class="card-value">₹<?php echo number_format($totalRevenue, 0); ?></div>
+                    <div class="card-value">₱<?php echo number_format($totalRevenue, 0); ?></div>
                     <p class="card-subtext">From all bookings</p>
                 </div>
             </div>
