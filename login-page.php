@@ -258,6 +258,9 @@ session_start();
         <p>
           Don't have an account? <a href="register.html">Register now</a>.
         </p>
+        <p style="margin-top: 1.5rem; text-align: center; border-top: 1px solid #ddd; padding-top: 1.5rem;">
+          <a href="admin/login.php" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem;">Log in as Admin</a>
+        </p>
       </form>
     </div>
   </div>

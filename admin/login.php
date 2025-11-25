@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="#rooms">Rooms</a>
                     <a href="#facilities">Facilities</a>
                     <a href="#contact">About</a>
-                    <a href="../login.html" style="color: var(--accent)">Login / Register</a>
+                    <a href="../login-page.php" style="color: var(--accent)">Login / Register</a>
                 </nav>
             </div>
         </header>
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button type="submit" class="btn">Login</button>
 
-                <p><a href="../login.html">Back to User Login</a></p>
+                <p><a href="../login-page.php">Back to User Login</a></p>
             </form>
         </div>
 
