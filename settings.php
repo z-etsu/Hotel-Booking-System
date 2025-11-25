@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div class="form-group">
-                                <label for="birthday">Birthday *</label>
+                                <label for="birthday">Birthday (16+ required) *</label>
                                 <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($user['birthday']); ?>" required>
                             </div>
 
@@ -289,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="action-details">
                                     <h3>Logout</h3>
                                     <p>Sign out of your account on this device</p>
-                                    <a href="logout.php" class="btn btn-danger">Logout</a>
+                                    <button id="settingsLogoutBtn" class="btn btn-danger">Logout</button>
                                 </div>
                             </div>
                         </div>
@@ -397,6 +397,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }, 4000);
             }
         };
+
+        // Set max date for birthday input (16+ requirement)
+        const birthdayInput = document.getElementById('birthday');
+        if (birthdayInput) {
+            const today = new Date();
+            const maxDate16YearsAgo = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+            const maxDateString = maxDate16YearsAgo.toISOString().split('T')[0];
+            birthdayInput.setAttribute('max', maxDateString);
+        }
+
+        // Handle logout button on settings page
+        const settingsLogoutBtn = document.getElementById('settingsLogoutBtn');
+        if (settingsLogoutBtn) {
+            settingsLogoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modal = document.getElementById('logoutConfirmationModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        }
     </script>
 </body>
 
