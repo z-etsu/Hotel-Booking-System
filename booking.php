@@ -78,7 +78,7 @@ session_start();
               </div>
               <div class="summary-price">
                 <div class="summary-from">From</div>
-                <div class="summary-value" id="detail-price-small">$399</div>
+                <div class="summary-value" id="detail-price-small">₱16,800</div>
                 <div class="summary-sub">/night</div>
               </div>
             </div>
@@ -99,7 +99,7 @@ session_start();
           <div class="booking-widget" id="booking-widget">
             <h3>Confirm Your Reservation</h3>
             <div class="price-summary">
-              <span class="final-price" id="widget-price">$399</span>
+              <span class="final-price" id="widget-price">₱16,800</span>
               <small>/ per night</small>
             </div>
             <form id="booking-form" autocomplete="off" novalidate>

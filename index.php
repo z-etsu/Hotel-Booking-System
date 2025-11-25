@@ -74,7 +74,7 @@ session_start(); // **START SESSION: Must be at the very top**
   <section id="rooms" class="rooms">
     <div class="container">
       <div class="section-title">
-        <p class="subtitle">Hotel & Spa Adina</p>
+        <p class="subtitle">Elegante Hotel</p>
         <h2>Room & Suites</h2>
       </div>
 
@@ -91,7 +91,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Single Room</h3>
             <p>Cozy room perfect for solo travelers with essential amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=single-room">Book Now from $89</a>
+            <a class="btn book-btn" href="booking.php?room=single-room">Book Now from ₱5,000</a>
           </div>
         </article>
 
@@ -106,7 +106,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Double Room</h3>
             <p>Comfortable room with a double bed and modern amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=double-room">Book Now from $129</a>
+            <a class="btn book-btn" href="booking.php?room=double-room">Book Now from ₱7,200</a>
           </div>
         </article>
 
@@ -121,7 +121,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Twin Room</h3>
             <p>Spacious room with two single beds, perfect for sharing.</p>
-            <a class="btn book-btn" href="booking.php?room=twin-room">Book Now from $139</a>
+            <a class="btn book-btn" href="booking.php?room=twin-room">Book Now from ₱7,800</a>
           </div>
         </article>
       </div>
@@ -139,7 +139,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Triple Room</h3>
             <p>Spacious room with three single beds or one double and one single bed.</p>
-            <a class="btn book-btn" href="booking.php?room=triple-room">Book Now from $189</a>
+            <a class="btn book-btn" href="booking.php?room=triple-room">Book Now from ₱10,600</a>
           </div>
         </article>
 
@@ -154,7 +154,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Family Room</h3>
             <p>Perfect for families with two double beds and extra living space.</p>
-            <a class="btn book-btn" href="booking.php?room=family-room">Book Now from $229</a>
+            <a class="btn book-btn" href="booking.php?room=family-room">Book Now from ₱12,800</a>
           </div>
         </article>
 
@@ -169,7 +169,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Connected Room</h3>
             <p>Two interconnected rooms perfect for families needing extra privacy.</p>
-            <a class="btn book-btn" href="booking.php?room=connected-room">Book Now from $249</a>
+            <a class="btn book-btn" href="booking.php?room=connected-room">Book Now from ₱14,000</a>
           </div>
         </article>
       </div>
@@ -187,7 +187,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Executive Suite</h3>
             <p>Luxurious suite with separate living room and premium amenities.</p>
-            <a class="btn book-btn" href="booking.php?room=executive-suite">Book Now from $299</a>
+            <a class="btn book-btn" href="booking.php?room=executive-suite">Book Now from ₱16,800</a>
           </div>
         </article>
 
@@ -202,7 +202,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Presidential Suite</h3>
             <p>Our finest suite with panoramic views and exclusive services.</p>
-            <a class="btn book-btn" href="booking.php?room=presidential-suite">Book Now from $399</a>
+            <a class="btn book-btn" href="booking.php?room=presidential-suite">Book Now from ₱22,400</a>
           </div>
         </article>
 
@@ -217,7 +217,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="card-content">
             <h3>Royal Suite</h3>
             <p>Ultimate luxury with multiple rooms and private terrace.</p>
-            <a class="btn book-btn" href="booking.php?room=royal-suite">Book Now from $449</a>
+            <a class="btn book-btn" href="booking.php?room=royal-suite">Book Now from ₱25,200</a>
           </div>
         </article>
       </div>
@@ -414,7 +414,7 @@ session_start(); // **START SESSION: Must be at the very top**
           </div>
           <div class="info-item">
             <h3>Email</h3>
-            <p><i class="fas fa-envelope"></i> info@hotelname.com</p>
+            <p><i class="fas fa-envelope"></i> info@elegante.com</p>
           </div>
           <div class="map">
             <iframe 
@@ -477,7 +477,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <ul>
             <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
             <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+            <li><i class="fas fa-envelope"></i> info@elegante.com</li>
             <li><i class="fas fa-clock"></i> 24/7 Open</li>
           </ul>
         </div>

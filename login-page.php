@@ -212,7 +212,7 @@ session_start();
 <body class="page-transition">
   <header id="navbar" class="scrolled">
     <div class="container">
-      <h1 class="logo">Elegante</h1>
+      <a href="index.php" style="text-decoration: none;"><h1 class="logo">Elegante</h1></a>
       <nav>
         <a href="index.php">Home</a>
         <a href="rooms.php">Rooms</a>
@@ -258,6 +258,9 @@ session_start();
         <p>
           Don't have an account? <a href="register.html">Register now</a>.
         </p>
+        <p style="margin-top: 1.5rem; text-align: center; border-top: 1px solid #ddd; padding-top: 1.5rem;">
+          <a href="admin/login.php" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem;">Log in as Admin</a>
+        </p>
       </form>
     </div>
   </div>
@@ -289,7 +292,7 @@ session_start();
           <ul>
             <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
             <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+            <li><i class="fas fa-envelope"></i> info@elegante.com</li>
             <li><i class="fas fa-clock"></i> 24/7 Open</li>
           </ul>
         </div>

@@ -71,12 +71,10 @@ session_start();
 
                 <div class="filter-group">
                     <h3>💵 Price Range (per night)</h3>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="0-150"> $0 - $150</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="151-300"> $151 -
-                        $300</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="301-500"> $301 -
-                        $500</label>
-                    <label class="filter-checkbox"><input type="checkbox" name="price" value="501-1000"> $501+</label>
+                    <label class="filter-checkbox"><input type="checkbox" name="price" value="0-5000"> ₱0 - ₱5,000</label>
+                    <label class="filter-checkbox"><input type="checkbox" name="price" value="5001-12000"> ₱5,001 - ₱12,000</label>
+                    <label class="filter-checkbox"><input type="checkbox" name="price" value="12001-20000"> ₱12,001 - ₱20,000</label>
+                    <label class="filter-checkbox"><input type="checkbox" name="price" value="20001-50000"> ₱20,001+</label>
                 </div>
 
                 <div class="filter-group">

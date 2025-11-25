@@ -77,29 +77,25 @@ session_start(); // Ensure session is available for navbar and messages
             <div class="team-grid">
                 <div class="team-member">
                     <img src="images/presidential3.avif" alt="General Manager" />
-                    <h4>Ana Santos</h4>
+                    <h4>Jaspher Atun</h4>
                     <p>General Manager</p>
                 </div>
                 <div class="team-member">
                     <img src="images/presidential4.avif" alt="Head Chef" />
-                    <h4>Marco Cruz</h4>
+                    <h4>Kurt Jerald Emba</h4>
                     <p>Head Chef</p>
                 </div>
                 <div class="team-member">
                     <img src="images/presidential5.avif" alt="Guest Relations" />
-                    <h4>Liza de la Cruz</h4>
+                    <h4>Jhon Benedict Gundan</h4>
                     <p>Guest Relations</p>
                 </div>
                 <div class="team-member">
                     <img src="images/presidential6.avif" alt="Director of Sales" />
-                    <h4>Isabella Rodriguez</h4>
+                    <h4>Jaspher Palangue</h4>
                     <p>Director of Sales</p>
                 </div>
-                <div class="team-member">
-                    <img src="images/presidential2.avif" alt="Wellness Manager" />
-                    <h4>Paolo Mendez</h4>
-                    <p>Wellness & Spa Manager</p>
-                </div>
+          
             </div>
         </section>
 
