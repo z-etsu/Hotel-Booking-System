@@ -302,7 +302,14 @@
 }
 
 .info-icon {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(184, 134, 11, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .info-icon i {
@@ -361,7 +368,14 @@
 }
 
 .action-icon {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(184, 134, 11, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .action-card.danger .action-icon {

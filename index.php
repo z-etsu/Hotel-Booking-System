@@ -240,7 +240,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="facility-content">
             <h3>Premium Bedding</h3>
             <p>Luxurious Egyptian cotton sheets and hypoallergenic pillows</p>
-            <a href="#" class="facility-link">Details</a>
+            <a href="facilities.php" class="facility-link">Details</a>
           </div>
         </div>
 
@@ -252,7 +252,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="facility-content">
             <h3>Smart Entertainment</h3>
             <p>Modern TV with streaming services and cable channels</p>
-            <a href="#" class="facility-link">Details</a>
+            <a href="facilities.php" class="facility-link">Details</a>
           </div>
         </div>
 
@@ -264,7 +264,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="facility-content">
             <h3>High-Speed WiFi</h3>
             <p>Complimentary internet throughout the room</p>
-            <a href="#" class="facility-link">Details</a>
+            <a href="facilities.php" class="facility-link">Details</a>
           </div>
         </div>
 
@@ -276,7 +276,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="facility-content">
             <h3>Luxury Bathroom</h3>
             <p>Premium toiletries and rainfall shower</p>
-            <a href="#" class="facility-link">Details</a>
+            <a href="facilities.php" class="facility-link">Details</a>
           </div>
         </div>
 
@@ -288,7 +288,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <div class="facility-content">
             <h3>In-Room Beverage Bar</h3>
             <p>Mini fridge, coffee maker, and 24/7 refreshments</p>
-            <a href="#" class="facility-link">Details</a>
+            <a href="facilities.php" class="facility-link">Details</a>
           </div>
         </div>
       </div>
@@ -465,10 +465,10 @@ session_start(); // **START SESSION: Must be at the very top**
         <div class="quick-links">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#rooms">Our Rooms</a></li>
-            <li><a href="#facilities">Facilities</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="rooms.php">Our Rooms</a></li>
+            <li><a href="facilities.php">Facilities</a></li>
+            <li><a href="index.php#testimonials">Testimonials</a></li>
+            <li><a href="about.php">About Us</a></li>
           </ul>
         </div>
 

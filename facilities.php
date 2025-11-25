@@ -151,11 +151,15 @@ session_start();
         }
 
         .amenity-item {
+            display: block;
             padding: 20px;
             background-color: #f9f7f4;
             border-radius: 10px;
             border-left: 4px solid #b8860b;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .amenity-item:hover {
@@ -429,30 +433,30 @@ session_start();
         <div class="container">
             <h2>Guest Services</h2>
             <div class="amenities-grid">
-                <div class="amenity-item">
+                <a href="facilities.php" class="amenity-item">
                     <strong>24/7 Front Desk</strong>
                     <p>Our dedicated staff is available round the clock to assist with any inquiries or requests.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Concierge Services</strong>
                     <p>Expert recommendations for dining, attractions, transportation, and special arrangements.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Luggage Storage</strong>
                     <p>Secure storage for your luggage before check-in or after check-out.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Housekeeping</strong>
                     <p>Daily room cleaning and turndown service for your comfort and convenience.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Laundry Service</strong>
                     <p>Professional laundry and dry cleaning services with quick turnaround times.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Wake-up Call Service</strong>
                     <p>Reliable wake-up calls to ensure you never miss an important appointment.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -522,38 +526,38 @@ session_start();
         <div class="container">
             <h2>Room Amenities</h2>
             <div class="amenities-grid">
-                <div class="amenity-item">
+                <a href="facilities.php" class="amenity-item">
                     <strong>High-Speed WiFi</strong>
                     <p>Complimentary premium internet throughout your room and all hotel premises.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Smart TV with Cable</strong>
                     <p>55" Smart TV with streaming services and international channels.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Air Conditioning</strong>
                     <p>Individual climate control to maintain your ideal room temperature.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Premium Bedding</strong>
                     <p>Egyptian cotton sheets, luxury pillows, and high-quality mattresses for restful sleep.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Marble Bathroom</strong>
                     <p>Rain shower, soaking tub, luxury toiletries, and premium towels.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Work Desk</strong>
                     <p>Ergonomic workspace with desk lamp, power outlets, and comfortable chair.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Mini Bar & Safe</strong>
                     <p>Complimentary refreshments and secure safe for valuables.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>In-Room Entertainment</strong>
                     <p>Sound system, streaming services, and extensive entertainment options.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -563,30 +567,30 @@ session_start();
         <div class="container">
             <h2>Accessibility & Special Features</h2>
             <div class="amenities-grid">
-                <div class="amenity-item">
+                <a href="facilities.php" class="amenity-item">
                     <strong>Wheelchair Accessible Rooms</strong>
                     <p>Specially designed rooms with wheelchair access, grab bars, and accessible bathrooms.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Elevators & Ramps</strong>
                     <p>Multiple elevators and ramps throughout the hotel for easy accessibility.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Accessible Parking</strong>
                     <p>Dedicated wheelchair-accessible parking spaces near the entrance.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Pet-Friendly Policy</strong>
                     <p>Welcome your furry friends with our pet-friendly rooms and amenities.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Smoke-Free Rooms</strong>
                     <p>Dedicated non-smoking rooms throughout the hotel for health-conscious guests.</p>
-                </div>
-                <div class="amenity-item">
+                </a>
+                <a href="facilities.php" class="amenity-item">
                     <strong>Secure Parking</strong>
                     <p>24-hour monitored parking garage with security cameras and valet service.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>

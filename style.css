@@ -79,14 +79,10 @@ nav a,
     display: flex;
     justify-content: center; /* keep inner container centered */
     align-items: center;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
     z-index: 1000;
     background: transparent;
     overflow: visible;
-}
-
-/* Navbar transitions - only for appearance, not position */
-#navbar.scrolled {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
 /* Make the inner container hold the logo and nav side-by-side */
@@ -127,6 +123,11 @@ nav {
     font-weight: 400;
     font-family: var(--brand-font);
     color: var(--text-color);
+    margin: 0;
+}
+
+.logo-link {
+    text-decoration: none;
 }
 
 nav a {

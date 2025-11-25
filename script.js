@@ -174,36 +174,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.room-slide');
     const prevBtn = document.querySelector('.prev-slide');
     const nextBtn = document.querySelector('.next-slide');
-    let currentSlide = 0;
+    
+    // Only initialize if these elements exist
+    if (prevBtn && nextBtn && slides.length > 0) {
+        let currentSlide = 0;
 
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
     }
-
-    prevBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    });
-
-    nextBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    });
 
     // Price range slider
     const priceSlider = document.querySelector('.price-slider');
     const priceDisplay = document.querySelector('.price-display');
     
-    priceSlider.addEventListener('input', (e) => {
-        priceDisplay.textContent = `$0 - $${e.target.value}`;
-    });
+    if (priceSlider && priceDisplay) {
+        priceSlider.addEventListener('input', (e) => {
+            priceDisplay.textContent = `$0 - $${e.target.value}`;
+        });
+    }
 });
 
 // ✨ Smooth Page Transition Effect - Blur Out on Link Click
 document.addEventListener('DOMContentLoaded', () => {
     // Handle all internal navigation links with smooth blur transition
-    document.querySelectorAll('a').forEach(link => {
+    document.querySelectorAll('a:not(.amenity-item)').forEach(link => {
         link.addEventListener('click', (e) => {
             // Skip if link has special attributes (target="_blank", mailto, etc.)
             if (link.target === '_blank' || link.href.includes('mailto:') || link.href.includes('tel:') || link.href.startsWith('#')) {
