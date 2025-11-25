@@ -281,6 +281,123 @@ document.addEventListener('DOMContentLoaded', () => {
     const roomCardsDisplay = document.querySelector('.room-cards-display');
     const categoryLabels = document.querySelectorAll('.category-label');
     const applyFiltersBtn = document.querySelector('.apply-filters-btn');
+    const advancedFiltersBtn = document.getElementById('advancedFiltersBtn');
+
+    // Note: the advanced filter modal may be loaded dynamically from `advance-filter.php`.
+    // We'll fetch and inject it when the user clicks the Advanced Filters button,
+    // then initialize its controls (amenities, apply/reset/close handlers).
+
+    // === COLLECT ALL UNIQUE AMENITIES FROM ROOMS ===
+    function getAllUniqueAmenities() {
+        const amenitiesSet = new Set();
+        rooms.forEach(room => {
+            room.amenities.forEach(amenity => amenitiesSet.add(amenity));
+        });
+        return Array.from(amenitiesSet).sort();
+    }
+
+    // When advanced filters are requested, fetch the modal HTML and inject it.
+    async function loadAndShowAdvanceFilterModal() {
+        try {
+            const resp = await fetch('advance-filter.php', { cache: 'no-store' });
+            if (!resp.ok) throw new Error('Failed to load advanced filter UI');
+            const html = await resp.text();
+
+            // Insert the returned HTML into a wrapper and append to body
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            // Initialize modal controls now that they're in the DOM
+            initInjectedAdvancedModal();
+        } catch (err) {
+            console.error('Could not load advanced filter modal:', err);
+            alert('Unable to open advanced filters right now.');
+        }
+    }
+
+    if (advancedFiltersBtn) {
+        advancedFiltersBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadAndShowAdvanceFilterModal();
+        });
+    }
+
+    // Initialize controls for the modal that was injected via fetch
+    function initInjectedAdvancedModal() {
+        const advancedFilterModal = document.getElementById('advancedFilterModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const advancedCancelBtn = document.getElementById('advancedCancelBtn');
+        const advancedApplyBtn = document.getElementById('advancedApplyBtn');
+        const advancedResetBtn = document.getElementById('advancedResetBtn');
+        const advancedAmenitiesGrid = document.getElementById('advancedAmenitiesGrid');
+
+        if (!advancedFilterModal) return;
+
+        // populate amenities dynamically
+        if (advancedAmenitiesGrid) {
+            const allAmenities = getAllUniqueAmenities();
+            advancedAmenitiesGrid.innerHTML = allAmenities.map(amenity => `
+                <div class="amenity-checkbox-modal">
+                    <input type="checkbox" id="adv-amenity-${amenity.replace(/\s+/g, '-').toLowerCase()}" value="${amenity}">
+                    <label for="adv-amenity-${amenity.replace(/\s+/g, '-').toLowerCase()}">${amenity}</label>
+                </div>
+            `).join('');
+        }
+
+        // show modal (register-success style uses .show class)
+        advancedFilterModal.classList.add('show');
+
+        // close handlers
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => advancedFilterModal.classList.remove('show'));
+        if (advancedCancelBtn) advancedCancelBtn.addEventListener('click', () => advancedFilterModal.classList.remove('show'));
+        // close when clicking overlay
+        advancedFilterModal.addEventListener('click', (e) => { if (e.target === advancedFilterModal) advancedFilterModal.classList.remove('show'); });
+
+        // reset handler
+        if (advancedResetBtn) {
+            advancedResetBtn.addEventListener('click', () => {
+                const min = document.getElementById('advMinPrice'); if (min) min.value = '';
+                const max = document.getElementById('advMaxPrice'); if (max) max.value = '';
+                const guests = document.getElementById('advGuests'); if (guests) guests.value = '';
+                document.querySelectorAll('#advancedAmenitiesGrid input[type="checkbox"]').forEach(cb => cb.checked = false);
+            });
+        }
+
+        // apply handler (use existing logic but target the injected modal)
+        if (advancedApplyBtn) {
+            advancedApplyBtn.addEventListener('click', () => {
+                // reuse the same filtering logic as applyAdvancedFilters but reference DOM inside injected modal
+                const minPrice = parseFloat(document.getElementById('advMinPrice').value) || 0;
+                const maxPrice = parseFloat(document.getElementById('advMaxPrice').value) || Infinity;
+                const minGuests = parseInt(document.getElementById('advGuests').value) || 0;
+                const selectedAdvancedAmenities = Array.from(document.querySelectorAll('#advancedAmenitiesGrid input[type="checkbox"]:checked')).map(cb => cb.value);
+
+                const activeCategoryLabel = document.querySelector('.category-label.active');
+                const activeCategory = activeCategoryLabel ? activeCategoryLabel.dataset.category : 'all';
+
+                let filteredList = rooms;
+
+                // Filter by price
+                filteredList = filteredList.filter(room => room.price >= minPrice && room.price <= maxPrice);
+
+                // Filter by guest capacity
+                if (minGuests > 0) {
+                    filteredList = filteredList.filter(room => room.maxPeople >= minGuests);
+                }
+
+                // Filter by amenities
+                if (selectedAdvancedAmenities.length > 0) {
+                    filteredList = filteredList.filter(room => {
+                        return selectedAdvancedAmenities.every(amenity => room.amenities.includes(amenity));
+                    });
+                }
+
+                renderRoomCards(filteredList, activeCategory);
+                advancedFilterModal.classList.remove('show');
+            });
+        }
+    }
 
     // === HELPER FUNCTION ===
     function parseRange(value) {
@@ -407,6 +524,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderRoomCards(filteredList, activeCategory);
         }
+
+        // (Advanced filter handlers are initialized only when the modal is injected.)
 
         // === EVENT LISTENERS ===
         filterRooms();

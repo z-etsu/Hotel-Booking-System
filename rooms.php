@@ -107,6 +107,7 @@ session_start();
                 </div>
 
                 <button class="btn apply-filters-btn">Apply Filters</button>
+                <button class="btn advanced-filters-btn" id="advancedFiltersBtn">⚙️ Advanced Filters</button>
             </aside>
 
             <div class="room-cards-display">
@@ -115,6 +116,7 @@ session_start();
         </div>
     </section>
 
+    <!-- Advanced Filter Modal is loaded dynamically from advance-filter.php -->
 
     <!-- Footer -->
     <footer class="footer">
