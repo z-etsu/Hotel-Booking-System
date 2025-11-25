@@ -15,11 +15,11 @@
                 <h3 style="margin:0 0 0.5rem 0;">💵 Price Range (Per Night)</h3>
                 <div style="display:flex;gap:0.75rem;">
                     <div style="flex:1;">
-                        <label for="advMinPrice">Minimum Price ($)</label>
+                        <label for="advMinPrice">Minimum Price (₱)</label>
                         <input id="advMinPrice" type="number" min="0" placeholder="0" style="width:100%;padding:0.5rem;border:1px solid #ddd;border-radius:6px;">
                     </div>
                     <div style="flex:1;">
-                        <label for="advMaxPrice">Maximum Price ($)</label>
+                        <label for="advMaxPrice">Maximum Price (₱)</label>
                         <input id="advMaxPrice" type="number" min="0" placeholder="999" style="width:100%;padding:0.5rem;border:1px solid #ddd;border-radius:6px;">
                     </div>
                 </div>
