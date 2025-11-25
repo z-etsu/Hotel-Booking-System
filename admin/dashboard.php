@@ -113,12 +113,23 @@ $cancelledBookings = $cancelledBookingsData['cancelled_count'];
     </div>
 
     <script>
-        // Optional: Add page transition animation
+        // Page transition animation
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.admin-container');
             if (container) {
                 container.style.opacity = '0';
                 container.style.animation = 'fadeIn 0.5s ease-in forwards';
+            }
+
+            // Logout confirmation
+            const logoutBtn = document.querySelector('.admin-logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to log out?')) {
+                        window.location.href = this.href;
+                    }
+                });
             }
         });
 
