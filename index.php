@@ -74,7 +74,7 @@ session_start(); // **START SESSION: Must be at the very top**
   <section id="rooms" class="rooms">
     <div class="container">
       <div class="section-title">
-        <p class="subtitle">Hotel & Spa Adina</p>
+        <p class="subtitle">Elegante Hotel</p>
         <h2>Room & Suites</h2>
       </div>
 
@@ -414,7 +414,7 @@ session_start(); // **START SESSION: Must be at the very top**
           </div>
           <div class="info-item">
             <h3>Email</h3>
-            <p><i class="fas fa-envelope"></i> info@hotelname.com</p>
+            <p><i class="fas fa-envelope"></i> info@elegante.com</p>
           </div>
           <div class="map">
             <iframe 
@@ -477,7 +477,7 @@ session_start(); // **START SESSION: Must be at the very top**
           <ul>
             <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
             <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+            <li><i class="fas fa-envelope"></i> info@elegante.com</li>
             <li><i class="fas fa-clock"></i> 24/7 Open</li>
           </ul>
         </div>

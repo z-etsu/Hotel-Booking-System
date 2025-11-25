@@ -289,7 +289,7 @@ session_start();
           <ul>
             <li><i class="fas fa-map-marker-alt"></i> 123 Masangkay Street, Binondo, Manila</li>
             <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
-            <li><i class="fas fa-envelope"></i> info@hotelname.com</li>
+            <li><i class="fas fa-envelope"></i> info@elegante.com</li>
             <li><i class="fas fa-clock"></i> 24/7 Open</li>
           </ul>
         </div>
