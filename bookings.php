@@ -134,6 +134,10 @@ $stmt->close();
                                         <button class="btn btn-danger cancel-booking-btn" data-booking-id="<?php echo htmlspecialchars($booking['id']); ?>" data-room-name="<?php echo htmlspecialchars($booking['room_name']); ?>">
                                             Cancel Booking
                                         </button>
+                                    <?php elseif ($booking['status'] === 'booked'): ?>
+                                        <button class="btn btn-primary rate-review-btn" data-booking-id="<?php echo htmlspecialchars($booking['id']); ?>" data-room-name="<?php echo htmlspecialchars($booking['room_name']); ?>">
+                                            ⭐ Rate & Review
+                                        </button>
                                     <?php else: ?>
                                         <div class="booking-cancelled-note">
                                             This booking has been cancelled.

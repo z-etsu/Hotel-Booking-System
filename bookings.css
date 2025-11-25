@@ -146,6 +146,12 @@
     border: 1px solid #a5d6a7;
 }
 
+.booking-status-badge[data-status="booked"] {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
 .booking-status-badge[data-status="cancelled"] {
     background-color: #ffebee;
     color: #c62828;

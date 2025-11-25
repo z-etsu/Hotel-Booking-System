@@ -7,7 +7,7 @@ $roomAvailability = [];
 $bookingsQuery = "
     SELECT room_name, COUNT(*) as booked_count
     FROM bookings
-    WHERE status = 'active'
+    WHERE (status = 'active' OR status = 'booked')
     AND check_out >= CURDATE()
     GROUP BY room_name
 ";
