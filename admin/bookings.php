@@ -481,6 +481,7 @@ foreach ($bookedBookings as $booking) {
                                 <table class="admin-table">
                                     <thead>
                                         <tr>
+                                            <th>Order #</th>
                                             <th>Guest Name</th>
                                             <th>Room Type</th>
                                             <th>Check-In</th>
@@ -496,6 +497,7 @@ foreach ($bookedBookings as $booking) {
                                             $checkOut = new DateTime($booking['check_out']);
                                         ?>
                                             <tr>
+                                                <td><strong>#<?php echo (int)$booking['id']; ?></strong></td>
                                                 <td><?php echo htmlspecialchars($booking['first_name'] . ' ' . $booking['last_name']); ?></td>
                                                 <td><span class="booking-info-badge"><?php echo htmlspecialchars($booking['room_name']); ?></span></td>
                                                 <td><?php echo $checkIn->format('M d, Y'); ?></td>
@@ -534,6 +536,7 @@ foreach ($bookedBookings as $booking) {
                                 <table class="admin-table">
                                     <thead>
                                         <tr>
+                                            <th>Order #</th>
                                             <th>Guest Name</th>
                                             <th>Room Type</th>
                                             <th>Room Number</th>
@@ -549,6 +552,7 @@ foreach ($bookedBookings as $booking) {
                                             $checkOut = new DateTime($booking['check_out']);
                                         ?>
                                             <tr>
+                                                <td><strong>#<?php echo (int)$booking['id']; ?></strong></td>
                                                 <td><?php echo htmlspecialchars($booking['first_name'] . ' ' . $booking['last_name']); ?></td>
                                                 <td><span class="booking-info-badge"><?php echo htmlspecialchars($booking['room_name']); ?></span></td>
                                                 <td><strong><?php echo htmlspecialchars($booking['room_number']); ?></strong></td>
@@ -582,6 +586,7 @@ foreach ($bookedBookings as $booking) {
                                 <table class="admin-table">
                                     <thead>
                                         <tr>
+                                            <th>Order #</th>
                                             <th>Guest Name</th>
                                             <th>Room Type</th>
                                             <th>Check-In</th>
@@ -596,6 +601,7 @@ foreach ($bookedBookings as $booking) {
                                             $checkOut = new DateTime($booking['check_out']);
                                         ?>
                                             <tr>
+                                                <td><strong>#<?php echo (int)$booking['id']; ?></strong></td>
                                                 <td><?php echo htmlspecialchars($booking['first_name'] . ' ' . $booking['last_name']); ?></td>
                                                 <td><span class="booking-info-badge"><?php echo htmlspecialchars($booking['room_name']); ?></span></td>
                                                 <td><?php echo $checkIn->format('M d, Y'); ?></td>
