@@ -43,8 +43,8 @@ if (empty($description) || strlen($description) < 5) {
     exit;
 }
 
-// Check if booking exists and belongs to user
-$checkBooking = $conn->prepare("SELECT room_name FROM bookings WHERE id = ? AND user_id = ? AND status = 'assigned'");
+// Check if booking exists and belongs to user and is finished
+$checkBooking = $conn->prepare("SELECT room_name FROM bookings WHERE id = ? AND user_id = ? AND status = 'finished'");
 if (!$checkBooking) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $conn->error]);

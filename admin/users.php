@@ -9,8 +9,23 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 require_once '../db_connect.php';
 
-// Fetch all users
-$usersQuery = "SELECT id, first_name, middle_initial, last_name, email, birthday, contact_number FROM users ORDER BY id DESC";
+// Fetch all users with their booking count
+$usersQuery = "
+    SELECT 
+        u.id, 
+        u.first_name, 
+        u.middle_initial, 
+        u.last_name, 
+        u.email, 
+        u.birthday, 
+        u.contact_number, 
+        u.created_at,
+        COUNT(b.id) as booking_count
+    FROM users u
+    LEFT JOIN bookings b ON u.id = b.user_id
+    GROUP BY u.id
+    ORDER BY u.created_at DESC
+";
 $usersResult = $conn->query($usersQuery);
 
 if (!$usersResult) {
@@ -143,6 +158,8 @@ $totalRevenue = $revenueResult->fetch_assoc()['total_revenue'];
                                     <th>Email</th>
                                     <th>Contact Number</th>
                                     <th>Birthday</th>
+                                    <th>Joined</th>
+                                    <th>Bookings</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,11 +171,13 @@ $totalRevenue = $revenueResult->fetch_assoc()['total_revenue'];
                                             <td><?php echo htmlspecialchars($u['email']); ?></td>
                                             <td><?php echo htmlspecialchars($u['contact_number'] ?? 'N/A'); ?></td>
                                             <td><?php echo htmlspecialchars($u['birthday']); ?></td>
+                                            <td><?php echo date('M d, Y', strtotime($u['created_at'])); ?></td>
+                                            <td><span class="badge badge-info"><?php echo (int)$u['booking_count']; ?></span></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="5" style="text-align: center; padding: 2rem;">No users found.</td>
+                                        <td colspan="7" style="text-align: center; padding: 2rem;">No users found.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

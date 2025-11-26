@@ -239,6 +239,23 @@ body {
     color: #777;
 }
 
+/* Badge styles */
+.badge {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 2rem;
+}
+
+.badge-info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
 @media (max-width: 900px) {
     .admin-table {
         min-width: 700px;
@@ -318,6 +335,22 @@ body {
 
 .total-revenue .card-value {
     color: var(--warning-color);
+}
+
+.primary .card-value {
+    color: #3f51b5;
+}
+
+.total-users {
+    border-left-color: #3f51b5;
+}
+
+.success .card-value {
+    color: var(--success-color);
+}
+
+.total-rooms {
+    border-left-color: var(--success-color);
 }
 
 /* ===== IMPROVED STATS CARDS ===== */

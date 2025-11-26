@@ -45,6 +45,24 @@ $cancelledBookingsResult = $conn->query($cancelledBookingsQuery);
 $cancelledBookingsData = $cancelledBookingsResult->fetch_assoc();
 $cancelledBookings = $cancelledBookingsData['cancelled_count'];
 
+// Get total users
+$totalUsersQuery = "SELECT COUNT(*) as total_users FROM users";
+$totalUsersResult = $conn->query($totalUsersQuery);
+$totalUsersData = $totalUsersResult->fetch_assoc();
+$totalUsers = $totalUsersData['total_users'];
+
+// Get total rooms (static count from room types)
+$roomTypes = [
+    'Single Room' => 12,
+    'Double Room' => 15,
+    'Twin Room' => 10,
+    'Triple Room' => 8,
+    'Family Room' => 5,
+    'Royal Suite' => 3,
+    'Presidential Suite' => 2
+];
+$totalRooms = array_sum($roomTypes);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,6 +155,28 @@ $cancelledBookings = $cancelledBookingsData['cancelled_count'];
                     <p class="card-label">Total Revenue</p>
                     <div class="card-value">₱<?php echo number_format($totalRevenue, 0); ?></div>
                     <p class="card-subtext">From all bookings</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Users & Rooms Summary Section -->
+        <section class="analytics-section">
+            <h2 class="analytics-title">System Overview</h2>
+            <div class="analytics-grid">
+                <!-- Total Users Card -->
+                <div class="analytics-card primary total-users">
+                    <div class="card-icon">👥</div>
+                    <p class="card-label">Total Users</p>
+                    <div class="card-value"><?php echo number_format($totalUsers); ?></div>
+                    <p class="card-subtext">Registered members</p>
+                </div>
+
+                <!-- Total Rooms Card -->
+                <div class="analytics-card success total-rooms">
+                    <div class="card-icon">🏨</div>
+                    <p class="card-label">Total Rooms</p>
+                    <div class="card-value"><?php echo number_format($totalRooms); ?></div>
+                    <p class="card-subtext">Available inventory</p>
                 </div>
             </div>
         </section>
