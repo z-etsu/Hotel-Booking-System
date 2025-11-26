@@ -27,6 +27,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle marking booking as finished
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'mark_finished') {
+    $bookingId = (int)$_POST['booking_id'];
+    
+    // Update booking status to 'finished'
+    $updateQuery = "UPDATE bookings SET status = 'finished' WHERE id = " . $bookingId;
+    
+    if ($conn->query($updateQuery) === TRUE) {
+        $_SESSION['success_message'] = "Booking marked as finished! User can now review.";
+        // Redirect to refresh the page
+        header("Location: bookings.php");
+        exit;
+    } else {
+        $_SESSION['error_message'] = "Failed to mark booking as finished: " . $conn->error;
+    }
+}
+
 // Handle cancellation - only allow cancellation of active bookings
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'cancel_booking') {
     $bookingId = (int)$_POST['booking_id'];
@@ -238,6 +255,15 @@ foreach ($finishedBookings as $booking) {
 
         .btn-cancel:hover {
             background-color: #c0392b;
+        }
+
+        .btn-finish {
+            background-color: #2e7d32;
+            color: white;
+        }
+
+        .btn-finish:hover {
+            background-color: #1b5e20;
         }
 
         .modal {
@@ -599,7 +625,7 @@ foreach ($finishedBookings as $booking) {
                                             <th>Check-In</th>
                                             <th>Check-Out</th>
                                             <th>Total Price</th>
-                                            <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -616,9 +642,13 @@ foreach ($finishedBookings as $booking) {
                                                 <td><?php echo $checkOut->format('M d, Y'); ?></td>
                                                 <td><strong>₱<?php echo number_format((int)$booking['total_price']); ?></strong></td>
                                                 <td>
-                                                    <span class="status-badge status-active">
-                                                        ✓ Room Assigned
-                                                    </span>
+                                                    <form method="POST" style="display: inline;">
+                                                        <input type="hidden" name="action" value="mark_finished">
+                                                        <input type="hidden" name="booking_id" value="<?php echo (int)$booking['id']; ?>">
+                                                        <button type="submit" class="btn-small btn-finish" onclick="return confirm('Mark this booking as finished? User will be able to review.');">
+                                                            ✓ Finish
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

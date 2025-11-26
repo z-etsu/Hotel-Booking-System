@@ -282,9 +282,7 @@ $stmt->close();
                                     </div>
                                 </div>
                                 <div class="booking-card-footer">
-                                    <button class="btn btn-primary rate-review-btn" data-booking-id="<?php echo htmlspecialchars($booking['id']); ?>" data-room-name="<?php echo htmlspecialchars($booking['room_name']); ?>">
-                                        ⭐ Rate & Review
-                                    </button>
+                                    <div class="enjoy-stay-label">🏨 Enjoy your stay!</div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

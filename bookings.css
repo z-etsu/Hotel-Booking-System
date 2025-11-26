@@ -198,6 +198,31 @@
     border: 1px solid #a5d6a7;
 }
 
+/* Enjoy Your Stay Label */
+.enjoy-stay-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 2px solid #4caf50;
+    text-align: center;
+}
+
+/* No Review Badge */
+.no-review-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    background-color: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
 /* Card Content */
 .booking-card-content {
     display: grid;
