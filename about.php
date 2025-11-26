@@ -76,24 +76,29 @@ session_start(); // Ensure session is available for navbar and messages
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <img src="images/presidential3.avif" alt="General Manager" />
+                    <img src="images/ATUN_2X2_2.png" alt="General Manager" />
                     <h4>Jaspher Atun</h4>
                     <p>General Manager</p>
                 </div>
                 <div class="team-member">
-                    <img src="images/presidential4.avif" alt="Head Chef" />
+                    <img src="images/kurt_1x1.png" alt="Head Chef" />
                     <h4>Kurt Jerald Emba</h4>
                     <p>Head Chef</p>
                 </div>
                 <div class="team-member">
-                    <img src="images/presidential5.avif" alt="Guest Relations" />
+                    <img src="images/jbetlog1x1.jpg" alt="Guest Relations" />
                     <h4>Jhon Benedict Gundan</h4>
                     <p>Guest Relations</p>
                 </div>
                 <div class="team-member">
-                    <img src="images/presidential6.avif" alt="Director of Sales" />
+                    <img src="images/jashertite.jpg" alt="Director of Sales" />
                     <h4>Jaspher Palangue</h4>
                     <p>Director of Sales</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/sdsdq11.png" alt="Hotdog" />
+                    <h4>Elijah Gracio</h4>
+                    <p>Hotdog</p>
                 </div>
           
             </div>
