@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $bookingId = (int)$_POST['booking_id'];
     $roomNumber = $conn->real_escape_string(trim($_POST['room_number']));
     
-    // Update booking with room number and change status to booked
-    $updateQuery = "UPDATE bookings SET room_number = '" . $roomNumber . "', status = 'booked' WHERE id = " . $bookingId;
+    // Update booking with room number AND change status to 'assigned'
+    $updateQuery = "UPDATE bookings SET room_number = '" . $roomNumber . "', status = 'assigned' WHERE id = " . $bookingId;
     
     if ($conn->query($updateQuery) === TRUE) {
         $_SESSION['success_message'] = "Room #" . htmlspecialchars($roomNumber) . " assigned successfully!";
@@ -79,8 +79,8 @@ foreach ($roomQuantities as $roomName => $quantity) {
     $availableRooms[$roomName] = $rooms;
 }
 
-// Get already assigned room numbers (only from booked bookings)
-$assignedRoomsQuery = "SELECT room_number FROM bookings WHERE status = 'booked' AND room_number IS NOT NULL";
+// Get already assigned room numbers (from both assigned and finished bookings)
+$assignedRoomsQuery = "SELECT room_number FROM bookings WHERE (status = 'assigned' OR status = 'finished') AND room_number IS NOT NULL";
 $assignedRoomsResult = $conn->query($assignedRoomsQuery);
 $assignedRooms = [];
 if ($assignedRoomsResult) {
@@ -104,31 +104,42 @@ while ($row = $bookingsResult->fetch_assoc()) {
 }
 
 // Separate bookings into categories
-$activeBookings = [];
-$bookedBookings = [];
+$pendingBookings = [];
+$assignedBookings = [];
+$finishedBookings = [];
 $cancelledBookingsArray = [];
 
 foreach ($allBookings as $booking) {
-    if ($booking['status'] === 'cancelled') {
+    // Handle empty status - default to 'active' (pending)
+    $status = trim($booking['status'] ?? '');
+    if (empty($status)) {
+        $status = 'active';
+    }
+    
+    if ($status === 'cancelled') {
         $cancelledBookingsArray[] = $booking;
-    } else if ($booking['status'] === 'booked') {
-        $bookedBookings[] = $booking;
-    } else if ($booking['status'] === 'active') {
-        $activeBookings[] = $booking;
+    } else if ($status === 'finished') {
+        $finishedBookings[] = $booking;
+    } else if ($status === 'assigned') {
+        $assignedBookings[] = $booking;
+    } else if ($status === 'active') {
+        $pendingBookings[] = $booking;
     }
 }
 
 // Get booking statistics from the arrays we just created
-$totalBookings = count($activeBookings) + count($bookedBookings) + count($cancelledBookingsArray);
-$activeBookingsCount = count($activeBookings);
+$totalBookings = count($pendingBookings) + count($assignedBookings) + count($finishedBookings) + count($cancelledBookingsArray);
+$pendingBookingsCount = count($pendingBookings);
+$assignedBookingsCount = count($assignedBookings);
+$finishedBookingsCount = count($finishedBookings);
 $cancelledBookingsCount = count($cancelledBookingsArray);
 
 // Calculate revenue
 $totalRevenue = 0;
-foreach ($activeBookings as $booking) {
+foreach ($assignedBookings as $booking) {
     $totalRevenue += (float)$booking['total_price'];
 }
-foreach ($bookedBookings as $booking) {
+foreach ($finishedBookings as $booking) {
     $totalRevenue += (float)$booking['total_price'];
 }
 
@@ -395,6 +406,10 @@ foreach ($bookedBookings as $booking) {
                     <span class="nav-icon">🏨</span>
                     <span class="nav-label">Rooms</span>
                 </a>
+                <a href="reviews.php" class="nav-item">
+                    <span class="nav-icon">⭐</span>
+                    <span class="nav-label">Reviews</span>
+                </a>
             </nav>
         </aside>
 
@@ -438,8 +453,20 @@ foreach ($bookedBookings as $booking) {
                             </div>
                             <div class="stat-info">
                                 <p class="stat-label">Pending Check-in</p>
-                                <h3 class="stat-number"><?php echo (int)$activeBookingsCount; ?></h3>
+                                <h3 class="stat-number"><?php echo (int)$pendingBookingsCount; ?></h3>
                                 <p class="stat-description">Awaiting room assignment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-primary">
+                        <div class="stat-card-inner">
+                            <div class="stat-icon-wrapper">
+                                <span class="stat-icon-large">🔑</span>
+                            </div>
+                            <div class="stat-info">
+                                <p class="stat-label">Assigned Bookings</p>
+                                <h3 class="stat-number"><?php echo (int)$assignedBookingsCount; ?></h3>
+                                <p class="stat-description">Room assigned</p>
                             </div>
                         </div>
                     </div>
@@ -449,9 +476,9 @@ foreach ($bookedBookings as $booking) {
                                 <span class="stat-icon-large">✅</span>
                             </div>
                             <div class="stat-info">
-                                <p class="stat-label">Booked</p>
-                                <h3 class="stat-number"><?php echo count($bookedBookings); ?></h3>
-                                <p class="stat-description">Room assigned</p>
+                                <p class="stat-label">Finished Bookings</p>
+                                <h3 class="stat-number"><?php echo $finishedBookingsCount; ?></h3>
+                                <p class="stat-description">Completed stays</p>
                             </div>
                         </div>
                     </div>
@@ -472,10 +499,13 @@ foreach ($bookedBookings as $booking) {
                 <!-- Booking Tabs -->
                 <div class="booking-tabs">
                     <button class="booking-tab active" onclick="switchTab('pending')">
-                        ⏳ Pending Check-in (<?php echo count($activeBookings); ?>)
+                        ⏳ Pending (<?php echo count($pendingBookings); ?>)
+                    </button>
+                    <button class="booking-tab" onclick="switchTab('assigned')">
+                        🔑 Assigned (<?php echo count($assignedBookings); ?>)
                     </button>
                     <button class="booking-tab" onclick="switchTab('booked')">
-                        ✅ Room Assigned (<?php echo count($bookedBookings); ?>)
+                        ✅ Finished (<?php echo count($finishedBookings); ?>)
                     </button>
                     <button class="booking-tab" onclick="switchTab('cancelled')">
                         ❌ Cancelled (<?php echo $cancelledBookingsCount; ?>)
@@ -486,7 +516,7 @@ foreach ($bookedBookings as $booking) {
                 <section class="tab-content active" id="pending">
                     <div class="analytics-section">
                         <h2 class="analytics-title">Pending Check-in</h2>
-                        <?php if (count($activeBookings) > 0): ?>
+                        <?php if (count($pendingBookings) > 0): ?>
                             <div class="table-wrap">
                                 <table class="admin-table">
                                     <thead>
@@ -502,7 +532,7 @@ foreach ($bookedBookings as $booking) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($activeBookings as $booking):
+                                        <?php foreach ($pendingBookings as $booking):
                                             $checkIn = new DateTime($booking['check_in']);
                                             $checkOut = new DateTime($booking['check_out']);
                                         ?>
@@ -537,11 +567,11 @@ foreach ($bookedBookings as $booking) {
                     </div>
                 </section>
 
-                <!-- Booked Bookings Tab -->
-                <section class="tab-content" id="booked">
+                <!-- Assigned Bookings Tab -->
+                <section class="tab-content" id="assigned">
                     <div class="analytics-section">
-                        <h2 class="analytics-title">Room Assigned</h2>
-                        <?php if (count($bookedBookings) > 0): ?>
+                        <h2 class="analytics-title">Assigned Rooms</h2>
+                        <?php if (count($assignedBookings) > 0): ?>
                             <div class="table-wrap">
                                 <table class="admin-table">
                                     <thead>
@@ -557,7 +587,7 @@ foreach ($bookedBookings as $booking) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($bookedBookings as $booking):
+                                        <?php foreach ($assignedBookings as $booking):
                                             $checkIn = new DateTime($booking['check_in']);
                                             $checkOut = new DateTime($booking['check_out']);
                                         ?>
@@ -571,7 +601,7 @@ foreach ($bookedBookings as $booking) {
                                                 <td><strong>₱<?php echo number_format((int)$booking['total_price']); ?></strong></td>
                                                 <td>
                                                     <span class="status-badge status-active">
-                                                        ✓ Assigned
+                                                        ✓ Room Assigned
                                                     </span>
                                                 </td>
                                             </tr>
@@ -582,6 +612,62 @@ foreach ($bookedBookings as $booking) {
                         <?php else: ?>
                             <div class="no-bookings">
                                 <p>No bookings with assigned rooms yet.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </section>
+
+                <!-- Finished Bookings Tab -->
+                <section class="tab-content" id="booked">
+                    <div class="analytics-section">
+                        <h2 class="analytics-title">Finished Bookings</h2>
+                        <?php if (count($finishedBookings) > 0): ?>
+                            <div class="table-wrap">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Guest Name</th>
+                                            <th>Room Type</th>
+                                            <th>Room Number</th>
+                                            <th>Check-In</th>
+                                            <th>Check-Out</th>
+                                            <th>Total Price</th>
+                                            <th>Review Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($finishedBookings as $booking):
+                                            $checkIn = new DateTime($booking['check_in']);
+                                            $checkOut = new DateTime($booking['check_out']);
+                                        ?>
+                                            <tr>
+                                                <td><strong>#<?php echo (int)$booking['id']; ?></strong></td>
+                                                <td><?php echo htmlspecialchars($booking['first_name'] . ' ' . $booking['last_name']); ?></td>
+                                                <td><span class="booking-info-badge"><?php echo htmlspecialchars($booking['room_name']); ?></span></td>
+                                                <td><strong><?php echo htmlspecialchars($booking['room_number']); ?></strong></td>
+                                                <td><?php echo $checkIn->format('M d, Y'); ?></td>
+                                                <td><?php echo $checkOut->format('M d, Y'); ?></td>
+                                                <td><strong>₱<?php echo number_format((int)$booking['total_price']); ?></strong></td>
+                                                <td>
+                                                    <?php if ($booking['has_review']): ?>
+                                                        <a href="reviews.php?booking_id=<?php echo (int)$booking['id']; ?>" class="status-badge status-success">
+                                                            ✓ View Review
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="status-badge status-warning">
+                                                            ⏳ Pending Review
+                                                        </span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php else: ?>
+                            <div class="no-bookings">
+                                <p>No finished bookings yet.</p>
                             </div>
                         <?php endif; ?>
                     </div>

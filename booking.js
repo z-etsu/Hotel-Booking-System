@@ -1,56 +1,67 @@
-// FILE: booking.js (UPDATED)
+// FILE: booking.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Read room slug from URL
-    const params = new URLSearchParams(window.location.search);
-    const roomSlug = params.get('room') || '';
+    try {
+        // 1. Read room slug from URL
+        const params = new URLSearchParams(window.location.search);
+        const roomSlug = params.get('room') || '';
+        console.log('Booking page loaded, room slug:', roomSlug);
 
-    // Basic helper to convert slug to comparable name
-    function slugToName(slug) {
-        return slug.replace(/-/g, ' ').trim().toLowerCase();
-    }
+        // Basic helper to convert slug to comparable name
+        function slugToName(slug) {
+            return slug.replace(/-/g, ' ').trim().toLowerCase();
+        }
 
-    // Find room data: ensure rooms array is available
-    const roomsList = Array.isArray(window.rooms) ? window.rooms : null;
+        // Find room data: ensure rooms array is available
+        const roomsList = Array.isArray(window.rooms) ? window.rooms : null;
+        console.log('Rooms array available:', !!roomsList, roomsList ? `(${roomsList.length} rooms)` : 'null');
 
-    if (!roomsList) {
-        console.error('rooms data not found. Make sure rooms.js is included before booking.js and exposes window.rooms');
-        // Show user-friendly message
-        document.querySelector('.booking-page-main').innerHTML = `
-            <div class="container" style="text-align:center; padding: 100px;">
-                <h1>Room Data Missing</h1>
-                <p>The room data could not be loaded. Please go back to <a href="rooms.php">Rooms</a>.</p>
-            </div>`;
-        return;
-    }
+        if (!roomsList) {
+            console.error('rooms data not found. Make sure rooms.js is included before booking.js');
+            document.querySelector('.booking-page-main').innerHTML = `
+                <div class="container" style="text-align:center; padding: 100px;">
+                    <h1>Room Data Missing</h1>
+                    <p>The room data could not be loaded. Please go back to <a href="rooms.php">Rooms</a>.</p>
+                </div>`;
+            return;
+        }
 
-    const normalized = slugToName(roomSlug);
-    const room = roomsList.find(r => r.name.toLowerCase() === normalized);
+        const normalized = slugToName(roomSlug);
+        const room = roomsList.find(r => r.name.toLowerCase() === normalized);
+        console.log('Room lookup - normalized slug:', normalized, '- found room:', room ? room.name : 'NOT FOUND');
 
-    if (!room) {
-        document.querySelector('.booking-page-main').innerHTML = `
-            <div class="container" style="text-align:center; padding: 100px;">
-                <h1>404: Room Not Found</h1>
-                <p>The selected room details could not be loaded.</p>
-                <a href="rooms.php" class="btn book-final-btn" style="width:auto;">View All Rooms</a>
-            </div>`;
-        return;
-    }
+        if (!room) {
+            document.querySelector('.booking-page-main').innerHTML = `
+                <div class="container" style="text-align:center; padding: 100px;">
+                    <h1>404: Room Not Found</h1>
+                    <p>The selected room details could not be loaded.</p>
+                    <a href="rooms.php" class="btn book-final-btn" style="width:auto;">View All Rooms</a>
+                </div>`;
+            return;
+        }
 
-    // Populate page
-    function renderRoomDetails(room) {
-        document.getElementById('room-title').textContent = `${room.name} - Elegante`;
-        document.getElementById('room-name').textContent = room.name;
-        document.getElementById('room-category').textContent = (room.category || '').toUpperCase() + ' ROOM';
-        document.getElementById('room-tagline').textContent = room.tagline || '';
-        document.getElementById('room-description').textContent = room.description;
+        // Safe setter function to prevent null errors
+        function safeSetText(elementId, value) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.textContent = value;
+            } else {
+                console.warn(`Element with id '${elementId}' not found`);
+            }
+        }
 
-        document.getElementById('detail-size').textContent = room.size || '';
-        document.getElementById('detail-capacity').textContent = `${room.maxPeople} people`;
-        document.getElementById('detail-price').textContent = `₱${room.price.toLocaleString()}`;
+        // Populate page details
+        safeSetText('room-title', `${room.name} - Elegante`);
+        safeSetText('room-name', room.name);
+        safeSetText('room-category', (room.category || '').toUpperCase() + ' ROOM');
+        safeSetText('room-tagline', room.tagline || '');
+        safeSetText('room-description', room.description);
 
-        document.getElementById('widget-price').textContent = `₱${room.price.toLocaleString()}`;
-        document.getElementById('detail-price-small').textContent = `₱${room.price.toLocaleString()}`;
+        safeSetText('detail-size', room.size || '');
+        safeSetText('detail-capacity', `${room.maxPeople} people`);
+        safeSetText('detail-price', `₱${room.price.toLocaleString()}`);
+        safeSetText('widget-price', `₱${room.price.toLocaleString()}`);
+        safeSetText('detail-price-small', `₱${room.price.toLocaleString()}`);
 
         // Populate guests dropdown based on room max capacity
         const guestsSelect = document.getElementById('guests');
@@ -66,13 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Amenities
         const amenitiesList = document.getElementById('full-amenities-list');
-        amenitiesList.innerHTML = (room.amenities || []).map(a => `<li>${a}</li>`).join('');
+        if (amenitiesList) {
+            amenitiesList.innerHTML = (room.amenities || []).map(a => `<li>${a}</li>`).join('');
+        }
 
         // Highlights (Why Guests Love This Room)
         const highlightsContainer = document.getElementById('highlights-container');
         if (highlightsContainer && room.highlights && room.highlights.length > 0) {
             highlightsContainer.innerHTML = room.highlights.map(highlight => {
-                const parts = highlight.split(/:\s+/); // split on ": " to get title and description
+                const parts = highlight.split(/:\s+/);
                 const title = parts[0] || highlight;
                 const description = parts[1] || '';
                 return `
@@ -84,53 +97,63 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join('');
         }
 
-        // Photo gallery: prefer room.images array, fallback to imageUrl
+        // Photo gallery
         const galleryImages = (room.images && room.images.length > 0) ? room.images : [room.imageUrl];
         const mainImageContainer = document.querySelector('.main-image-container');
         const galleryThumbs = document.querySelector('.gallery-thumbs');
         const galleryCount = document.querySelector('.gallery-count');
 
-        galleryCount && (galleryCount.textContent = `(${galleryImages.length})`);
-
-        mainImageContainer.innerHTML = galleryImages.map((src, i) => `
-            <div class="room-slide-image" data-index="${i}" ${i === 0 ? 'aria-hidden="false"' : 'aria-hidden="true"'}>
-                <img src="${src}" alt="${room.name} — photo ${i + 1}" />
-            </div>
-        `).join('');
-
-        // Thumbs (optional)
-        galleryThumbs.innerHTML = galleryImages.map((src, i) => `
-            <button class="thumb-btn" data-index="${i}" aria-label="View photo ${i + 1}">
-                <img src="${src}" alt="thumb ${i + 1}" />
-            </button>
-        `).join('');
-
-        // --- SLIDESHOW SETUP ---
-        const slides = mainImageContainer.querySelectorAll('.room-slide-image');
-        let currentSlide = 0;
-
-        function updateSlideshow() {
-            mainImageContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        if (galleryCount) {
+            galleryCount.textContent = `(${galleryImages.length})`;
         }
 
-        document.querySelector('.next-arrow')?.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides.length;
+        if (mainImageContainer) {
+            mainImageContainer.innerHTML = galleryImages.map((src, i) => `
+                <div class="room-slide-image" data-index="${i}" ${i === 0 ? 'aria-hidden="false"' : 'aria-hidden="true"'}>
+                    <img src="${src}" alt="${room.name} — photo ${i + 1}" />
+                </div>
+            `).join('');
+
+            // Thumbs
+            if (galleryThumbs) {
+                galleryThumbs.innerHTML = galleryImages.map((src, i) => `
+                    <button class="thumb-btn" data-index="${i}" aria-label="View photo ${i + 1}">
+                        <img src="${src}" alt="thumb ${i + 1}" />
+                    </button>
+                `).join('');
+            }
+
+            // Slideshow setup
+            const slides = mainImageContainer.querySelectorAll('.room-slide-image');
+            let currentSlide = 0;
+
+            function updateSlideshow() {
+                mainImageContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            const nextArrow = document.querySelector('.next-arrow');
+            const prevArrow = document.querySelector('.prev-arrow');
+
+            if (nextArrow) {
+                nextArrow.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    updateSlideshow();
+                });
+            }
+
+            if (prevArrow) {
+                prevArrow.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    updateSlideshow();
+                });
+            }
+
             updateSlideshow();
-        });
-        document.querySelector('.prev-arrow')?.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlideshow();
-        });
+        }
 
-        // optional: auto-slide every 5s
-        // setInterval(() => { currentSlide = (currentSlide + 1) % slides.length; updateSlideshow(); }, 5000);
-
-        updateSlideshow();
-
-        // Add hidden inputs to booking form so submission includes selected room & price
+        // Add hidden inputs to booking form
         const bookingForm = document.getElementById('booking-form');
         if (bookingForm) {
-            // remove existing if present
             ['roomName', 'roomPrice'].forEach(name => {
                 const ex = bookingForm.querySelector(`input[name="${name}"]`);
                 if (ex) ex.remove();
@@ -154,23 +177,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkOutInput = document.getElementById('check-out');
         const widgetPrice = document.getElementById('widget-price');
 
-        // Get today's date
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        // Wait for Litepickr to be available
+        console.log('Date inputs found:', {
+            checkIn: !!checkInInput,
+            checkOut: !!checkOutInput,
+            widgetPrice: !!widgetPrice
+        });
+
         function initializeDatePicker() {
+            console.log('initializeDatePicker called');
+            if (!checkInInput || !checkOutInput) {
+                console.error('Date input elements not found in DOM');
+                return;
+            }
+
             if (typeof Litepicker === 'undefined') {
-                // Litepickr not loaded yet, try again
+                console.log('Litepicker not loaded, retrying in 100ms...');
                 setTimeout(initializeDatePicker, 100);
                 return;
             }
 
-            // Shared date range state
+            console.log('Initializing Litepicker date pickers');
             let startDate = null;
             let endDate = null;
 
-            // Check-in date picker
             const checkInPicker = new Litepicker({
                 element: checkInInput,
                 minDate: today,
@@ -186,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 onSelect: function(date) {
                     startDate = date;
                     checkInInput.value = date ? date.format('YYYY-MM-DD') : '';
-                    // If checkout is already selected and is before checkin, clear it
                     if (endDate && startDate && endDate < startDate) {
                         endDate = null;
                         checkOutInput.value = '';
@@ -202,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Check-out date picker
             const checkOutPicker = new Litepicker({
                 element: checkOutInput,
                 minDate: startDate || today,
@@ -229,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Update checkout min date when checkin changes
             checkInInput.addEventListener('change', function() {
                 if (checkInInput.value) {
                     const newMinDate = new Date(checkInInput.value);
@@ -238,16 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Initialize when DOM is ready
         initializeDatePicker();
 
-        // Calculate and update price based on nights
         function calculatePrice() {
+            if (!checkInInput || !checkOutInput) {
+                return;
+            }
+
             const checkInVal = checkInInput.value;
             const checkOutVal = checkOutInput.value;
 
             if (!checkInVal || !checkOutVal) {
-                widgetPrice.textContent = `$${room.price}`;
+                safeSetText('widget-price', `₱${room.price}`);
                 return;
             }
 
@@ -255,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkOut = new Date(checkOutVal);
 
             if (checkOut <= checkIn) {
-                widgetPrice.textContent = `$${room.price}`;
+                safeSetText('widget-price', `₱${room.price}`);
                 return;
             }
 
@@ -264,17 +295,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (nights > 0) {
                 const total = nights * room.price;
-                widgetPrice.innerHTML = `$${total.toLocaleString()}<br><small style="font-size: 0.85rem; color: #666;">${nights} night${nights !== 1 ? 's' : ''}</small>`;
+                const priceEl = document.getElementById('widget-price');
+                if (priceEl) {
+                    priceEl.innerHTML = `₱${total.toLocaleString()}<br><small style="font-size: 0.85rem; color: #666;">${nights} night${nights !== 1 ? 's' : ''}</small>`;
+                }
             } else {
-                widgetPrice.textContent = `$${room.price}`;
+                safeSetText('widget-price', `₱${room.price}`);
             }
         }
 
-        // Booking button behaviour: validate and submit
+        // Booking button
         const bookBtn = document.getElementById('book-final-btn');
         if (bookBtn) {
             bookBtn.addEventListener('click', async () => {
-                // Check if user is logged in
+                if (!checkInInput || !checkOutInput) {
+                    showThemedAlert('Booking form is not properly loaded.');
+                    return;
+                }
+
                 const userLoggedIn = document.getElementById('user-logged-in').value === 'true';
                 if (!userLoggedIn) {
                     showThemedAlert('Please log in first.');
@@ -292,8 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const inDate = new Date(checkInVal);
                 const outDate = new Date(checkOutVal);
-                
-                // Validate dates
+
                 if (inDate < today) {
                     showThemedAlert('Check-in date cannot be in the past.');
                     return;
@@ -309,20 +346,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // calculate nights
                 const msPerDay = 24 * 60 * 60 * 1000;
                 const nights = Math.ceil((outDate - inDate) / msPerDay);
                 const total = nights * room.price;
 
-                // Show confirmation with themed modal
                 showConfirmationModal(room.name, nights, room.price, total, async () => {
-                    // Disable button while processing
                     bookBtn.disabled = true;
                     const originalText = bookBtn.textContent;
                     bookBtn.textContent = 'Processing...';
 
                     try {
-                        // Submit booking to backend
                         const formData = new FormData();
                         formData.append('room_name', room.name);
                         formData.append('check_in', checkInVal);
@@ -337,15 +370,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             body: formData
                         });
 
+                        console.log('Booking response status:', response.status);
                         const result = await response.json();
+                        console.log('Booking result:', result);
 
                         if (result.success) {
                             showSuccessModal(result.order_id);
-                            // Redirect after 2 seconds
                             setTimeout(() => {
                                 window.location.href = 'bookings.php';
                             }, 2000);
                         } else {
+                            console.error('Booking failed:', result.message);
                             showThemedAlert('Booking failed: ' + (result.message || 'Unknown error'));
                             bookBtn.disabled = false;
                             bookBtn.textContent = originalText;
@@ -360,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Themed Modal Functions
+        // Modal Functions
         function showThemedAlert(message) {
             const modal = document.getElementById('themed-alert-modal');
             const content = document.getElementById('alert-message-content');
@@ -375,27 +410,31 @@ document.addEventListener('DOMContentLoaded', () => {
         function showConfirmationModal(roomName, nights, pricePerNight, total, onConfirm) {
             const modal = document.getElementById('booking-confirmation-modal');
             if (modal) {
-                document.getElementById('confirm-room-name').textContent = roomName;
-                document.getElementById('confirm-nights').textContent = nights;
-                document.getElementById('confirm-price-per-night').textContent = `₱${pricePerNight.toLocaleString()}`;
-                document.getElementById('confirm-total').textContent = `₱${total.toLocaleString()}`;
-                
+                safeSetText('confirm-room-name', roomName);
+                safeSetText('confirm-nights', nights);
+                safeSetText('confirm-price-per-night', `₱${pricePerNight.toLocaleString()}`);
+                safeSetText('confirm-total', `₱${total.toLocaleString()}`);
+
                 const confirmBtn = document.getElementById('confirm-booking-btn');
                 const cancelBtn = document.getElementById('cancel-confirmation-btn');
-                
-                confirmBtn.onclick = () => {
-                    modal.classList.remove('show');
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    onConfirm();
-                };
-                
-                cancelBtn.onclick = () => {
-                    modal.classList.remove('show');
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                };
-                
+
+                if (confirmBtn) {
+                    confirmBtn.onclick = () => {
+                        modal.classList.remove('show');
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        onConfirm();
+                    };
+                }
+
+                if (cancelBtn) {
+                    cancelBtn.onclick = () => {
+                        modal.classList.remove('show');
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    };
+                }
+
                 modal.classList.add('show');
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -405,34 +444,48 @@ document.addEventListener('DOMContentLoaded', () => {
         function showSuccessModal(orderId) {
             const modal = document.getElementById('booking-success-modal');
             if (modal) {
-                document.getElementById('success-order-id').textContent = orderId;
+                safeSetText('success-order-id', orderId);
                 modal.classList.add('show');
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             }
         }
 
-        // Close themed alert modal
+        // Close alert modal
         const alertModal = document.getElementById('themed-alert-modal');
         if (alertModal) {
             const closeBtn = alertModal.querySelector('.modal-close-btn');
             const okBtn = document.getElementById('alert-ok-btn');
-            
-            closeBtn?.addEventListener('click', () => {
-                alertModal.classList.remove('show');
-                alertModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-            
-            okBtn?.addEventListener('click', () => {
-                alertModal.classList.remove('show');
-                alertModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    alertModal.classList.remove('show');
+                    alertModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+
+            if (okBtn) {
+                okBtn.addEventListener('click', () => {
+                    alertModal.classList.remove('show');
+                    alertModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
         }
 
-    } // end renderRoomDetails
-
-    renderRoomDetails(room);
-
+    } catch (error) {
+        console.error('Error initializing booking page:', error);
+        console.error('Error stack:', error.stack);
+        const mainContent = document.querySelector('.booking-page-main');
+        if (mainContent) {
+            mainContent.innerHTML = `
+                <div class="container" style="text-align:center; padding: 100px;">
+                    <h1>Error Loading Page</h1>
+                    <p>An error occurred while loading the booking page. Please try again or contact support.</p>
+                    <p style="font-size:0.9em; color:#666;">Error: ${error.message}</p>
+                    <a href="rooms.php" class="btn" style="display:inline-block; margin-top:20px;">Back to Rooms</a>
+                </div>`;
+        }
+    }
 });

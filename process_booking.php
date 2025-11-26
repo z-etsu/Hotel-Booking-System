@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 session_start();
 require_once 'db_connect.php';
 
@@ -101,6 +105,7 @@ $stmt = $conn->prepare("
 
 if ($stmt === false) {
     http_response_code(500);
+    error_log('Prepare error: ' . $conn->error);
     echo json_encode([
         'success' => false,
         'message' => 'Database error: ' . $conn->error
@@ -114,6 +119,7 @@ $stmt->bind_param("isssddii", $user_id, $room_name, $check_in, $check_out, $pric
 // Execute the statement
 if ($stmt->execute()) {
     $order_id = $stmt->insert_id;
+    error_log('Booking created successfully: Order ID = ' . $order_id);
     
     http_response_code(200);
     echo json_encode([
@@ -129,6 +135,7 @@ if ($stmt->execute()) {
         ]
     ]);
 } else {
+    error_log('Execute error: ' . $stmt->error);
     http_response_code(500);
     echo json_encode([
         'success' => false,

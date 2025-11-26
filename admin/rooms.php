@@ -167,6 +167,10 @@ foreach ($rooms as $room) {
                     <span class="nav-icon">🏨</span>
                     <span class="nav-label">Rooms</span>
                 </a>
+                <a href="reviews.php" class="nav-item">
+                    <span class="nav-icon">⭐</span>
+                    <span class="nav-label">Reviews</span>
+                </a>
             </nav>
         </aside>
 

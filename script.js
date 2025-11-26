@@ -259,6 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle form submissions with transition
     document.querySelectorAll('form').forEach(form => {
+        // Skip review form - it handles its own submission
+        if (form.id === 'reviewForm') return;
+        
         form.addEventListener('submit', () => {
             const body = document.body;
             body.style.transition = 'opacity 0.4s ease-out, filter 0.4s ease-out';
