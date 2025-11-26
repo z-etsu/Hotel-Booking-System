@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 require_once '../db_connect.php';
 
 // Fetch all users
-$usersQuery = "SELECT id, first_name, middle_initial, last_name, email, birthday FROM users ORDER BY id DESC";
+$usersQuery = "SELECT id, first_name, middle_initial, last_name, email, birthday, contact_number FROM users ORDER BY id DESC";
 $usersResult = $conn->query($usersQuery);
 
 if (!$usersResult) {
@@ -141,6 +141,7 @@ $totalRevenue = $revenueResult->fetch_assoc()['total_revenue'];
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Contact Number</th>
                                     <th>Birthday</th>
                                 </tr>
                             </thead>
@@ -151,12 +152,13 @@ $totalRevenue = $revenueResult->fetch_assoc()['total_revenue'];
                                             <td><?php echo (int)$u['id']; ?></td>
                                             <td><?php echo htmlspecialchars($u['first_name'] . ' ' . ($u['middle_initial'] ? $u['middle_initial'] . ' ' : '') . $u['last_name']); ?></td>
                                             <td><?php echo htmlspecialchars($u['email']); ?></td>
+                                            <td><?php echo htmlspecialchars($u['contact_number'] ?? 'N/A'); ?></td>
                                             <td><?php echo htmlspecialchars($u['birthday']); ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="4" style="text-align: center; padding: 2rem;">No users found.</td>
+                                        <td colspan="5" style="text-align: center; padding: 2rem;">No users found.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
