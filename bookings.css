@@ -167,9 +167,9 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background-color: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeaa7;
+    background-color: #ffc107;
+    color: #000 !important;
+    border: 2px solid #ff9800;
 }
 
 .status-assigned {

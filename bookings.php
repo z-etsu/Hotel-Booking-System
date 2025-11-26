@@ -231,7 +231,7 @@ $stmt->close();
                     </div>
                     <?php endif; ?>
 
-                    <!-- ASSIGNED BOOKINGS SECTION -->
+                    <!-- ASSIGNED BOOKINGS SECTION - NO CANCEL BUTTON -->
                     <?php if (!empty($assigned_bookings)): ?>
                     <div class="bookings-list bookings-section">
                         <div class="section-header">
@@ -282,8 +282,8 @@ $stmt->close();
                                     </div>
                                 </div>
                                 <div class="booking-card-footer">
-                                    <button class="btn btn-danger cancel-booking-btn" data-booking-id="<?php echo htmlspecialchars($booking['id']); ?>" data-room-name="<?php echo htmlspecialchars($booking['room_name']); ?>">
-                                        Cancel Booking
+                                    <button class="btn btn-primary rate-review-btn" data-booking-id="<?php echo htmlspecialchars($booking['id']); ?>" data-room-name="<?php echo htmlspecialchars($booking['room_name']); ?>">
+                                        ⭐ Rate & Review
                                     </button>
                                 </div>
                             </div>

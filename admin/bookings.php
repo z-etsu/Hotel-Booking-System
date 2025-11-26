@@ -27,9 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Handle cancellation
+// Handle cancellation - only allow cancellation of active bookings
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'cancel_booking') {
     $bookingId = (int)$_POST['booking_id'];
+    
+    // Check if booking is in 'active' status (can only cancel active bookings, not assigned ones)
+    $checkQuery = "SELECT status FROM bookings WHERE id = " . $bookingId;
+    $checkResult = $conn->query($checkQuery);
+    $bookingData = $checkResult->fetch_assoc();
+    
+    // Ensure status is either empty (defaults to active) or explicitly 'active'
+    $currentStatus = trim($bookingData['status'] ?? '');
+    if (empty($currentStatus)) { $currentStatus = 'active'; }
+    
+    // Only allow cancellation if status is 'active'
+    if ($currentStatus !== 'active') {
+        $_SESSION['error_message'] = "Cannot cancel booking - room has already been assigned. Contact support if needed.";
+        header("Location: bookings.php");
+        exit;
+    }
     
     $updateQuery = "UPDATE bookings SET status = 'cancelled' WHERE id = " . $bookingId;
     
