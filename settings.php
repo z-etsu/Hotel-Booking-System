@@ -116,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Settings - Elegante</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="settings.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
     <script src="script.js?v=<?php echo time(); ?>"></script>
 </head>
@@ -186,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <div class="form-group">
                                 <label for="birthday">Birthday (16+ required) *</label>
-                                <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($user['birthday']); ?>" required>
+                                <input type="text" id="birthday" name="birthday" placeholder="Select your birthday" value="<?php echo htmlspecialchars($user['birthday']); ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -371,6 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
         // Tab switching
@@ -423,9 +425,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         const birthdayInput = document.getElementById('birthday');
         if (birthdayInput) {
             const today = new Date();
+            const minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
             const maxDate16YearsAgo = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
-            const maxDateString = maxDate16YearsAgo.toISOString().split('T')[0];
-            birthdayInput.setAttribute('max', maxDateString);
+
+            // Initialize Flatpickr with 16+ validation
+            flatpickr("#birthday", {
+                mode: "single",
+                dateFormat: "Y-m-d",
+                maxDate: maxDate16YearsAgo,
+                minDate: minDate,
+                yearRange: [1925, new Date().getFullYear() - 16],
+                altInput: true,
+                altFormat: "F j, Y",
+                animate: true,
+                theme: "light",
+            });
+        }
+
+        // Disable numbers on name fields
+        const firstNameInput = document.getElementById("first_name");
+        const lastNameInput = document.getElementById("last_name");
+        const middleInitialInput = document.getElementById("middle_initial");
+
+        // Function to remove numbers from input
+        const removeNumbers = (input) => {
+            input.addEventListener("input", function () {
+                this.value = this.value.replace(/[0-9]/g, "");
+            });
+        };
+
+        if (firstNameInput) removeNumbers(firstNameInput);
+        if (lastNameInput) removeNumbers(lastNameInput);
+        if (middleInitialInput) removeNumbers(middleInitialInput);
+
+        // Disable text on contact number - only numbers allowed
+        const contactNumberInput = document.getElementById("contact_number");
+        if (contactNumberInput) {
+            contactNumberInput.addEventListener("input", function () {
+                // Remove all non-digit and non-special characters (keep only numbers, +, spaces)
+                this.value = this.value.replace(/[^\d\+\s]/g, "");
+            });
         }
 
         // Handle logout button on settings page

@@ -62,6 +62,20 @@
                 box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2); /* Soft glow */
                 background-color: #fff;
             }
+            .auth-form input.error-field {
+                border-color: #e74c3c;
+                box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+            }
+            .error-message {
+                color: #e74c3c;
+                font-size: 0.85rem;
+                margin-top: 0.5rem;
+                display: none;
+                font-weight: 500;
+            }
+            .error-message.show {
+                display: block;
+            }
             .auth-form input::placeholder {
                 color: #999;
             }
@@ -217,6 +231,7 @@
                 <div class="form-group">
                     <!-- NAME attribute added -->
                     <input type="email" id="email" name="email" placeholder="Email Address" required />
+                    <div id="emailError" class="error-message"></div>
                 </div>
 
                 <div class="form-group password-group">
@@ -293,6 +308,56 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
+                // Disable numbers on name fields
+                const firstNameInput = document.getElementById("firstName");
+                const lastNameInput = document.getElementById("lastName");
+                const middleInitialInput = document.getElementById("middleInitial");
+
+                // Function to remove numbers from input
+                const removeNumbers = (input) => {
+                    input.addEventListener("input", function () {
+                        this.value = this.value.replace(/[0-9]/g, "");
+                    });
+                };
+
+                if (firstNameInput) removeNumbers(firstNameInput);
+                if (lastNameInput) removeNumbers(lastNameInput);
+                if (middleInitialInput) removeNumbers(middleInitialInput);
+
+                // Disable text on contact number - only numbers allowed
+                const contactNumberInput = document.getElementById("contactNumber");
+                if (contactNumberInput) {
+                    contactNumberInput.addEventListener("input", function () {
+                        // Remove all non-digit and non-special characters (keep only numbers, +, spaces)
+                        this.value = this.value.replace(/[^\d\+\s]/g, "");
+                    });
+                }
+
+                // Email validation for .com extension
+                const emailInput = document.getElementById("email");
+                const emailError = document.getElementById("emailError");
+                if (emailInput) {
+                    emailInput.addEventListener("blur", function () {
+                        const email = this.value.trim();
+                        if (email && !email.endsWith(".com")) {
+                            this.classList.add("error-field");
+                            emailError.textContent = "Email must end with .com";
+                            emailError.classList.add("show");
+                        } else {
+                            this.classList.remove("error-field");
+                            emailError.classList.remove("show");
+                        }
+                    });
+
+                    // Clear error when user starts typing
+                    emailInput.addEventListener("input", function () {
+                        if (this.value.includes(".com")) {
+                            this.classList.remove("error-field");
+                            emailError.classList.remove("show");
+                        }
+                    });
+                }
+
                 // Password toggle functionality
                 const togglePassword = document.getElementById("togglePassword");
                 const passwordInput = document.getElementById("password");
@@ -328,11 +393,20 @@
                 const registerForm = document.getElementById("registerForm");
                 registerForm.addEventListener("submit", function (e) {
                     const birthdayValue = document.getElementById("birthday").value;
+                    const emailValue = document.getElementById("email").value.trim();
 
                     if (!birthdayValue) {
                         e.preventDefault();
                         alert("Please select a valid birthday.");
                         document.getElementById("birthday").focus();
+                        return;
+                    }
+
+                    // Email .com validation
+                    if (!emailValue.endsWith(".com")) {
+                        e.preventDefault();
+                        alert("Email must end with .com");
+                        document.getElementById("email").focus();
                         return;
                     }
 
