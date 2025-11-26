@@ -5,18 +5,27 @@ require_once 'db_connect.php';
 
 // Check if the form was submitted using POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     // 1. Sanitize and retrieve form data
     $firstName = trim($_POST['firstName'] ?? '');
     $middleInitial = trim($_POST['middleInitial'] ?? '');
     $lastName = trim($_POST['lastName'] ?? '');
     $birthday = trim($_POST['birthday'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    $contactNumber = trim($_POST['contactNumber'] ?? '');
     $password = $_POST['password'] ?? ''; // Do not trim password
 
     // Basic Validation
-    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($birthday)) {
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($birthday) || empty($contactNumber)) {
         $_SESSION['message'] = 'All required fields must be filled out.';
+        $_SESSION['message_type'] = 'error';
+        header("Location: register.html");
+        exit;
+    }
+
+    // Validate Philippines phone number format
+    if (!preg_match('/^(\+63\s\d{3}\s\d{3}\s\d{4}|09\d{9})$/', $contactNumber)) {
+        $_SESSION['message'] = 'Please enter a valid Philippine phone number (e.g., +63 912 345 6789 or 09123456789).';
         $_SESSION['message_type'] = 'error';
         header("Location: register.html");
         exit;
@@ -42,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Set middle initial to NULL if it's empty
     $middleInitial = $middleInitial === '' ? NULL : $middleInitial;
-    
+
     // 3. Prepare the SQL statement for insertion (using prepared statement for security)
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_initial, last_name, email, password_hash, birthday) VALUES (?, ?, ?, ?, ?, ?)");
-    
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_initial, last_name, email, password_hash, birthday, contact_number) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
     // Check if preparation was successful
     if ($stmt === false) {
         $_SESSION['message'] = 'A server error occurred during registration.';
@@ -53,10 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: register.html");
         exit;
     }
-    
-    // Bind parameters: 'ssssss' means 6 strings (or 's' for strings, 'i' for integers, 'd' for doubles, 'b' for blobs)
+
+    // Bind parameters: 'sssssss' means 7 strings (or 's' for strings, 'i' for integers, 'd' for doubles, 'b' for blobs)
     // We treat all inputs as strings here.
-    $stmt->bind_param("ssssss", $firstName, $middleInitial, $lastName, $email, $passwordHash, $birthday);
+    $stmt->bind_param("sssssss", $firstName, $middleInitial, $lastName, $email, $passwordHash, $birthday, $contactNumber);
 
     // 4. Execute the statement
     if ($stmt->execute()) {
@@ -68,12 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Check for specific error like duplicate entry (e.g., email UNIQUE constraint)
         if ($conn->errno == 1062) {
-             $_SESSION['message'] = 'Error: This email address is already registered.';
-             $_SESSION['message_type'] = 'error';
+            $_SESSION['message'] = 'Error: This email address is already registered.';
+            $_SESSION['message_type'] = 'error';
         } else {
             // Other database error
-             $_SESSION['message'] = 'Error registering user: ' . $stmt->error;
-             $_SESSION['message_type'] = 'error';
+            $_SESSION['message'] = 'Error registering user: ' . $stmt->error;
+            $_SESSION['message_type'] = 'error';
         }
         header("Location: register.html");
         exit;
@@ -87,4 +96,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: register.html");
     exit;
 }
-?>

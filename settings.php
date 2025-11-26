@@ -13,7 +13,7 @@ $message = '';
 $message_type = '';
 
 // Fetch user data
-$stmt = $conn->prepare("SELECT first_name, middle_initial, last_name, email, birthday FROM users WHERE id = ?");
+$stmt = $conn->prepare("SELECT first_name, middle_initial, last_name, email, birthday, contact_number FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -36,17 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $middle_initial = trim($_POST['middle_initial'] ?? '');
         $last_name = trim($_POST['last_name'] ?? '');
         $birthday = trim($_POST['birthday'] ?? '');
+        $contact_number = trim($_POST['contact_number'] ?? '');
 
         // Validation
-        if (empty($first_name) || empty($last_name) || empty($birthday)) {
+        if (empty($first_name) || empty($last_name) || empty($birthday) || empty($contact_number)) {
             $message = 'All required fields must be filled out.';
+            $message_type = 'error';
+        } elseif (!preg_match('/^(\+63\s\d{3}\s\d{3}\s\d{4}|09\d{9})$/', $contact_number)) {
+            $message = 'Please enter a valid Philippine phone number (e.g., +63 912 345 6789 or 09123456789).';
             $message_type = 'error';
         } else {
             // Convert empty middle_initial to NULL
             $middle_initial = $middle_initial === '' ? NULL : $middle_initial;
 
-            $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_initial = ?, last_name = ?, birthday = ? WHERE id = ?");
-            $stmt->bind_param("ssssi", $first_name, $middle_initial, $last_name, $birthday, $user_id);
+            $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_initial = ?, last_name = ?, birthday = ?, contact_number = ? WHERE id = ?");
+            $stmt->bind_param("sssssi", $first_name, $middle_initial, $last_name, $birthday, $contact_number, $user_id);
 
             if ($stmt->execute()) {
                 $_SESSION['user_name'] = "$first_name $last_name";
@@ -54,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user['middle_initial'] = $middle_initial;
                 $user['last_name'] = $last_name;
                 $user['birthday'] = $birthday;
+                $user['contact_number'] = $contact_number;
                 $message = 'Profile updated successfully!';
                 $message_type = 'success';
             } else {
@@ -184,6 +189,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($user['birthday']); ?>" required>
                             </div>
 
+                            <div class="form-group">
+                                <label for="contact_number">Contact Number *</label>
+                                <input type="tel" id="contact_number" name="contact_number" placeholder="Contact Number (e.g., +63 912 345 6789)" pattern="(^\+63\s\d{3}\s\d{3}\s\d{4}$|^09\d{9}$)" title="Please enter a valid Philippine phone number (e.g., +63 912 345 6789 or 09123456789)" value="<?php echo htmlspecialchars($user['contact_number'] ?? ''); ?>" required>
+                            </div>
+
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
@@ -276,6 +286,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="info-details">
                                     <h3>Birthday</h3>
                                     <p><?php echo date('F j, Y', strtotime($user['birthday'])); ?></p>
+                                    <small>You can edit this in the Profile section</small>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="info-details">
+                                    <h3>Contact Number</h3>
+                                    <p><?php echo htmlspecialchars($user['contact_number'] ?? 'Not provided'); ?></p>
                                     <small>You can edit this in the Profile section</small>
                                 </div>
                             </div>

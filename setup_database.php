@@ -15,10 +15,11 @@ $sql_statements = [
         email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
         birthday DATE NOT NULL,
+        contact_number VARCHAR(20),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
-    
+
     // Bookings table (NEW) - With support for review system
     "CREATE TABLE IF NOT EXISTS bookings (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +41,7 @@ $sql_statements = [
         INDEX idx_status (status),
         INDEX idx_check_in (check_in)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
-    
+
     // Reviews table - for storing user reviews of bookings
     "CREATE TABLE IF NOT EXISTS reviews (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,7 +84,7 @@ echo "\n=== Verifying Tables ===\n";
 $result = $conn->query("SHOW TABLES LIKE 'bookings'");
 if ($result->num_rows > 0) {
     echo "✓ Bookings table exists!\n";
-    
+
     // Show table structure
     echo "\nBookings Table Structure:\n";
     $structure = $conn->query("DESCRIBE bookings");
@@ -96,4 +97,3 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 echo "\n✓ Database setup complete! You can now use the bookings feature.\n";
-?>
